@@ -168,9 +168,10 @@ flowchart LR
 ### 7.1 Cross-Validation Structure (10 LORO Runs)
 Leave-One-Record-Out (LORO) cross-validation is performed strictly within the training cohort across 5 fixed random seeds $\mathcal{S} = \{42, 101, 202, 303, 404\}$:
 * **Fold 1:** Train on Record 106 ($n=100$), Validate on Record 119 ($n=100$) (5 runs).
-  * *Scaler Rule:* Fitted strictly on Record 106 features; Record 119 features transformed and clipped.
+  * *Scaler Rule:* Fitted strictly on Record 106 raw features (`FEATURE_NAMES`); Record 119 raw features transformed and clipped to $[0, \pi]$.
 * **Fold 2:** Train on Record 119 ($n=100$), Validate on Record 106 ($n=100$) (5 runs).
-  * *Scaler Rule:* Fitted strictly on Record 119 features; Record 106 features transformed and clipped.
+  * *Scaler Rule:* Fitted strictly on Record 119 raw features (`FEATURE_NAMES`); Record 106 raw features transformed and clipped to $[0, \pi]$.
+* *Prohibition:* Precomputed `*_scaled` columns in `features_train.csv` (which were fitted jointly across Records 106 + 119) must **NOT** be used in LORO cross-validation. Doing so induces inter-patient validation leakage (see `report/vqc_preprocessing_leakage_audit.md`).
 * Total LORO runs: $5\text{ seeds} \times 2\text{ folds} = \mathbf{10\text{ runs}}$.
 
 ### 7.2 Full Training Cohort Runs (5 Runs)
