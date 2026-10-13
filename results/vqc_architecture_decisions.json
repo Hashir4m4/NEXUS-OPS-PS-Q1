@@ -2,22 +2,22 @@
   "project": "Project Q - IBM Quantum Qiskit Fall Fest 2026",
   "challenge": "PS-Q1 - Biomedical Signal Classifier",
   "team": "NEXUS-OPS",
-  "milestone": "5B.1 - Scientific Corrections & Team Review Package",
-  "decision_owner": "NEXUS-OPS team — pending confirmation",
-  "global_status": "PROPOSED_NOT_TEAM_APPROVED",
+  "milestone": "5E - Formal Team Approval and Implementation Authorization",
+  "decision_owner": "NEXUS-OPS team",
+  "global_status": "TEAM_APPROVED",
   "project_owner_review_summary": {
-    "review_status": "INDIVIDUAL_SELECTIONS_RECORDED_NOT_TEAM_APPROVED",
-    "notes": "The project owner has individually reviewed the proposed choices and endorsed D5 (L=1), D6 (polarity: positive=VEB, negative=Normal), and D9 (MSE/Brier). These represent individual owner selections and do NOT constitute formal NEXUS-OPS team consensus. All decisions remain PROPOSED_NOT_TEAM_APPROVED pending full team sign-off."
+    "review_status": "SUPERSEDED_BY_FORMAL_TEAM_APPROVAL",
+    "notes": "Prior individual project owner selections (D5, D6, D9) are now formalized and superseded by NEXUS-OPS team approval for all decisions D1 through D10."
   },
-  "timestamp": "2026-10-12T23:10:00+05:30",
+  "timestamp": "2026-10-13T12:05:00+05:30",
   "decisions": [
     {
       "id": "D1",
       "name": "Qubit count",
       "proposed_choice": "6 qubits",
-      "status": "PROPOSED_NOT_TEAM_APPROVED",
+      "status": "TEAM_APPROVED",
       "project_owner_position": "APPROVE",
-      "team_approval_status": "PENDING",
+      "team_approval_status": "APPROVED",
       "verdict": "ACCEPTABLE FOR BASELINE",
       "purpose": "Provide a 1:1 direct mapping from the 6 engineered biomedical features to individual qubits.",
       "technical_advantages": [
@@ -32,15 +32,16 @@
       "verification_requirements": [
         "Verify that qubit index mapping strictly preserves feature column order (pre_rr -> q0, post_rr -> q1, qrs_rms -> q2, qrs_duration -> q3, p2p_amplitude -> q4, spectral_ratio -> q5).",
         "Verify quantum register allocation in QuantumCircuit(6) once constructed."
-      ]
+      ],
+      "approval_date": "2026-10-13"
     },
     {
       "id": "D2",
       "name": "Feature encoding",
       "proposed_choice": "First-order RY angle encoding",
-      "status": "PROPOSED_NOT_TEAM_APPROVED",
+      "status": "TEAM_APPROVED",
       "project_owner_position": "APPROVE",
-      "team_approval_status": "PENDING",
+      "team_approval_status": "APPROVED",
       "verdict": "ACCEPTABLE FOR BASELINE",
       "purpose": "Encode normalized continuous features into single-qubit state rotations using the Ry basis.",
       "technical_advantages": [
@@ -55,15 +56,16 @@
       "verification_requirements": [
         "Verify feature inputs are strictly bounded in [0, pi] and clipped against out-of-range test values.",
         "Verify parameter vector binding order during Qiskit circuit evaluation."
-      ]
+      ],
+      "approval_date": "2026-10-13"
     },
     {
       "id": "D3",
       "name": "Ansatz",
       "proposed_choice": "RealAmplitudes",
-      "status": "PROPOSED_NOT_TEAM_APPROVED",
+      "status": "TEAM_APPROVED",
       "project_owner_position": "APPROVE",
-      "team_approval_status": "PENDING",
+      "team_approval_status": "APPROVED",
       "verdict": "ACCEPTABLE FOR BASELINE",
       "purpose": "Parameterize the quantum state using alternating layers of parameterized Ry gates and fixed entanglers.",
       "technical_advantages": [
@@ -78,15 +80,16 @@
       "verification_requirements": [
         "Verify that gate construction matches standard RealAmplitudes parameter ordering.",
         "Verify that no unexpected complex unitaries are introduced."
-      ]
+      ],
+      "approval_date": "2026-10-13"
     },
     {
       "id": "D4",
       "name": "Entanglement",
       "proposed_choice": "Linear",
-      "status": "PROPOSED_NOT_TEAM_APPROVED",
+      "status": "TEAM_APPROVED",
       "project_owner_position": "APPROVE",
-      "team_approval_status": "PENDING",
+      "team_approval_status": "APPROVED",
       "verdict": "ACCEPTABLE FOR BASELINE",
       "purpose": "Introduce quantum correlations between adjacent qubits via nearest-neighbor CNOT gates.",
       "technical_advantages": [
@@ -101,15 +104,16 @@
       "verification_requirements": [
         "Verify CNOT directionality and pair order: (0, 1), (1, 2), (2, 3), (3, 4), (4, 5).",
         "Verify that adjacent qubit pairs correlate clinically meaningful feature interactions."
-      ]
+      ],
+      "approval_date": "2026-10-13"
     },
     {
       "id": "D5",
       "name": "Ansatz repetitions",
       "proposed_choice": "L = 1",
-      "status": "PROPOSED_NOT_TEAM_APPROVED",
+      "status": "TEAM_APPROVED",
       "project_owner_position": "APPROVE",
-      "team_approval_status": "PENDING",
+      "team_approval_status": "APPROVED",
       "verdict": "ACCEPTABLE FOR BASELINE",
       "purpose": "Set the repetition depth of the parameterized entangling block to a single layer as the primary baseline.",
       "technical_advantages": [
@@ -124,15 +128,16 @@
       "verification_requirements": [
         "Verify theoretical parameter count equals 12 upon circuit construction.",
         "Verify training loss converges and evaluate whether L=2 is warranted as an ablation study."
-      ]
+      ],
+      "approval_date": "2026-10-13"
     },
     {
       "id": "D6",
       "name": "Measurement",
       "proposed_choice": "Average of six Z observables",
-      "status": "PROPOSED_NOT_TEAM_APPROVED",
+      "status": "TEAM_APPROVED",
       "project_owner_position": "APPROVE",
-      "team_approval_status": "PENDING",
+      "team_approval_status": "APPROVED",
       "verdict": "ACCEPTABLE FOR BASELINE (VERIFICATION REQUIRED ON POLARITY)",
       "purpose": "Measure local Pauli-Z expectation value on each qubit and average the outcomes across the register.",
       "technical_advantages": [
@@ -148,15 +153,16 @@
         "Verify dataset label convention: 0 = Normal, 1 = VEB.",
         "Verify SparsePauliOp little-endian construction for the 6 Pauli-Z terms with weight 1/6 each.",
         "Confirm that optimization drives Normal beats toward E < 0 and VEB beats toward E > 0 without introducing ad-hoc architecture changes."
-      ]
+      ],
+      "approval_date": "2026-10-13"
     },
     {
       "id": "D7",
       "name": "Optimizer",
       "proposed_choice": "COBYLA",
-      "status": "PROPOSED_NOT_TEAM_APPROVED",
+      "status": "TEAM_APPROVED",
       "project_owner_position": "APPROVE",
-      "team_approval_status": "PENDING",
+      "team_approval_status": "APPROVED",
       "verdict": "ACCEPTABLE FOR BASELINE",
       "purpose": "Execute classical parameter optimization using a derivative-free linear approximation method.",
       "technical_advantages": [
@@ -172,19 +178,20 @@
       "verification_requirements": [
         "Cap maximum iterations at 150.",
         "Log separately: iteration_count, objective_evaluation_count, best_objective_value, termination_reason, runtime_seconds, convergence_status."
-      ]
+      ],
+      "approval_date": "2026-10-13"
     },
     {
       "id": "D8",
       "name": "Initialization",
       "proposed_choice": "Small random U[-0.1, 0.1]",
-      "status": "PROPOSED_NOT_TEAM_APPROVED",
+      "status": "TEAM_APPROVED",
       "project_owner_position": "APPROVE",
-      "team_approval_status": "PENDING",
+      "team_approval_status": "APPROVED",
       "verdict": "ACCEPTABLE FOR BASELINE",
       "purpose": "Initialize variational parameters close to zero while breaking exact parameter symmetry.",
       "technical_advantages": [
-        "Starts the ansatz near the identity operation W(0) = I, avoiding random state dispersion.",
+        "Zero-valued variational Ry rotation parameters make those individual rotations identity operations, while the ansatz retains its fixed CNOT entanglers. Small random initialization U[-0.1, 0.1] avoids large initial state dispersion while breaking parameter symmetry.",
         "Guarantees initial gradients are well-behaved and avoids barren plateau initialization regions.",
         "Deterministic control via fixed random seed generation."
       ],
@@ -195,15 +202,16 @@
       "verification_requirements": [
         "Verify random number generator seed control with np.random.default_rng(seed).",
         "Verify parameter bounds are strictly enforced at t = 0."
-      ]
+      ],
+      "approval_date": "2026-10-13"
     },
     {
       "id": "D9",
       "name": "Loss",
       "proposed_choice": "MSE / Brier score",
-      "status": "PROPOSED_NOT_TEAM_APPROVED",
+      "status": "TEAM_APPROVED",
       "project_owner_position": "APPROVE",
-      "team_approval_status": "PENDING",
+      "team_approval_status": "APPROVED",
       "verdict": "ACCEPTABLE FOR BASELINE",
       "purpose": "Compute mean squared error between model-predicted probabilities and binary target labels.",
       "technical_advantages": [
@@ -218,15 +226,16 @@
       "verification_requirements": [
         "Verify loss function calculation: L = (1/N) sum (p(VEB|x_i, theta) - y_i)^2.",
         "Verify numerical stability during optimization."
-      ]
+      ],
+      "approval_date": "2026-10-13"
     },
     {
       "id": "D10",
       "name": "Simulation",
       "proposed_choice": "Ideal statevector training + 1,024-shot evaluation",
-      "status": "PROPOSED_NOT_TEAM_APPROVED",
+      "status": "TEAM_APPROVED",
       "project_owner_position": "APPROVE",
-      "team_approval_status": "PENDING",
+      "team_approval_status": "APPROVED",
       "verdict": "ACCEPTABLE FOR BASELINE",
       "purpose": "Train variational parameters under exact analytical statevectors, then evaluate physical sampling robustness on the frozen model using 1,024 shots.",
       "technical_advantages": [
@@ -241,7 +250,8 @@
       "verification_requirements": [
         "Verify StatevectorEstimator is used exclusively during training.",
         "Verify BackendEstimatorV2 with AerSimulator(shots=1024) is used for shot-based evaluation with fixed seed."
-      ]
+      ],
+      "approval_date": "2026-10-13"
     }
   ],
   "resource_claims_classification": {
@@ -255,11 +265,17 @@
       "untranspiled_circuit_depth_expectation": 8,
       "observables_count": 6
     },
-    "verified_circuit_measurements": "NONE_YET — Requires constructing QuantumCircuit object in Milestone 5C",
-    "transpiled_hardware_metrics": "PENDING_TRANSPILATION — Depends on target backend basis gates, coupling map, and optimization level"
+    "verified_circuit_measurements": "NONE_YET \u2014 Requires constructing QuantumCircuit object in Milestone 5C",
+    "transpiled_hardware_metrics": "PENDING_TRANSPILATION \u2014 Depends on target backend basis gates, coupling map, and optimization level"
   },
   "training_protocol_spec": {
-    "seeds": [42, 101, 202, 303, 404],
+    "seeds": [
+      42,
+      101,
+      202,
+      303,
+      404
+    ],
     "validation_folds": [
       {
         "fold": 1,
@@ -285,13 +301,22 @@
       "runtime_seconds",
       "convergence_status"
     ],
-    "held_out_test_records": [200, 208],
+    "held_out_test_records": [
+      200,
+      208
+    ],
     "test_set_usage": "STRICTLY_POST_HOC_OBSERVATIONAL_ONLY",
     "historical_bias_disclosure": "Milestone 4.1 disclosed historical classical test-set selection bias; test set is strictly an observational benchmark."
   },
   "physiological_context_and_limitations": {
     "record_208_wording": "Some normal-labelled beats in Record 208 exhibited relatively rapid RR intervals (0.48-0.56 s), which may contribute to classification difficulty when compared against training set ectopic intervals. Sinus tachycardia is an unconfirmed hypothesis and not an established clinical diagnosis.",
     "scientific_limitations_count": 9,
-    "clinical_safety_claim": "None — academic benchmark prototype only, not clinically deployable."
+    "clinical_safety_claim": "None \u2014 academic benchmark prototype only, not clinically deployable."
+  },
+  "team_approval_confirmation": {
+    "approval_date": "2026-10-13",
+    "approval_status": "TEAM_APPROVED",
+    "communication": "Team confirmation communicated to the technical lead on 13 October 2026.",
+    "notes": "The NEXUS-OPS team has formally reviewed and approved decisions D1 through D10 for the primary baseline VQC architecture. Transition to Milestone 5E implementation is authorized under the agreed implementation boundaries."
   }
 }
