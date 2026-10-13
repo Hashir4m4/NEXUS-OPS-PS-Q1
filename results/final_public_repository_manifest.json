@@ -1,0 +1,433 @@
+{
+  "manifest_metadata": {
+    "timestamp": "2026-10-13T16:35:00Z",
+    "project": "NEXUS-OPS \u00e2\u20ac\u201d Project Q",
+    "challenge": "PS-Q1 Biomedical Signal Classifier",
+    "hackathon": "IBM Quantum Qiskit Fall Fest 2026",
+    "repository_url": "https://github.com/Hashir4m4/NEXUS-OPS-PS-Q1",
+    "manifest_version": "1.0",
+    "auditor_role": "Senior Technical Auditor & Scientific Software Architect"
+  },
+  "staging_counts_summary": {
+    "existing_tracked_files_count": 62,
+    "clean_tracked_files_count": 60,
+    "modified_tracked_files_count": 2,
+    "proposed_new_untracked_files_to_stage": 37,
+    "total_files_in_public_repo_after_staging": 99,
+    "excluded_untracked_files_count": 36,
+    "excluded_directories_count": 4
+  },
+  "proposed_files_for_staging": [
+    {
+      "relative_path": "README.md",
+      "category": "root",
+      "purpose": "Comprehensive repository front page, clinical motivation, architecture, benchmarks, quickstart, disclosures",
+      "git_status": "MODIFIED_TRACKED",
+      "sensitive_material": false,
+      "recommendation": "STAGE_AND_COMMIT"
+    },
+    {
+      "relative_path": ".gitignore",
+      "category": "root",
+      "purpose": "Exclusion rules protecting secrets, organizer PDFs, and local development artifacts",
+      "git_status": "MODIFIED_TRACKED",
+      "sensitive_material": false,
+      "recommendation": "STAGE_AND_COMMIT"
+    },
+    {
+      "relative_path": "demo.py",
+      "category": "root",
+      "purpose": "Lightweight reproducible demonstration runner (~1.9s execution, zero retraining)",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "pytest.ini",
+      "category": "root",
+      "purpose": "Pytest configuration for deterministic warning-free test execution",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "processors/__init__.py",
+      "category": "processors",
+      "purpose": "Package initializer for processors module",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "processors/processor_a.py",
+      "category": "processors",
+      "purpose": "Processor A (5Q linear chain) compilation model and capacity enforcement",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "processors/processor_b.py",
+      "category": "processors",
+      "purpose": "Processor B (9Q heavy-hex tree) compilation model and zero-swap embedding",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "processors/processor_A.json",
+      "category": "processors",
+      "purpose": "Canonical 5Q linear chain hardware specification",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "processors/processor_A_branching.json",
+      "category": "processors",
+      "purpose": "5Q branching tree reference topology",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "processors/processor_B.json",
+      "category": "processors",
+      "purpose": "Canonical 9Q heavy-hex sparse tree hardware specification",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "processors/processor_B_cyclic.json",
+      "category": "processors",
+      "purpose": "9Q cyclic variant hardware specification",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "src/vqc_circuit.py",
+      "category": "src",
+      "purpose": "Approved 6-qubit VQC architecture, RY state encoding, RealAmplitudes ansatz, ensemble observable",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "src/vqc_training.py",
+      "category": "src",
+      "purpose": "SciPy COBYLA optimization closures, MSE loss, prediction routines, quarantine enforcement",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "src/vqc_evaluation.py",
+      "category": "src",
+      "purpose": "Held-out test evaluation routines, ECE calibration, confusion matrices",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "src/transpilation_experiments.py",
+      "category": "src",
+      "purpose": "Hardware compilation suite for Processors A and B",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "src/noise_experiments.py",
+      "category": "src",
+      "purpose": "Readout error diagnostic audit and noisy simulation pipeline",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "src/processor_simulation.py",
+      "category": "src",
+      "purpose": "Finite shot-scaling sweep simulations (S=256..4096)",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "tests/test_vqc_circuit.py",
+      "category": "tests",
+      "purpose": "Circuit contracts, parameter ordering, gates, observable tests",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "tests/test_vqc_training.py",
+      "category": "tests",
+      "purpose": "Training closures, objective contracts, prediction bounds tests",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "tests/test_vqc_training_diagnostics.py",
+      "category": "tests",
+      "purpose": "Optimization sensitivity profiles, multi-seed stability, LORO tests",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "tests/test_vqc_evaluation.py",
+      "category": "tests",
+      "purpose": "Model ranking, ECE computation, artifact schema tests",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "tests/test_processor_ab.py",
+      "category": "tests",
+      "purpose": "Hardware topology, coupling maps, capacity rejection tests",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "tests/test_hardware_experiments.py",
+      "category": "tests",
+      "purpose": "Transpiler mapping, noisy simulation, readout error diagnostic tests",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "results/vqc_model_selection.json",
+      "category": "results",
+      "purpose": "Frozen optimal variational weights (fold_1_seed_303)",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "results/vqc_heldout_evaluation.json",
+      "category": "results",
+      "purpose": "Complete held-out test predictions and metrics (Records 200 & 208)",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "results/noisy_simulation_results.json",
+      "category": "results",
+      "purpose": "Full synthetic noise simulation data and readout diagnostic results",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "results/transpilation_comparison.json",
+      "category": "results",
+      "purpose": "Multi-seed compilation benchmarks for Processors A and B",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "results/shot_based_results.json",
+      "category": "results",
+      "purpose": "Finite-shot sweep results (S=256..4096)",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "results/processor_ab_transpilation.json",
+      "category": "results",
+      "purpose": "Detailed per-seed hardware compilation metrics",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "results/vqc_loro_summary.json",
+      "category": "results",
+      "purpose": "Summary of LORO cross-validation fold performance",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "results/phase1_packaging_verification.json",
+      "category": "results",
+      "purpose": "Packaging verification and metric cross-check artifact",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "results/final_public_repository_manifest.json",
+      "category": "results",
+      "purpose": "Machine-readable public repository staging manifest",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "report/PHASE5_PHASE6_COMPLETION_REPORT.md",
+      "category": "report",
+      "purpose": "Master Technical Synthesis for Phase 5 (QML) and Phase 6 (Hardware)",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "report/quantum_hardware_experiment_report.md",
+      "category": "report",
+      "purpose": "Hardware compilation, topology analysis, and noise experiment report",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "report/vqc_evaluation_report.md",
+      "category": "report",
+      "purpose": "Held-out test cohort performance, confusion matrices, and calibration",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "report/processor_architecture_comparison.md",
+      "category": "report",
+      "purpose": "Processor A vs Processor B architecture summary",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "report/PUBLIC_REPOSITORY_REPORT_SELECTION.md",
+      "category": "report",
+      "purpose": "Report curation guide categorizing 45 reports into Include, Exclude, Review",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "report/README_SCIENTIFIC_ACCURACY_AUDIT.md",
+      "category": "report",
+      "purpose": "Scientific accuracy audit report verifying 6-feature source of truth and disclosures",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    },
+    {
+      "relative_path": "report/FINAL_PUBLIC_REPOSITORY_MANIFEST.md",
+      "category": "report",
+      "purpose": "Comprehensive pre-staging public repository file manifest and review report",
+      "git_status": "UNTRACKED",
+      "sensitive_material": false,
+      "recommendation": "INCLUDE"
+    }
+  ],
+  "excluded_items": {
+    "directories_to_ignore": [
+      {
+        "directory": "docs/challenge_materials/",
+        "reason": "Copyrighted hackathon organizer PDF instructions and guides (not for redistribution)"
+      },
+      {
+        "directory": "backup_audit_20261013/",
+        "reason": "Local development safety backup snapshot"
+      },
+      {
+        "directory": "backup_phase6_final_20261013/",
+        "reason": "Local development safety backup snapshot"
+      },
+      {
+        "directory": "scratch/",
+        "reason": "Temporary scratch and diagnostic scripts"
+      }
+    ],
+    "intermediate_reports_to_exclude_from_staging": [
+      "report/AUTONOMOUS_SESSION_HANDOVER.md",
+      "report/FINAL_PHASE1_PUBLICATION_READINESS.md",
+      "report/ORGANIZER_FAQ_COMPLIANCE_RECONCILIATION.md",
+      "report/PHASE1_SUBMISSION_READINESS_AUDIT.md",
+      "report/PHASE5_FINAL_AUDIT.md",
+      "report/PHASE5_PHASE6_CORRECTION_LOG.md",
+      "report/PHASE5_PHASE6_EXECUTION_PLAN.md",
+      "report/PHASE5_PHASE6_FINAL_HANDOVER.md",
+      "report/PHASE5_PHASE6_INDEPENDENT_AUDIT.md",
+      "report/PHASE6_FINAL_AUDIT.md",
+      "report/PHASE6_FINAL_EVIDENCE_RECONCILIATION.md",
+      "report/PHASE6_FINAL_TECHNICAL_CORRECTIONS.md",
+      "report/PUBLICATION_BLOCKER_VERIFICATION.md",
+      "report/processor_ab_evidence_audit.md",
+      "report/processor_ab_experiment_design.md",
+      "report/processor_ab_topology_research.md",
+      "report/quantum_noise_analysis.md",
+      "report/vqc_circuit_step2_review.md",
+      "report/vqc_circuit_step3_review.md",
+      "report/vqc_circuit_step5_review.md",
+      "report/vqc_circuit_step6_review.md",
+      "report/vqc_implementation_preflight.md",
+      "report/vqc_model_selection_protocol.md",
+      "report/vqc_observable_step4_review.md",
+      "report/vqc_training_architecture_step1_review.md",
+      "report/vqc_training_report.md",
+      "report/vqc_training_step2_diagnostics.md"
+    ],
+    "intermediate_results_to_exclude_from_staging": [
+      "results/organizer_faq_compliance.json",
+      "results/phase1_submission_readiness.json",
+      "results/phase5_phase6_audit.json",
+      "results/phase6_final_verification.json",
+      "results/processor_ab_evidence_audit.json",
+      "results/publication_blocker_verification.json",
+      "results/vqc_training_runs.json",
+      "results/vqc_training_step2_diagnostics.json",
+      "results/vqc_training_step3_diagnostic.json"
+    ]
+  },
+  "proposed_gitignore_additions": [
+    "# Safety backups",
+    "backup_*/",
+    "",
+    "# Temporary development scratch",
+    "scratch/",
+    "",
+    "# Organizer competition materials (quarantined)",
+    "docs/challenge_materials/",
+    "",
+    "# Local execution logs",
+    "*.log"
+  ],
+  "security_and_compliance": {
+    "secrets_or_credentials_detected": false,
+    "organizer_copyright_protected": true,
+    "git_operations_performed": {
+      "git_add": false,
+      "git_commit": false,
+      "git_push": false,
+      "portal_submission": false
+    },
+    "phase_7_started": false,
+    "all_tests_passing": true,
+    "total_tests": 116,
+    "passed_tests": 116
+  },
+  "remaining_blockers": [
+    {
+      "item": ".gitignore Safety Exclusions",
+      "status": "APPLIED_LOCALLY",
+      "description": "Narrow, non-destructive exclusions for backup_*/, scratch/, docs/challenge_materials/, and *.log applied to .gitignore."
+    },
+    {
+      "item": "Git Staging & Commit Authorization",
+      "status": "AWAITING_OWNER_AUTHORIZATION",
+      "description": "Owner authorization to stage (git add) the 37 proposed files + 2 modified files and execute Phase 1 commit."
+    }
+  ]
+}

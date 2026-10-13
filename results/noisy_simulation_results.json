@@ -1,0 +1,358 @@
+{
+  "metadata": {
+    "timestamp": "2026-10-13T12:37:50Z",
+    "processor": "Processor B (Canonical Sparse Tree, 9Q)",
+    "selected_model_run_id": "fold_1_seed_303",
+    "shots": 4096,
+    "seed_transpiler": 42,
+    "primary_seed_simulator": 42,
+    "noise_model_parameters": {
+      "single_qubit_depolarizing_p": 0.001,
+      "cx_depolarizing_p": 0.005,
+      "readout_error_p": 0.01
+    },
+    "total_test_samples": 100,
+    "basis_gates": [
+      "rz",
+      "sx",
+      "x",
+      "cx"
+    ],
+    "transpiled_circuit_depth": 15,
+    "transpiled_circuit_ops": {
+      "rz": 36,
+      "sx": 24,
+      "cx": 5
+    },
+    "logical_to_physical_qubits": [
+      0,
+      1,
+      2,
+      4,
+      5,
+      6
+    ]
+  },
+  "readout_diagnostic_audit": {
+    "diagnostic_description": "Exaggerated 50% readout error test on single qubit |0>",
+    "theoretical_ideal_expectation": 1.0,
+    "theoretical_attenuated_expectation_under_50pct_readout": 0.0,
+    "estimator_v2_measured_expectation": 1.0,
+    "estimator_v2_applied_readout_error": false,
+    "measurement_sampler_measured_expectation": 0.0054,
+    "measurement_sampler_applied_readout_error": true,
+    "conclusion": "EstimatorV2 ignores ReadoutError because it evaluates snapshot expectations without measurement operations. Measurement-based AerSimulator correctly applies ReadoutError."
+  },
+  "ideal_baseline": {
+    "mse_loss": 0.16263370085155981,
+    "accuracy": 0.76,
+    "sensitivity": 1.0,
+    "specificity": 0.52,
+    "f1_score": 0.8064516129032258,
+    "mean_p_normal": 0.477489738350117,
+    "mean_p_veb": 0.7092032145888202,
+    "class_polarity_delta_p": 0.2317134762387032,
+    "predicted_normal_count": 26,
+    "predicted_veb_count": 74,
+    "precision": 0.6756756756756757,
+    "roc_auc": 0.9988,
+    "confusion_matrix": {
+      "tn": 26,
+      "fp": 24,
+      "fn": 0,
+      "tp": 50,
+      "matrix": [
+        [
+          26,
+          24
+        ],
+        [
+          0,
+          50
+        ]
+      ]
+    }
+  },
+  "path_a_gate_noise_only": {
+    "execution_method": "Qiskit Aer EstimatorV2 (operator snapshot expectation)",
+    "readout_error_applied": false,
+    "gate_noise_applied": true,
+    "metrics": {
+      "mse_loss": 0.1633725096760745,
+      "accuracy": 0.74,
+      "sensitivity": 1.0,
+      "specificity": 0.48,
+      "f1_score": 0.7936507936507937,
+      "mean_p_normal": 0.4775482449308272,
+      "mean_p_veb": 0.7061099018398527,
+      "class_polarity_delta_p": 0.22856165690902547,
+      "predicted_normal_count": 24,
+      "predicted_veb_count": 76,
+      "precision": 0.6578947368421053,
+      "roc_auc": 0.9992,
+      "confusion_matrix": {
+        "tn": 24,
+        "fp": 26,
+        "fn": 0,
+        "tp": 50,
+        "matrix": [
+          [
+            24,
+            26
+          ],
+          [
+            0,
+            50
+          ]
+        ]
+      }
+    },
+    "degradation_delta": {
+      "delta_accuracy": -0.020000000000000018,
+      "delta_f1_score": -0.012800819252432039,
+      "delta_sensitivity": 0.0,
+      "delta_specificity": -0.040000000000000036,
+      "delta_precision": -0.017780938833570348,
+      "delta_roc_auc": 0.00039999999999995595,
+      "delta_mse_loss": 0.0007388088245146862,
+      "delta_class_polarity_delta_p": -0.0031518193296777297
+    },
+    "flip_count": 2,
+    "flip_rate": 0.02,
+    "mae_expectation": 0.013009253166040647
+  },
+  "path_b_full_noise_combined": {
+    "execution_method": "Qiskit AerSimulator with physical measurements",
+    "readout_error_applied": true,
+    "gate_noise_applied": true,
+    "metrics": {
+      "mse_loss": 0.16437617093324658,
+      "accuracy": 0.77,
+      "sensitivity": 1.0,
+      "specificity": 0.54,
+      "f1_score": 0.8130081300813007,
+      "mean_p_normal": 0.4778263346354168,
+      "mean_p_veb": 0.7023933919270833,
+      "class_polarity_delta_p": 0.22456705729166648,
+      "predicted_normal_count": 27,
+      "predicted_veb_count": 73,
+      "precision": 0.684931506849315,
+      "roc_auc": 0.9984,
+      "confusion_matrix": {
+        "tn": 27,
+        "fp": 23,
+        "fn": 0,
+        "tp": 50,
+        "matrix": [
+          [
+            27,
+            23
+          ],
+          [
+            0,
+            50
+          ]
+        ]
+      }
+    },
+    "degradation_delta": {
+      "delta_accuracy": 0.010000000000000009,
+      "delta_f1_score": 0.006556517178074928,
+      "delta_sensitivity": 0.0,
+      "delta_specificity": 0.020000000000000018,
+      "delta_precision": 0.009255831173639373,
+      "delta_roc_auc": -0.00040000000000006697,
+      "delta_mse_loss": 0.0017424700816867644,
+      "delta_class_polarity_delta_p": -0.0071464189470367145
+    },
+    "flip_count": 1,
+    "flip_rate": 0.01,
+    "mae_expectation": 0.011463204864404261,
+    "rmse_expectation": 0.014134916423646724,
+    "max_expectation_error": 0.03553248126644526
+  },
+  "patient_stratified_full_noise": {
+    "200": {
+      "num_samples": 50,
+      "ideal_metrics": {
+        "mse_loss": 0.14408648221996848,
+        "accuracy": 0.84,
+        "sensitivity": 1.0,
+        "specificity": 0.68,
+        "f1_score": 0.8620689655172413,
+        "mean_p_normal": 0.4477033093032931,
+        "mean_p_veb": 0.7301090832281675,
+        "class_polarity_delta_p": 0.28240577392487437,
+        "predicted_normal_count": 17,
+        "predicted_veb_count": 33,
+        "precision": 0.7575757575757576,
+        "roc_auc": 1.0,
+        "confusion_matrix": {
+          "tn": 17,
+          "fp": 8,
+          "fn": 0,
+          "tp": 25,
+          "matrix": [
+            [
+              17,
+              8
+            ],
+            [
+              0,
+              25
+            ]
+          ]
+        }
+      },
+      "full_noise_metrics": {
+        "mse_loss": 0.14644391361210082,
+        "accuracy": 0.84,
+        "sensitivity": 1.0,
+        "specificity": 0.68,
+        "f1_score": 0.8620689655172413,
+        "mean_p_normal": 0.4487613932291667,
+        "mean_p_veb": 0.7214583333333334,
+        "class_polarity_delta_p": 0.27269694010416673,
+        "predicted_normal_count": 17,
+        "predicted_veb_count": 33,
+        "precision": 0.7575757575757576,
+        "roc_auc": 0.9984,
+        "confusion_matrix": {
+          "tn": 17,
+          "fp": 8,
+          "fn": 0,
+          "tp": 25,
+          "matrix": [
+            [
+              17,
+              8
+            ],
+            [
+              0,
+              25
+            ]
+          ]
+        }
+      },
+      "metric_delta": {
+        "delta_accuracy": 0.0,
+        "delta_f1": 0.0,
+        "delta_sensitivity": 0.0,
+        "delta_specificity": 0.0,
+        "delta_mse": 0.0023574313921323475
+      },
+      "flip_count": 0,
+      "mean_abs_error_prob": 0.0067919148202812505
+    },
+    "208": {
+      "num_samples": 50,
+      "ideal_metrics": {
+        "mse_loss": 0.18118091948315113,
+        "accuracy": 0.68,
+        "sensitivity": 1.0,
+        "specificity": 0.36,
+        "f1_score": 0.7575757575757575,
+        "mean_p_normal": 0.5072761673969409,
+        "mean_p_veb": 0.688297345949473,
+        "class_polarity_delta_p": 0.18102117855253208,
+        "predicted_normal_count": 9,
+        "predicted_veb_count": 41,
+        "precision": 0.6097560975609756,
+        "roc_auc": 0.9967999999999999,
+        "confusion_matrix": {
+          "tn": 9,
+          "fp": 16,
+          "fn": 0,
+          "tp": 25,
+          "matrix": [
+            [
+              9,
+              16
+            ],
+            [
+              0,
+              25
+            ]
+          ]
+        }
+      },
+      "full_noise_metrics": {
+        "mse_loss": 0.1823084282543924,
+        "accuracy": 0.7,
+        "sensitivity": 1.0,
+        "specificity": 0.4,
+        "f1_score": 0.7692307692307693,
+        "mean_p_normal": 0.5068912760416667,
+        "mean_p_veb": 0.6833284505208332,
+        "class_polarity_delta_p": 0.17643717447916651,
+        "predicted_normal_count": 10,
+        "predicted_veb_count": 40,
+        "precision": 0.625,
+        "roc_auc": 0.9984,
+        "confusion_matrix": {
+          "tn": 10,
+          "fp": 15,
+          "fn": 0,
+          "tp": 25,
+          "matrix": [
+            [
+              10,
+              15
+            ],
+            [
+              0,
+              25
+            ]
+          ]
+        }
+      },
+      "metric_delta": {
+        "delta_accuracy": 0.019999999999999907,
+        "delta_f1": 0.011655011655011815,
+        "delta_sensitivity": 0.0,
+        "delta_specificity": 0.040000000000000036,
+        "delta_mse": 0.0011275087712412646
+      },
+      "flip_count": 1,
+      "mean_abs_error_prob": 0.004671290044123005
+    }
+  },
+  "multi_seed_simulations_full_noise": [
+    {
+      "seed_simulator": 42,
+      "accuracy": 0.77,
+      "f1_score": 0.8130081300813007,
+      "sensitivity": 1.0,
+      "specificity": 0.54,
+      "precision": 0.684931506849315,
+      "mse_loss": 0.16437617093324658,
+      "roc_auc": 0.9984,
+      "polarity_delta_p": 0.22456705729166648,
+      "mae_vs_ideal_exp": 0.011463204864404261
+    },
+    {
+      "seed_simulator": 101,
+      "accuracy": 0.74,
+      "f1_score": 0.7936507936507937,
+      "sensitivity": 1.0,
+      "specificity": 0.48,
+      "precision": 0.6578947368421053,
+      "mse_loss": 0.16427285305327835,
+      "roc_auc": 0.9992,
+      "polarity_delta_p": 0.22541422526041682,
+      "mae_vs_ideal_exp": 0.011248474032603841
+    },
+    {
+      "seed_simulator": 202,
+      "accuracy": 0.76,
+      "f1_score": 0.8064516129032258,
+      "sensitivity": 1.0,
+      "specificity": 0.52,
+      "precision": 0.6756756756756757,
+      "mse_loss": 0.16393141372336284,
+      "roc_auc": 0.9984,
+      "polarity_delta_p": 0.22579752604166659,
+      "mae_vs_ideal_exp": 0.011920047595997973
+    }
+  ]
+}

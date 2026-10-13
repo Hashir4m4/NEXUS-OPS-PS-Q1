@@ -1,0 +1,251 @@
+{
+  "metadata": {
+    "experiment_name": "Phase5_VQC_LORO_Full_Experiment",
+    "model_architecture": "6Q_RY_RealAmplitudes_Linear_Reps1_12Params",
+    "observable": "Average_Pauli_Z_6Q",
+    "optimizer": "COBYLA",
+    "maxiter": 50,
+    "seeds": [
+      42,
+      101,
+      202,
+      303,
+      404
+    ],
+    "evaluation_backend": "StatevectorEstimator",
+    "timestamp": "2026-10-13T11:35:52Z",
+    "total_elapsed_seconds": 99.37181830406189
+  },
+  "fold_1_summary": {
+    "num_runs": 5,
+    "train_mse": {
+      "mean": 0.08030940834089664,
+      "std": 0.003954462160483259,
+      "min": 0.07460962714255324,
+      "max": 0.08520962739631065
+    },
+    "val_mse": {
+      "mean": 0.15658102827521675,
+      "std": 0.043783836834084405,
+      "min": 0.10198282722846348,
+      "max": 0.21296907157450626
+    },
+    "train_accuracy": {
+      "mean": 1.0,
+      "std": 0.0,
+      "min": 1.0,
+      "max": 1.0
+    },
+    "val_accuracy": {
+      "mean": 0.8460000000000001,
+      "std": 0.1961224107541002,
+      "min": 0.53,
+      "max": 1.0
+    },
+    "val_sensitivity": {
+      "mean": 1.0,
+      "std": 0.0,
+      "min": 1.0,
+      "max": 1.0
+    },
+    "val_specificity": {
+      "mean": 0.692,
+      "std": 0.3922448215082004,
+      "min": 0.06,
+      "max": 1.0
+    },
+    "val_precision": {
+      "mean": 0.8280927835051546,
+      "std": 0.213372800424254,
+      "min": 0.5154639175257731,
+      "max": 1.0
+    },
+    "val_f1_score": {
+      "mean": 0.8899005756148612,
+      "std": 0.1377468300931001,
+      "min": 0.6802721088435374,
+      "max": 1.0
+    },
+    "val_roc_auc": {
+      "mean": 1.0,
+      "std": 0.0,
+      "min": 1.0,
+      "max": 1.0
+    },
+    "val_polarity_delta_p": {
+      "mean": 0.22786601484617908,
+      "std": 0.10435109908161191,
+      "min": 0.10645936367234698,
+      "max": 0.36821401464967285
+    },
+    "evaluations": {
+      "mean": 50.0,
+      "std": 0.0,
+      "min": 50.0,
+      "max": 50.0
+    },
+    "iterations": {
+      "mean": 30.8,
+      "std": 0.7483314773547882,
+      "min": 30.0,
+      "max": 32.0
+    },
+    "runtime_sec": {
+      "mean": 8.635516548156739,
+      "std": 1.0643742823807545,
+      "min": 6.919651746749878,
+      "max": 9.956084966659546
+    }
+  },
+  "fold_2_summary": {
+    "num_runs": 5,
+    "train_mse": {
+      "mean": 0.07378968735508833,
+      "std": 0.010169507682564964,
+      "min": 0.06381126553842015,
+      "max": 0.08886992082141974
+    },
+    "val_mse": {
+      "mean": 0.17282714886000278,
+      "std": 0.010924949897486009,
+      "min": 0.1569215340616201,
+      "max": 0.18629115721700756
+    },
+    "train_accuracy": {
+      "mean": 1.0,
+      "std": 0.0,
+      "min": 1.0,
+      "max": 1.0
+    },
+    "val_accuracy": {
+      "mean": 0.754,
+      "std": 0.01959591794226544,
+      "min": 0.73,
+      "max": 0.79
+    },
+    "val_sensitivity": {
+      "mean": 0.508,
+      "std": 0.039191835884530825,
+      "min": 0.46,
+      "max": 0.58
+    },
+    "val_specificity": {
+      "mean": 1.0,
+      "std": 0.0,
+      "min": 1.0,
+      "max": 1.0
+    },
+    "val_precision": {
+      "mean": 1.0,
+      "std": 0.0,
+      "min": 1.0,
+      "max": 1.0
+    },
+    "val_f1_score": {
+      "mean": 0.6728628402982485,
+      "std": 0.03376426771346131,
+      "min": 0.6301369863013699,
+      "max": 0.7341772151898733
+    },
+    "val_roc_auc": {
+      "mean": 0.9680799999999999,
+      "std": 0.004947079946796895,
+      "min": 0.96,
+      "max": 0.974
+    },
+    "val_polarity_delta_p": {
+      "mean": 0.2060430937151148,
+      "std": 0.03307581448724741,
+      "min": 0.16856718352213307,
+      "max": 0.24544126992062337
+    },
+    "evaluations": {
+      "mean": 50.0,
+      "std": 0.0,
+      "min": 50.0,
+      "max": 50.0
+    },
+    "iterations": {
+      "mean": 30.4,
+      "std": 1.019803902718557,
+      "min": 29.0,
+      "max": 32.0
+    },
+    "runtime_sec": {
+      "mean": 9.6910240650177,
+      "std": 0.18733503357768733,
+      "min": 9.430557012557983,
+      "max": 9.921528339385986
+    }
+  },
+  "macro_summary": {
+    "num_folds": 2,
+    "total_runs": 10,
+    "total_elapsed_seconds": 99.37181830406189,
+    "train_mse": {
+      "macro_mean": 0.07704954784799248,
+      "fold_1_mean": 0.08030940834089664,
+      "fold_2_mean": 0.07378968735508833
+    },
+    "val_mse": {
+      "macro_mean": 0.16470408856760976,
+      "fold_1_mean": 0.15658102827521675,
+      "fold_2_mean": 0.17282714886000278
+    },
+    "train_accuracy": {
+      "macro_mean": 1.0,
+      "fold_1_mean": 1.0,
+      "fold_2_mean": 1.0
+    },
+    "val_accuracy": {
+      "macro_mean": 0.8,
+      "fold_1_mean": 0.8460000000000001,
+      "fold_2_mean": 0.754
+    },
+    "val_sensitivity": {
+      "macro_mean": 0.754,
+      "fold_1_mean": 1.0,
+      "fold_2_mean": 0.508
+    },
+    "val_specificity": {
+      "macro_mean": 0.846,
+      "fold_1_mean": 0.692,
+      "fold_2_mean": 1.0
+    },
+    "val_precision": {
+      "macro_mean": 0.9140463917525773,
+      "fold_1_mean": 0.8280927835051546,
+      "fold_2_mean": 1.0
+    },
+    "val_f1_score": {
+      "macro_mean": 0.7813817079565548,
+      "fold_1_mean": 0.8899005756148612,
+      "fold_2_mean": 0.6728628402982485
+    },
+    "val_roc_auc": {
+      "macro_mean": 0.98404,
+      "fold_1_mean": 1.0,
+      "fold_2_mean": 0.9680799999999999
+    },
+    "val_polarity_delta_p": {
+      "macro_mean": 0.21695455428064694,
+      "fold_1_mean": 0.22786601484617908,
+      "fold_2_mean": 0.2060430937151148
+    },
+    "evaluations": {
+      "macro_mean": 50.0,
+      "fold_1_mean": 50.0,
+      "fold_2_mean": 50.0
+    },
+    "iterations": {
+      "macro_mean": 30.6,
+      "fold_1_mean": 30.8,
+      "fold_2_mean": 30.4
+    },
+    "runtime_sec": {
+      "macro_mean": 9.163270306587219,
+      "fold_1_mean": 8.635516548156739,
+      "fold_2_mean": 9.6910240650177
+    }
+  }
+}

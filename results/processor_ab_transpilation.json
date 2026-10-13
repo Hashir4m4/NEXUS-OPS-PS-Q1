@@ -1,0 +1,127 @@
+{
+  "metadata": {
+    "generated_at_utc": "2026-10-13T09:05:51.967673+00:00",
+    "project": "NEXUS-OPS PS-Q1 Biomedical Classifier",
+    "event": "Qiskit Fall Fest SRMAP 2026 (Phase 1)",
+    "qiskit_version": "2.5.2",
+    "qiskit_aer_version": "0.17.2",
+    "basis_gates": [
+      "rz",
+      "sx",
+      "x",
+      "cx"
+    ],
+    "optimization_level": 1,
+    "seed_transpiler": 42,
+    "seed_simulator": 42,
+    "shots": 4096,
+    "noise_parameters": {
+      "single_qubit_depolarizing_p": 0.001,
+      "cx_depolarizing_p": 0.005,
+      "readout_error_p": 0.01
+    }
+  },
+  "circuits": {
+    "approved_vqc_6q": {
+      "num_qubits": 6,
+      "uncompiled_depth": 8,
+      "uncompiled_ops": {
+        "ry": 18,
+        "cx": 5
+      },
+      "encoding_parameters": 6,
+      "variational_parameters": 12,
+      "total_parameters": 18
+    },
+    "reference_vqc_5q": {
+      "num_qubits": 5,
+      "uncompiled_depth": 7,
+      "uncompiled_ops": {
+        "ry": 15,
+        "cx": 4
+      },
+      "encoding_parameters": 5,
+      "variational_parameters": 10,
+      "total_parameters": 15
+    }
+  },
+  "transpilation_results": {
+    "processor_a_canonical_6q": {
+      "processor": "Processor A (Canonical Line)",
+      "circuit": "Approved VQC (6Q)",
+      "success": false,
+      "capacity_exceeded": true,
+      "error_type": "CircuitTooWideForTarget",
+      "message": "Circuit width (6 qubits) exceeds Processor A physical capacity (5 qubits). In accordance with Challenge Kit Section 3.1, Processor A serves as a capacity reference, and full-size execution is performed on Processor B."
+    },
+    "processor_a_canonical_5q_ref": {
+      "processor": "Processor A (Canonical Line 0-1-2-3-4)",
+      "circuit": "Reference VQC (5Q)",
+      "success": true,
+      "depth": 14,
+      "cx_count": 4,
+      "swap_count": 0,
+      "total_ops": 54,
+      "ops": {
+        "rz": 30,
+        "sx": 20,
+        "cx": 4
+      }
+    },
+    "processor_a_branching_5q_ref": {
+      "processor": "Processor A (Branching Tree Alternative)",
+      "circuit": "Reference VQC (5Q)",
+      "success": true,
+      "depth": 21,
+      "cx_count": 7,
+      "swap_count": 0,
+      "total_ops": 57,
+      "ops": {
+        "rz": 30,
+        "sx": 20,
+        "cx": 7
+      },
+      "routing_overhead_cx": 3
+    },
+    "processor_b_canonical_6q": {
+      "processor": "Processor B (Canonical Sparse Tree)",
+      "circuit": "Approved VQC (6Q)",
+      "success": true,
+      "depth": 15,
+      "cx_count": 5,
+      "swap_count": 0,
+      "routing_overhead_cx": 0,
+      "total_ops": 65,
+      "ops": {
+        "rz": 36,
+        "sx": 24,
+        "cx": 5
+      }
+    },
+    "processor_b_cyclic_6q": {
+      "processor": "Processor B (Cyclic Mesh Alternative)",
+      "circuit": "Approved VQC (6Q)",
+      "success": true,
+      "depth": 15,
+      "cx_count": 5,
+      "swap_count": 0,
+      "routing_overhead_cx": 0,
+      "total_ops": 65,
+      "ops": {
+        "rz": 36,
+        "sx": 24,
+        "cx": 5
+      }
+    }
+  },
+  "simulation_results": {
+    "processor_b_execution": {
+      "ideal_expectation": 0.2400364575488815,
+      "shots": 4096,
+      "seed_simulator": 42,
+      "noisy_expectation": 0.23470977285521177,
+      "noisy_std_error": 0.015625,
+      "absolute_deviation": 0.005326684693669731
+    }
+  }
+}

@@ -14,3 +14,15 @@ data/mitbih/
 data/*.dat
 data/*.hea
 data/*.atr
+
+# Safety backups
+backup_*/
+
+# Temporary development scratch
+scratch/
+
+# Organizer competition materials (quarantined)
+docs/challenge_materials/
+
+# Local execution logs
+*.log

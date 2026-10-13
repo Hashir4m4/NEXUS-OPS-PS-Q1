@@ -1,0 +1,43 @@
+{
+  "name": "Processor_B",
+  "description": "Official QFF 2026 Phase 1 Processor B - 9-qubit heavy-hex-inspired sparse graph execution target",
+  "num_qubits": 9,
+  "coupling_map": [
+    [0, 1], [1, 0],
+    [1, 2], [2, 1],
+    [2, 3], [3, 2],
+    [2, 4], [4, 2],
+    [4, 5], [5, 4],
+    [5, 6], [6, 5],
+    [4, 7], [7, 4],
+    [7, 8], [8, 7]
+  ],
+  "unique_undirected_edges": [
+    [0, 1],
+    [1, 2],
+    [2, 3],
+    [2, 4],
+    [4, 5],
+    [5, 6],
+    [4, 7],
+    [7, 8]
+  ],
+  "basis_gates": ["rz", "sx", "x", "cx"],
+  "noise_model": {
+    "type": "challenge_defined_synthetic",
+    "single_qubit_depolarizing_p": 0.001,
+    "cx_depolarizing_p": 0.005,
+    "readout_error_p": 0.01
+  },
+  "benchmark_defaults": {
+    "shots": 4096,
+    "optimization_level": 1,
+    "seed_transpiler": 42,
+    "seed_simulator": 42
+  },
+  "source": {
+    "document": "Updated_Challenge_Kit.pdf (Section 3.2 & 3.4)",
+    "event": "Qiskit Fall Fest SRMAP 2026",
+    "hardware_analogue": "IBM Quantum Eagle / Heron heavy-hex subgraphs"
+  }
+}

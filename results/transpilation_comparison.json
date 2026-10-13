@@ -1,0 +1,1301 @@
+{
+  "metadata": {
+    "timestamp": "2026-10-13T11:56:39Z",
+    "seeds": [
+      42,
+      101,
+      202,
+      303,
+      404
+    ],
+    "optimization_levels": [
+      1,
+      2,
+      3
+    ],
+    "logical_circuit_specs": {
+      "approved_6q_vqc": {
+        "num_qubits": 6,
+        "depth": 8,
+        "cx_count": 5,
+        "total_params": 18
+      },
+      "reference_5q_vqc": {
+        "num_qubits": 5,
+        "depth": 2,
+        "cx_count": 0,
+        "total_params": 15
+      }
+    }
+  },
+  "capacity_boundary_checks": {
+    "processor_a_canonical_6q_approved": {
+      "processor": "Processor A (Canonical Line, 5Q)",
+      "circuit": "Approved VQC (6Q)",
+      "success": false,
+      "capacity_exceeded": true,
+      "error_type": "CircuitTooWideForTarget",
+      "message": "Circuit width (6 qubits) exceeds Processor A physical capacity (5 qubits). In accordance with Challenge Kit Section 3.1, Processor A serves as a capacity reference, and full-size execution is performed on Processor B."
+    },
+    "processor_a_branching_6q_approved": {
+      "processor": "Processor A (Branching Tree, 5Q)",
+      "circuit": "Approved VQC (6Q)",
+      "success": false,
+      "capacity_exceeded": true,
+      "error_type": "CircuitTooWideForTarget",
+      "message": "Circuit width (6 qubits) exceeds Processor A physical capacity (5 qubits). In accordance with Challenge Kit Section 3.1, Processor A serves as a capacity reference, and full-size execution is performed on Processor B."
+    }
+  },
+  "statistical_summary": {
+    "processor_a_reference_5q": {
+      "canonical": {
+        "opt_level_1": {
+          "num_runs": 5,
+          "depth": {
+            "mean": 16.0,
+            "std": 0.0,
+            "min": 16.0,
+            "max": 16.0
+          },
+          "cx_count": {
+            "mean": 4.0,
+            "std": 0.0,
+            "min": 4.0,
+            "max": 4.0
+          },
+          "total_ops": {
+            "mean": 65.0,
+            "std": 0.0,
+            "min": 65.0,
+            "max": 65.0
+          },
+          "routing_overhead_cx": {
+            "mean": 0.0,
+            "std": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "opt_level_2": {
+          "num_runs": 5,
+          "depth": {
+            "mean": 16.0,
+            "std": 0.0,
+            "min": 16.0,
+            "max": 16.0
+          },
+          "cx_count": {
+            "mean": 4.0,
+            "std": 0.0,
+            "min": 4.0,
+            "max": 4.0
+          },
+          "total_ops": {
+            "mean": 65.0,
+            "std": 0.0,
+            "min": 65.0,
+            "max": 65.0
+          },
+          "routing_overhead_cx": {
+            "mean": 0.0,
+            "std": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "opt_level_3": {
+          "num_runs": 5,
+          "depth": {
+            "mean": 16.0,
+            "std": 0.0,
+            "min": 16.0,
+            "max": 16.0
+          },
+          "cx_count": {
+            "mean": 4.0,
+            "std": 0.0,
+            "min": 4.0,
+            "max": 4.0
+          },
+          "total_ops": {
+            "mean": 65.0,
+            "std": 0.0,
+            "min": 65.0,
+            "max": 65.0
+          },
+          "routing_overhead_cx": {
+            "mean": 0.0,
+            "std": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        }
+      },
+      "branching": {
+        "opt_level_1": {
+          "num_runs": 5,
+          "depth": {
+            "mean": 23.0,
+            "std": 0.0,
+            "min": 23.0,
+            "max": 23.0
+          },
+          "cx_count": {
+            "mean": 7.0,
+            "std": 0.0,
+            "min": 7.0,
+            "max": 7.0
+          },
+          "total_ops": {
+            "mean": 68.0,
+            "std": 0.0,
+            "min": 68.0,
+            "max": 68.0
+          },
+          "routing_overhead_cx": {
+            "mean": 3.0,
+            "std": 0.0,
+            "min": 3.0,
+            "max": 3.0
+          }
+        },
+        "opt_level_2": {
+          "num_runs": 5,
+          "depth": {
+            "mean": 23.0,
+            "std": 0.0,
+            "min": 23.0,
+            "max": 23.0
+          },
+          "cx_count": {
+            "mean": 7.0,
+            "std": 0.0,
+            "min": 7.0,
+            "max": 7.0
+          },
+          "total_ops": {
+            "mean": 68.0,
+            "std": 0.0,
+            "min": 68.0,
+            "max": 68.0
+          },
+          "routing_overhead_cx": {
+            "mean": 3.0,
+            "std": 0.0,
+            "min": 3.0,
+            "max": 3.0
+          }
+        },
+        "opt_level_3": {
+          "num_runs": 5,
+          "depth": {
+            "mean": 23.0,
+            "std": 0.0,
+            "min": 23.0,
+            "max": 23.0
+          },
+          "cx_count": {
+            "mean": 7.0,
+            "std": 0.0,
+            "min": 7.0,
+            "max": 7.0
+          },
+          "total_ops": {
+            "mean": 68.0,
+            "std": 0.0,
+            "min": 68.0,
+            "max": 68.0
+          },
+          "routing_overhead_cx": {
+            "mean": 3.0,
+            "std": 0.0,
+            "min": 3.0,
+            "max": 3.0
+          }
+        }
+      }
+    },
+    "processor_b_approved_6q": {
+      "canonical": {
+        "opt_level_1": {
+          "num_runs": 5,
+          "depth": {
+            "mean": 15.0,
+            "std": 0.0,
+            "min": 15.0,
+            "max": 15.0
+          },
+          "cx_count": {
+            "mean": 5.0,
+            "std": 0.0,
+            "min": 5.0,
+            "max": 5.0
+          },
+          "swap_count": {
+            "mean": 0.0,
+            "std": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "total_ops": {
+            "mean": 65.0,
+            "std": 0.0,
+            "min": 65.0,
+            "max": 65.0
+          },
+          "routing_overhead_cx": {
+            "mean": 0.0,
+            "std": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "opt_level_2": {
+          "num_runs": 5,
+          "depth": {
+            "mean": 15.0,
+            "std": 0.0,
+            "min": 15.0,
+            "max": 15.0
+          },
+          "cx_count": {
+            "mean": 5.0,
+            "std": 0.0,
+            "min": 5.0,
+            "max": 5.0
+          },
+          "swap_count": {
+            "mean": 0.0,
+            "std": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "total_ops": {
+            "mean": 65.0,
+            "std": 0.0,
+            "min": 65.0,
+            "max": 65.0
+          },
+          "routing_overhead_cx": {
+            "mean": 0.0,
+            "std": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "opt_level_3": {
+          "num_runs": 5,
+          "depth": {
+            "mean": 15.0,
+            "std": 0.0,
+            "min": 15.0,
+            "max": 15.0
+          },
+          "cx_count": {
+            "mean": 5.0,
+            "std": 0.0,
+            "min": 5.0,
+            "max": 5.0
+          },
+          "swap_count": {
+            "mean": 0.0,
+            "std": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "total_ops": {
+            "mean": 65.0,
+            "std": 0.0,
+            "min": 65.0,
+            "max": 65.0
+          },
+          "routing_overhead_cx": {
+            "mean": 0.0,
+            "std": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        }
+      },
+      "cyclic": {
+        "opt_level_1": {
+          "num_runs": 5,
+          "depth": {
+            "mean": 15.0,
+            "std": 0.0,
+            "min": 15.0,
+            "max": 15.0
+          },
+          "cx_count": {
+            "mean": 5.0,
+            "std": 0.0,
+            "min": 5.0,
+            "max": 5.0
+          },
+          "swap_count": {
+            "mean": 0.0,
+            "std": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "total_ops": {
+            "mean": 65.0,
+            "std": 0.0,
+            "min": 65.0,
+            "max": 65.0
+          },
+          "routing_overhead_cx": {
+            "mean": 0.0,
+            "std": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "opt_level_2": {
+          "num_runs": 5,
+          "depth": {
+            "mean": 15.0,
+            "std": 0.0,
+            "min": 15.0,
+            "max": 15.0
+          },
+          "cx_count": {
+            "mean": 5.0,
+            "std": 0.0,
+            "min": 5.0,
+            "max": 5.0
+          },
+          "swap_count": {
+            "mean": 0.0,
+            "std": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "total_ops": {
+            "mean": 65.0,
+            "std": 0.0,
+            "min": 65.0,
+            "max": 65.0
+          },
+          "routing_overhead_cx": {
+            "mean": 0.0,
+            "std": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        },
+        "opt_level_3": {
+          "num_runs": 5,
+          "depth": {
+            "mean": 15.0,
+            "std": 0.0,
+            "min": 15.0,
+            "max": 15.0
+          },
+          "cx_count": {
+            "mean": 5.0,
+            "std": 0.0,
+            "min": 5.0,
+            "max": 5.0
+          },
+          "swap_count": {
+            "mean": 0.0,
+            "std": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          },
+          "total_ops": {
+            "mean": 65.0,
+            "std": 0.0,
+            "min": 65.0,
+            "max": 65.0
+          },
+          "routing_overhead_cx": {
+            "mean": 0.0,
+            "std": 0.0,
+            "min": 0.0,
+            "max": 0.0
+          }
+        }
+      }
+    }
+  },
+  "detailed_runs": {
+    "processor_a_reference_5q": {
+      "canonical": {
+        "1": [
+          {
+            "seed": 42,
+            "depth": 16,
+            "cx_count": 4,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 4,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 101,
+            "depth": 16,
+            "cx_count": 4,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 4,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 202,
+            "depth": 16,
+            "cx_count": 4,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 4,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 303,
+            "depth": 16,
+            "cx_count": 4,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 4,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 404,
+            "depth": 16,
+            "cx_count": 4,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 4,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 0
+          }
+        ],
+        "2": [
+          {
+            "seed": 42,
+            "depth": 16,
+            "cx_count": 4,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 4,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 101,
+            "depth": 16,
+            "cx_count": 4,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 4,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 202,
+            "depth": 16,
+            "cx_count": 4,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 4,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 303,
+            "depth": 16,
+            "cx_count": 4,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 4,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 404,
+            "depth": 16,
+            "cx_count": 4,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 4,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 0
+          }
+        ],
+        "3": [
+          {
+            "seed": 42,
+            "depth": 16,
+            "cx_count": 4,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 4,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 101,
+            "depth": 16,
+            "cx_count": 4,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 4,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 202,
+            "depth": 16,
+            "cx_count": 4,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 4,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 303,
+            "depth": 16,
+            "cx_count": 4,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 4,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 404,
+            "depth": 16,
+            "cx_count": 4,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 4,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 0
+          }
+        ]
+      },
+      "branching": {
+        "1": [
+          {
+            "seed": 42,
+            "depth": 23,
+            "cx_count": 7,
+            "swap_count": 0,
+            "total_ops": 68,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 7,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 3
+          },
+          {
+            "seed": 101,
+            "depth": 23,
+            "cx_count": 7,
+            "swap_count": 0,
+            "total_ops": 68,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 7,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 3
+          },
+          {
+            "seed": 202,
+            "depth": 23,
+            "cx_count": 7,
+            "swap_count": 0,
+            "total_ops": 68,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 7,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 3
+          },
+          {
+            "seed": 303,
+            "depth": 23,
+            "cx_count": 7,
+            "swap_count": 0,
+            "total_ops": 68,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 7,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 3
+          },
+          {
+            "seed": 404,
+            "depth": 23,
+            "cx_count": 7,
+            "swap_count": 0,
+            "total_ops": 68,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 7,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 3
+          }
+        ],
+        "2": [
+          {
+            "seed": 42,
+            "depth": 23,
+            "cx_count": 7,
+            "swap_count": 0,
+            "total_ops": 68,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 7,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 3
+          },
+          {
+            "seed": 101,
+            "depth": 23,
+            "cx_count": 7,
+            "swap_count": 0,
+            "total_ops": 68,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 7,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 3
+          },
+          {
+            "seed": 202,
+            "depth": 23,
+            "cx_count": 7,
+            "swap_count": 0,
+            "total_ops": 68,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 7,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 3
+          },
+          {
+            "seed": 303,
+            "depth": 23,
+            "cx_count": 7,
+            "swap_count": 0,
+            "total_ops": 68,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 7,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 3
+          },
+          {
+            "seed": 404,
+            "depth": 23,
+            "cx_count": 7,
+            "swap_count": 0,
+            "total_ops": 68,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 7,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 3
+          }
+        ],
+        "3": [
+          {
+            "seed": 42,
+            "depth": 23,
+            "cx_count": 7,
+            "swap_count": 0,
+            "total_ops": 68,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 7,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 3
+          },
+          {
+            "seed": 101,
+            "depth": 23,
+            "cx_count": 7,
+            "swap_count": 0,
+            "total_ops": 68,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 7,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 3
+          },
+          {
+            "seed": 202,
+            "depth": 23,
+            "cx_count": 7,
+            "swap_count": 0,
+            "total_ops": 68,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 7,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 3
+          },
+          {
+            "seed": 303,
+            "depth": 23,
+            "cx_count": 7,
+            "swap_count": 0,
+            "total_ops": 68,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 7,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 3
+          },
+          {
+            "seed": 404,
+            "depth": 23,
+            "cx_count": 7,
+            "swap_count": 0,
+            "total_ops": 68,
+            "ops": {
+              "sx": 30,
+              "rz": 30,
+              "cx": 7,
+              "barrier": 1
+            },
+            "routing_overhead_cx": 3
+          }
+        ]
+      }
+    },
+    "processor_b_approved_6q": {
+      "canonical": {
+        "1": [
+          {
+            "seed": 42,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n0: <Qubit register=(6, \"q\"), index=0>,\n1: <Qubit register=(6, \"q\"), index=1>,\n2: <Qubit register=(6, \"q\"), index=2>,\n4: <Qubit register=(6, \"q\"), index=3>,\n5: <Qubit register=(6, \"q\"), index=4>,\n6: <Qubit register=(6, \"q\"), index=5>,\n3: <Qubit register=(3, \"ancilla\"), index=0>,\n7: <Qubit register=(3, \"ancilla\"), index=1>,\n8: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 101,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n0: <Qubit register=(6, \"q\"), index=0>,\n1: <Qubit register=(6, \"q\"), index=1>,\n2: <Qubit register=(6, \"q\"), index=2>,\n4: <Qubit register=(6, \"q\"), index=3>,\n5: <Qubit register=(6, \"q\"), index=4>,\n6: <Qubit register=(6, \"q\"), index=5>,\n3: <Qubit register=(3, \"ancilla\"), index=0>,\n7: <Qubit register=(3, \"ancilla\"), index=1>,\n8: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 202,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n0: <Qubit register=(6, \"q\"), index=0>,\n1: <Qubit register=(6, \"q\"), index=1>,\n2: <Qubit register=(6, \"q\"), index=2>,\n4: <Qubit register=(6, \"q\"), index=3>,\n5: <Qubit register=(6, \"q\"), index=4>,\n6: <Qubit register=(6, \"q\"), index=5>,\n3: <Qubit register=(3, \"ancilla\"), index=0>,\n7: <Qubit register=(3, \"ancilla\"), index=1>,\n8: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 303,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n0: <Qubit register=(6, \"q\"), index=0>,\n1: <Qubit register=(6, \"q\"), index=1>,\n2: <Qubit register=(6, \"q\"), index=2>,\n4: <Qubit register=(6, \"q\"), index=3>,\n5: <Qubit register=(6, \"q\"), index=4>,\n6: <Qubit register=(6, \"q\"), index=5>,\n3: <Qubit register=(3, \"ancilla\"), index=0>,\n7: <Qubit register=(3, \"ancilla\"), index=1>,\n8: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 404,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n0: <Qubit register=(6, \"q\"), index=0>,\n1: <Qubit register=(6, \"q\"), index=1>,\n2: <Qubit register=(6, \"q\"), index=2>,\n4: <Qubit register=(6, \"q\"), index=3>,\n5: <Qubit register=(6, \"q\"), index=4>,\n6: <Qubit register=(6, \"q\"), index=5>,\n3: <Qubit register=(3, \"ancilla\"), index=0>,\n7: <Qubit register=(3, \"ancilla\"), index=1>,\n8: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          }
+        ],
+        "2": [
+          {
+            "seed": 42,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n0: <Qubit register=(6, \"q\"), index=0>,\n1: <Qubit register=(6, \"q\"), index=1>,\n2: <Qubit register=(6, \"q\"), index=2>,\n4: <Qubit register=(6, \"q\"), index=3>,\n5: <Qubit register=(6, \"q\"), index=4>,\n6: <Qubit register=(6, \"q\"), index=5>,\n3: <Qubit register=(3, \"ancilla\"), index=0>,\n7: <Qubit register=(3, \"ancilla\"), index=1>,\n8: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 101,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n0: <Qubit register=(6, \"q\"), index=0>,\n1: <Qubit register=(6, \"q\"), index=1>,\n2: <Qubit register=(6, \"q\"), index=2>,\n4: <Qubit register=(6, \"q\"), index=3>,\n5: <Qubit register=(6, \"q\"), index=4>,\n6: <Qubit register=(6, \"q\"), index=5>,\n3: <Qubit register=(3, \"ancilla\"), index=0>,\n7: <Qubit register=(3, \"ancilla\"), index=1>,\n8: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 202,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n0: <Qubit register=(6, \"q\"), index=0>,\n1: <Qubit register=(6, \"q\"), index=1>,\n2: <Qubit register=(6, \"q\"), index=2>,\n4: <Qubit register=(6, \"q\"), index=3>,\n5: <Qubit register=(6, \"q\"), index=4>,\n6: <Qubit register=(6, \"q\"), index=5>,\n3: <Qubit register=(3, \"ancilla\"), index=0>,\n7: <Qubit register=(3, \"ancilla\"), index=1>,\n8: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 303,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n0: <Qubit register=(6, \"q\"), index=0>,\n1: <Qubit register=(6, \"q\"), index=1>,\n2: <Qubit register=(6, \"q\"), index=2>,\n4: <Qubit register=(6, \"q\"), index=3>,\n5: <Qubit register=(6, \"q\"), index=4>,\n6: <Qubit register=(6, \"q\"), index=5>,\n3: <Qubit register=(3, \"ancilla\"), index=0>,\n7: <Qubit register=(3, \"ancilla\"), index=1>,\n8: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 404,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n0: <Qubit register=(6, \"q\"), index=0>,\n1: <Qubit register=(6, \"q\"), index=1>,\n2: <Qubit register=(6, \"q\"), index=2>,\n4: <Qubit register=(6, \"q\"), index=3>,\n5: <Qubit register=(6, \"q\"), index=4>,\n6: <Qubit register=(6, \"q\"), index=5>,\n3: <Qubit register=(3, \"ancilla\"), index=0>,\n7: <Qubit register=(3, \"ancilla\"), index=1>,\n8: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          }
+        ],
+        "3": [
+          {
+            "seed": 42,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n0: <Qubit register=(6, \"q\"), index=0>,\n1: <Qubit register=(6, \"q\"), index=1>,\n2: <Qubit register=(6, \"q\"), index=2>,\n4: <Qubit register=(6, \"q\"), index=3>,\n5: <Qubit register=(6, \"q\"), index=4>,\n6: <Qubit register=(6, \"q\"), index=5>,\n3: <Qubit register=(3, \"ancilla\"), index=0>,\n7: <Qubit register=(3, \"ancilla\"), index=1>,\n8: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 101,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n0: <Qubit register=(6, \"q\"), index=0>,\n1: <Qubit register=(6, \"q\"), index=1>,\n2: <Qubit register=(6, \"q\"), index=2>,\n4: <Qubit register=(6, \"q\"), index=3>,\n5: <Qubit register=(6, \"q\"), index=4>,\n6: <Qubit register=(6, \"q\"), index=5>,\n3: <Qubit register=(3, \"ancilla\"), index=0>,\n7: <Qubit register=(3, \"ancilla\"), index=1>,\n8: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 202,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n0: <Qubit register=(6, \"q\"), index=0>,\n1: <Qubit register=(6, \"q\"), index=1>,\n2: <Qubit register=(6, \"q\"), index=2>,\n4: <Qubit register=(6, \"q\"), index=3>,\n5: <Qubit register=(6, \"q\"), index=4>,\n6: <Qubit register=(6, \"q\"), index=5>,\n3: <Qubit register=(3, \"ancilla\"), index=0>,\n7: <Qubit register=(3, \"ancilla\"), index=1>,\n8: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 303,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n0: <Qubit register=(6, \"q\"), index=0>,\n1: <Qubit register=(6, \"q\"), index=1>,\n2: <Qubit register=(6, \"q\"), index=2>,\n4: <Qubit register=(6, \"q\"), index=3>,\n5: <Qubit register=(6, \"q\"), index=4>,\n6: <Qubit register=(6, \"q\"), index=5>,\n3: <Qubit register=(3, \"ancilla\"), index=0>,\n7: <Qubit register=(3, \"ancilla\"), index=1>,\n8: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 404,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n0: <Qubit register=(6, \"q\"), index=0>,\n1: <Qubit register=(6, \"q\"), index=1>,\n2: <Qubit register=(6, \"q\"), index=2>,\n4: <Qubit register=(6, \"q\"), index=3>,\n5: <Qubit register=(6, \"q\"), index=4>,\n6: <Qubit register=(6, \"q\"), index=5>,\n3: <Qubit register=(3, \"ancilla\"), index=0>,\n7: <Qubit register=(3, \"ancilla\"), index=1>,\n8: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          }
+        ]
+      },
+      "cyclic": {
+        "1": [
+          {
+            "seed": 42,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n0: <Qubit register=(6, \"q\"), index=0>,\n1: <Qubit register=(6, \"q\"), index=1>,\n2: <Qubit register=(6, \"q\"), index=2>,\n3: <Qubit register=(6, \"q\"), index=3>,\n4: <Qubit register=(6, \"q\"), index=4>,\n5: <Qubit register=(6, \"q\"), index=5>,\n6: <Qubit register=(3, \"ancilla\"), index=0>,\n7: <Qubit register=(3, \"ancilla\"), index=1>,\n8: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 101,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n0: <Qubit register=(6, \"q\"), index=0>,\n1: <Qubit register=(6, \"q\"), index=1>,\n2: <Qubit register=(6, \"q\"), index=2>,\n3: <Qubit register=(6, \"q\"), index=3>,\n4: <Qubit register=(6, \"q\"), index=4>,\n5: <Qubit register=(6, \"q\"), index=5>,\n6: <Qubit register=(3, \"ancilla\"), index=0>,\n7: <Qubit register=(3, \"ancilla\"), index=1>,\n8: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 202,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n0: <Qubit register=(6, \"q\"), index=0>,\n1: <Qubit register=(6, \"q\"), index=1>,\n2: <Qubit register=(6, \"q\"), index=2>,\n3: <Qubit register=(6, \"q\"), index=3>,\n4: <Qubit register=(6, \"q\"), index=4>,\n5: <Qubit register=(6, \"q\"), index=5>,\n6: <Qubit register=(3, \"ancilla\"), index=0>,\n7: <Qubit register=(3, \"ancilla\"), index=1>,\n8: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 303,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n0: <Qubit register=(6, \"q\"), index=0>,\n1: <Qubit register=(6, \"q\"), index=1>,\n2: <Qubit register=(6, \"q\"), index=2>,\n3: <Qubit register=(6, \"q\"), index=3>,\n4: <Qubit register=(6, \"q\"), index=4>,\n5: <Qubit register=(6, \"q\"), index=5>,\n6: <Qubit register=(3, \"ancilla\"), index=0>,\n7: <Qubit register=(3, \"ancilla\"), index=1>,\n8: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 404,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n0: <Qubit register=(6, \"q\"), index=0>,\n1: <Qubit register=(6, \"q\"), index=1>,\n2: <Qubit register=(6, \"q\"), index=2>,\n3: <Qubit register=(6, \"q\"), index=3>,\n4: <Qubit register=(6, \"q\"), index=4>,\n5: <Qubit register=(6, \"q\"), index=5>,\n6: <Qubit register=(3, \"ancilla\"), index=0>,\n7: <Qubit register=(3, \"ancilla\"), index=1>,\n8: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          }
+        ],
+        "2": [
+          {
+            "seed": 42,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n8: <Qubit register=(6, \"q\"), index=0>,\n0: <Qubit register=(6, \"q\"), index=1>,\n1: <Qubit register=(6, \"q\"), index=2>,\n2: <Qubit register=(6, \"q\"), index=3>,\n3: <Qubit register=(6, \"q\"), index=4>,\n4: <Qubit register=(6, \"q\"), index=5>,\n5: <Qubit register=(3, \"ancilla\"), index=0>,\n6: <Qubit register=(3, \"ancilla\"), index=1>,\n7: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 101,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n8: <Qubit register=(6, \"q\"), index=0>,\n0: <Qubit register=(6, \"q\"), index=1>,\n1: <Qubit register=(6, \"q\"), index=2>,\n2: <Qubit register=(6, \"q\"), index=3>,\n3: <Qubit register=(6, \"q\"), index=4>,\n4: <Qubit register=(6, \"q\"), index=5>,\n5: <Qubit register=(3, \"ancilla\"), index=0>,\n6: <Qubit register=(3, \"ancilla\"), index=1>,\n7: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 202,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n8: <Qubit register=(6, \"q\"), index=0>,\n0: <Qubit register=(6, \"q\"), index=1>,\n1: <Qubit register=(6, \"q\"), index=2>,\n2: <Qubit register=(6, \"q\"), index=3>,\n3: <Qubit register=(6, \"q\"), index=4>,\n4: <Qubit register=(6, \"q\"), index=5>,\n5: <Qubit register=(3, \"ancilla\"), index=0>,\n6: <Qubit register=(3, \"ancilla\"), index=1>,\n7: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 303,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n8: <Qubit register=(6, \"q\"), index=0>,\n0: <Qubit register=(6, \"q\"), index=1>,\n1: <Qubit register=(6, \"q\"), index=2>,\n2: <Qubit register=(6, \"q\"), index=3>,\n3: <Qubit register=(6, \"q\"), index=4>,\n4: <Qubit register=(6, \"q\"), index=5>,\n5: <Qubit register=(3, \"ancilla\"), index=0>,\n6: <Qubit register=(3, \"ancilla\"), index=1>,\n7: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 404,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n8: <Qubit register=(6, \"q\"), index=0>,\n0: <Qubit register=(6, \"q\"), index=1>,\n1: <Qubit register=(6, \"q\"), index=2>,\n2: <Qubit register=(6, \"q\"), index=3>,\n3: <Qubit register=(6, \"q\"), index=4>,\n4: <Qubit register=(6, \"q\"), index=5>,\n5: <Qubit register=(3, \"ancilla\"), index=0>,\n6: <Qubit register=(3, \"ancilla\"), index=1>,\n7: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          }
+        ],
+        "3": [
+          {
+            "seed": 42,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n8: <Qubit register=(6, \"q\"), index=0>,\n0: <Qubit register=(6, \"q\"), index=1>,\n1: <Qubit register=(6, \"q\"), index=2>,\n2: <Qubit register=(6, \"q\"), index=3>,\n3: <Qubit register=(6, \"q\"), index=4>,\n4: <Qubit register=(6, \"q\"), index=5>,\n5: <Qubit register=(3, \"ancilla\"), index=0>,\n6: <Qubit register=(3, \"ancilla\"), index=1>,\n7: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 101,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n8: <Qubit register=(6, \"q\"), index=0>,\n0: <Qubit register=(6, \"q\"), index=1>,\n1: <Qubit register=(6, \"q\"), index=2>,\n2: <Qubit register=(6, \"q\"), index=3>,\n3: <Qubit register=(6, \"q\"), index=4>,\n4: <Qubit register=(6, \"q\"), index=5>,\n5: <Qubit register=(3, \"ancilla\"), index=0>,\n6: <Qubit register=(3, \"ancilla\"), index=1>,\n7: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 202,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n8: <Qubit register=(6, \"q\"), index=0>,\n0: <Qubit register=(6, \"q\"), index=1>,\n1: <Qubit register=(6, \"q\"), index=2>,\n2: <Qubit register=(6, \"q\"), index=3>,\n3: <Qubit register=(6, \"q\"), index=4>,\n4: <Qubit register=(6, \"q\"), index=5>,\n5: <Qubit register=(3, \"ancilla\"), index=0>,\n6: <Qubit register=(3, \"ancilla\"), index=1>,\n7: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 303,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n8: <Qubit register=(6, \"q\"), index=0>,\n0: <Qubit register=(6, \"q\"), index=1>,\n1: <Qubit register=(6, \"q\"), index=2>,\n2: <Qubit register=(6, \"q\"), index=3>,\n3: <Qubit register=(6, \"q\"), index=4>,\n4: <Qubit register=(6, \"q\"), index=5>,\n5: <Qubit register=(3, \"ancilla\"), index=0>,\n6: <Qubit register=(3, \"ancilla\"), index=1>,\n7: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          },
+          {
+            "seed": 404,
+            "depth": 15,
+            "cx_count": 5,
+            "swap_count": 0,
+            "total_ops": 65,
+            "ops": {
+              "rz": 36,
+              "sx": 24,
+              "cx": 5
+            },
+            "initial_layout": "Layout({\n8: <Qubit register=(6, \"q\"), index=0>,\n0: <Qubit register=(6, \"q\"), index=1>,\n1: <Qubit register=(6, \"q\"), index=2>,\n2: <Qubit register=(6, \"q\"), index=3>,\n3: <Qubit register=(6, \"q\"), index=4>,\n4: <Qubit register=(6, \"q\"), index=5>,\n5: <Qubit register=(3, \"ancilla\"), index=0>,\n6: <Qubit register=(3, \"ancilla\"), index=1>,\n7: <Qubit register=(3, \"ancilla\"), index=2>\n})",
+            "routing_overhead_cx": 0
+          }
+        ]
+      }
+    }
+  }
+}

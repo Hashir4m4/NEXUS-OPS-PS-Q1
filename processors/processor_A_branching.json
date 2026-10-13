@@ -1,0 +1,28 @@
+{
+  "name": "Processor_A_Branching",
+  "description": "Alternative QFF 2026 Phase 1 Processor A - 5-qubit branching T-tree topology (from Oct 11 draft)",
+  "num_qubits": 5,
+  "coupling_map": [
+    [0, 1], [1, 0],
+    [1, 2], [2, 1],
+    [1, 3], [3, 1],
+    [3, 4], [4, 3]
+  ],
+  "unique_undirected_edges": [
+    [0, 1],
+    [1, 2],
+    [1, 3],
+    [3, 4]
+  ],
+  "basis_gates": ["rz", "sx", "x", "cx"],
+  "noise_model": {
+    "type": "challenge_defined_synthetic",
+    "single_qubit_depolarizing_p": 0.001,
+    "cx_depolarizing_p": 0.005,
+    "readout_error_p": 0.01
+  },
+  "source": {
+    "document": "Processor_AB_Benchmark_Configuration_FINAL.pdf (Section 3)",
+    "hardware_analogue": "IBM Tenerife (ibmqx4) / Ourense / Rome T-branching topology"
+  }
+}
