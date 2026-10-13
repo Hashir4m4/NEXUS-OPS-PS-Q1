@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.vscode/
+.idea/
+.obsidian/
+.env
+.DS_Store
+
+# Raw dataset files (PhysioNet WFDB records)
+data/mitbih/
+data/*.dat
+data/*.hea
+data/*.atr

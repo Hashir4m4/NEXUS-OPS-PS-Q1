@@ -1,0 +1,461 @@
+{
+  "experiment_name": "Milestone_4_Classical_ML_Baselines",
+  "dataset": {
+    "train_samples": 200,
+    "test_samples": 100,
+    "train_records": [
+      106,
+      119
+    ],
+    "test_records": [
+      200,
+      208
+    ],
+    "features": [
+      "pre_rr",
+      "post_rr",
+      "qrs_rms",
+      "qrs_duration",
+      "p2p_amplitude",
+      "spectral_ratio"
+    ],
+    "classes": {
+      "0": "Normal ('N')",
+      "1": "VEB ('V')"
+    }
+  },
+  "model_configurations": {
+    "logistic_regression": {
+      "model_class": "LogisticRegression",
+      "description": "L2-regularized logistic regression (linear baseline)",
+      "params": {
+        "C": 1.0,
+        "penalty": "l2",
+        "solver": "lbfgs",
+        "max_iter": 1000,
+        "random_state": 42
+      }
+    },
+    "svm_rbf": {
+      "model_class": "SVC",
+      "description": "Support Vector Classifier with Radial Basis Function kernel",
+      "params": {
+        "C": 1.0,
+        "kernel": "rbf",
+        "gamma": "scale",
+        "probability": true,
+        "random_state": 42
+      }
+    },
+    "random_forest": {
+      "model_class": "RandomForestClassifier",
+      "description": "Random Forest ensemble of 100 decision trees",
+      "params": {
+        "n_estimators": 100,
+        "max_depth": 5,
+        "min_samples_split": 4,
+        "random_state": 42
+      }
+    }
+  },
+  "leave_one_record_out_validation": {
+    "folds": {
+      "fold_1": {
+        "train_record": "106",
+        "val_record": "119",
+        "train_samples": 100,
+        "val_samples": 100,
+        "train_class_balance": {
+          "N": 50,
+          "V": 50
+        },
+        "val_class_balance": {
+          "N": 50,
+          "V": 50
+        },
+        "models": {
+          "logistic_regression": {
+            "accuracy": 0.97,
+            "sensitivity": 1.0,
+            "specificity": 0.94,
+            "precision": 0.9433962264150944,
+            "f1_score": 0.970873786407767,
+            "roc_auc": 1.0,
+            "confusion_matrix": {
+              "tn": 47,
+              "fp": 3,
+              "fn": 0,
+              "tp": 50,
+              "matrix": [
+                [
+                  47,
+                  3
+                ],
+                [
+                  0,
+                  50
+                ]
+              ]
+            }
+          },
+          "svm_rbf": {
+            "accuracy": 0.93,
+            "sensitivity": 1.0,
+            "specificity": 0.86,
+            "precision": 0.8771929824561403,
+            "f1_score": 0.9345794392523364,
+            "roc_auc": 1.0,
+            "confusion_matrix": {
+              "tn": 43,
+              "fp": 7,
+              "fn": 0,
+              "tp": 50,
+              "matrix": [
+                [
+                  43,
+                  7
+                ],
+                [
+                  0,
+                  50
+                ]
+              ]
+            }
+          },
+          "random_forest": {
+            "accuracy": 1.0,
+            "sensitivity": 1.0,
+            "specificity": 1.0,
+            "precision": 1.0,
+            "f1_score": 1.0,
+            "roc_auc": 1.0,
+            "confusion_matrix": {
+              "tn": 50,
+              "fp": 0,
+              "fn": 0,
+              "tp": 50,
+              "matrix": [
+                [
+                  50,
+                  0
+                ],
+                [
+                  0,
+                  50
+                ]
+              ]
+            }
+          }
+        }
+      },
+      "fold_2": {
+        "train_record": "119",
+        "val_record": "106",
+        "train_samples": 100,
+        "val_samples": 100,
+        "train_class_balance": {
+          "N": 50,
+          "V": 50
+        },
+        "val_class_balance": {
+          "N": 50,
+          "V": 50
+        },
+        "models": {
+          "logistic_regression": {
+            "accuracy": 0.64,
+            "sensitivity": 0.28,
+            "specificity": 1.0,
+            "precision": 1.0,
+            "f1_score": 0.4375,
+            "roc_auc": 1.0,
+            "confusion_matrix": {
+              "tn": 50,
+              "fp": 0,
+              "fn": 36,
+              "tp": 14,
+              "matrix": [
+                [
+                  50,
+                  0
+                ],
+                [
+                  36,
+                  14
+                ]
+              ]
+            }
+          },
+          "svm_rbf": {
+            "accuracy": 0.6,
+            "sensitivity": 0.2,
+            "specificity": 1.0,
+            "precision": 1.0,
+            "f1_score": 0.3333333333333333,
+            "roc_auc": 1.0,
+            "confusion_matrix": {
+              "tn": 50,
+              "fp": 0,
+              "fn": 40,
+              "tp": 10,
+              "matrix": [
+                [
+                  50,
+                  0
+                ],
+                [
+                  40,
+                  10
+                ]
+              ]
+            }
+          },
+          "random_forest": {
+            "accuracy": 0.75,
+            "sensitivity": 0.5,
+            "specificity": 1.0,
+            "precision": 1.0,
+            "f1_score": 0.6666666666666666,
+            "roc_auc": 0.9892,
+            "confusion_matrix": {
+              "tn": 50,
+              "fp": 0,
+              "fn": 25,
+              "tp": 25,
+              "matrix": [
+                [
+                  50,
+                  0
+                ],
+                [
+                  25,
+                  25
+                ]
+              ]
+            }
+          }
+        }
+      }
+    },
+    "summary": {
+      "logistic_regression": {
+        "mean_accuracy": 0.8049999999999999,
+        "std_accuracy": 0.16499999999999998,
+        "mean_sensitivity": 0.64,
+        "std_sensitivity": 0.36,
+        "mean_specificity": 0.97,
+        "std_specificity": 0.030000000000000027,
+        "mean_f1_score": 0.7041868932038835,
+        "mean_roc_auc": 1.0
+      },
+      "svm_rbf": {
+        "mean_accuracy": 0.765,
+        "std_accuracy": 0.16500000000000004,
+        "mean_sensitivity": 0.6,
+        "std_sensitivity": 0.4,
+        "mean_specificity": 0.9299999999999999,
+        "std_specificity": 0.07,
+        "mean_f1_score": 0.6339563862928349,
+        "mean_roc_auc": 1.0
+      },
+      "random_forest": {
+        "mean_accuracy": 0.875,
+        "std_accuracy": 0.125,
+        "mean_sensitivity": 0.75,
+        "std_sensitivity": 0.25,
+        "mean_specificity": 1.0,
+        "std_specificity": 0.0,
+        "mean_f1_score": 0.8333333333333333,
+        "mean_roc_auc": 0.9945999999999999
+      }
+    }
+  },
+  "final_test_evaluation": {
+    "models": {
+      "logistic_regression": {
+        "accuracy": 0.92,
+        "sensitivity": 1.0,
+        "specificity": 0.84,
+        "precision": 0.8620689655172413,
+        "f1_score": 0.9259259259259259,
+        "roc_auc": 0.996,
+        "confusion_matrix": {
+          "tn": 42,
+          "fp": 8,
+          "fn": 0,
+          "tp": 50,
+          "matrix": [
+            [
+              42,
+              8
+            ],
+            [
+              0,
+              50
+            ]
+          ]
+        },
+        "classification_report": {
+          "Normal": {
+            "precision": 1.0,
+            "recall": 0.84,
+            "f1-score": 0.9130434782608695,
+            "support": 50.0
+          },
+          "VEB": {
+            "precision": 0.8620689655172413,
+            "recall": 1.0,
+            "f1-score": 0.9259259259259259,
+            "support": 50.0
+          },
+          "accuracy": 0.92,
+          "macro avg": {
+            "precision": 0.9310344827586207,
+            "recall": 0.9199999999999999,
+            "f1-score": 0.9194847020933977,
+            "support": 100.0
+          },
+          "weighted avg": {
+            "precision": 0.9310344827586207,
+            "recall": 0.92,
+            "f1-score": 0.9194847020933977,
+            "support": 100.0
+          }
+        }
+      },
+      "svm_rbf": {
+        "accuracy": 0.91,
+        "sensitivity": 1.0,
+        "specificity": 0.82,
+        "precision": 0.847457627118644,
+        "f1_score": 0.9174311926605505,
+        "roc_auc": 0.996,
+        "confusion_matrix": {
+          "tn": 41,
+          "fp": 9,
+          "fn": 0,
+          "tp": 50,
+          "matrix": [
+            [
+              41,
+              9
+            ],
+            [
+              0,
+              50
+            ]
+          ]
+        },
+        "classification_report": {
+          "Normal": {
+            "precision": 1.0,
+            "recall": 0.82,
+            "f1-score": 0.9010989010989011,
+            "support": 50.0
+          },
+          "VEB": {
+            "precision": 0.847457627118644,
+            "recall": 1.0,
+            "f1-score": 0.9174311926605505,
+            "support": 50.0
+          },
+          "accuracy": 0.91,
+          "macro avg": {
+            "precision": 0.923728813559322,
+            "recall": 0.9099999999999999,
+            "f1-score": 0.9092650468797259,
+            "support": 100.0
+          },
+          "weighted avg": {
+            "precision": 0.9237288135593221,
+            "recall": 0.91,
+            "f1-score": 0.9092650468797259,
+            "support": 100.0
+          }
+        }
+      },
+      "random_forest": {
+        "accuracy": 0.77,
+        "sensitivity": 1.0,
+        "specificity": 0.54,
+        "precision": 0.684931506849315,
+        "f1_score": 0.8130081300813008,
+        "roc_auc": 0.9863999999999999,
+        "confusion_matrix": {
+          "tn": 27,
+          "fp": 23,
+          "fn": 0,
+          "tp": 50,
+          "matrix": [
+            [
+              27,
+              23
+            ],
+            [
+              0,
+              50
+            ]
+          ]
+        },
+        "classification_report": {
+          "Normal": {
+            "precision": 1.0,
+            "recall": 0.54,
+            "f1-score": 0.7012987012987013,
+            "support": 50.0
+          },
+          "VEB": {
+            "precision": 0.684931506849315,
+            "recall": 1.0,
+            "f1-score": 0.8130081300813008,
+            "support": 50.0
+          },
+          "accuracy": 0.77,
+          "macro avg": {
+            "precision": 0.8424657534246576,
+            "recall": 0.77,
+            "f1-score": 0.757153415690001,
+            "support": 100.0
+          },
+          "weighted avg": {
+            "precision": 0.8424657534246575,
+            "recall": 0.77,
+            "f1-score": 0.757153415690001,
+            "support": 100.0
+          }
+        }
+      }
+    },
+    "interpretability": {
+      "logistic_regression": {
+        "intercept": 1.9541228208593469,
+        "coefficients": {
+          "pre_rr": -3.1461398869865684,
+          "post_rr": 0.36845165943270114,
+          "qrs_rms": -0.5848077184651436,
+          "qrs_duration": 1.4920719474888962,
+          "p2p_amplitude": 0.4134118144091251,
+          "spectral_ratio": -0.89971550082778
+        },
+        "odds_ratios": {
+          "pre_rr": 0.04301786058926932,
+          "post_rr": 1.4454947629029085,
+          "qrs_rms": 0.5572129932817322,
+          "qrs_duration": 4.4462984786544935,
+          "p2p_amplitude": 1.5119675477657653,
+          "spectral_ratio": 0.40668534492763475
+        }
+      },
+      "random_forest": {
+        "feature_importances_gini": {
+          "pre_rr": 0.4472614138289326,
+          "post_rr": 0.08792678414013132,
+          "qrs_rms": 0.012629706446335919,
+          "qrs_duration": 0.2965885494328034,
+          "p2p_amplitude": 0.028282323635265123,
+          "spectral_ratio": 0.12731122251653165
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,193 @@
+{
+  "check_sample_counts": {
+    "passed": true,
+    "total_samples": 300,
+    "train_samples": 200,
+    "test_samples": 100,
+    "expected": {
+      "total": 300,
+      "train": 200,
+      "test": 100
+    }
+  },
+  "check_class_balance": {
+    "passed": true,
+    "overall": {
+      "N": 150,
+      "V": 150
+    },
+    "train": {
+      "N": 100,
+      "V": 100
+    },
+    "test": {
+      "N": 50,
+      "V": 50
+    }
+  },
+  "check_patient_isolation": {
+    "passed": true,
+    "train_records": [
+      "106",
+      "119"
+    ],
+    "test_records": [
+      "200",
+      "208"
+    ],
+    "record_overlap": []
+  },
+  "check_segment_dimensions": {
+    "passed": true,
+    "signal_columns_count": 360,
+    "expected_window_size": 360,
+    "window_duration_seconds": 1.0
+  },
+  "check_signal_finiteness": {
+    "passed": true,
+    "has_nan": false,
+    "has_inf": false,
+    "has_null": false
+  },
+  "check_boundary_compliance": {
+    "passed": true,
+    "min_window_start": 6328,
+    "max_window_end": 649556,
+    "max_record_samples": 650000
+  },
+  "check_sampled_window_overlap": {
+    "overlap_count_in_selected_subset": 9,
+    "overlapping_pairs": [
+      {
+        "record_id": "106",
+        "beat_1": "REC106_B0848_V",
+        "beat_2": "REC106_B0849_N",
+        "overlap_samples": 54
+      },
+      {
+        "record_id": "106",
+        "beat_1": "REC106_B1071_N",
+        "beat_2": "REC106_B1072_V",
+        "overlap_samples": 149
+      },
+      {
+        "record_id": "106",
+        "beat_1": "REC106_B1910_V",
+        "beat_2": "REC106_B1911_V",
+        "overlap_samples": 192
+      },
+      {
+        "record_id": "106",
+        "beat_1": "REC106_B2037_N",
+        "beat_2": "REC106_B2039_V",
+        "overlap_samples": 15
+      },
+      {
+        "record_id": "119",
+        "beat_1": "REC119_B0493_N",
+        "beat_2": "REC119_B0494_N",
+        "overlap_samples": 34
+      },
+      {
+        "record_id": "119",
+        "beat_1": "REC119_B0891_N",
+        "beat_2": "REC119_B0892_N",
+        "overlap_samples": 29
+      },
+      {
+        "record_id": "200",
+        "beat_1": "REC200_B1045_V",
+        "beat_2": "REC200_B1046_N",
+        "overlap_samples": 28
+      },
+      {
+        "record_id": "200",
+        "beat_1": "REC200_B2314_V",
+        "beat_2": "REC200_B2316_N",
+        "overlap_samples": 70
+      },
+      {
+        "record_id": "208",
+        "beat_1": "REC208_B2247_V",
+        "beat_2": "REC208_B2248_N",
+        "overlap_samples": 97
+      }
+    ],
+    "note": "Because 300 beats are sparsely subsampled across ~9,100 total beats, most selected beats do not overlap with each other."
+  },
+  "check_seed_determinism": {
+    "passed": true,
+    "seed_used": 42,
+    "repeated_run_exact_match": true
+  },
+  "overall_validation_status": "PASSED",
+  "dataset_metadata": {
+    "dataset_name": "MIT-BIH_Arrhythmia_NEXUS-OPS_PS-Q1_Phase1",
+    "random_seed": 42,
+    "sampling_rate_hz": 360.0,
+    "window_before_samples": 144,
+    "window_after_samples": 216,
+    "total_window_samples": 360,
+    "lead_name": "MLII",
+    "total_samples": 300,
+    "train_samples": 200,
+    "test_samples": 100,
+    "train_records": [
+      "106",
+      "119"
+    ],
+    "test_records": [
+      "200",
+      "208"
+    ],
+    "record_statistics": {
+      "106": {
+        "split": "train",
+        "total_valid_N": 1506,
+        "total_valid_V": 520,
+        "selected_N": 50,
+        "selected_V": 50,
+        "total_selected": 100,
+        "excluded_count": 72
+      },
+      "119": {
+        "split": "train",
+        "total_valid_N": 1542,
+        "total_valid_V": 444,
+        "selected_N": 50,
+        "selected_V": 50,
+        "total_selected": 100,
+        "excluded_count": 108
+      },
+      "200": {
+        "split": "test",
+        "total_valid_N": 1742,
+        "total_valid_V": 826,
+        "selected_N": 25,
+        "selected_V": 25,
+        "total_selected": 50,
+        "excluded_count": 224
+      },
+      "208": {
+        "split": "test",
+        "total_valid_N": 1585,
+        "total_valid_V": 992,
+        "selected_N": 25,
+        "selected_V": 25,
+        "total_selected": 50,
+        "excluded_count": 463
+      }
+    },
+    "total_exclusions": 867,
+    "exclusion_breakdown_by_reason": {
+      "Non-target annotation symbol 'F'": 375,
+      "Non-target annotation symbol '+'": 345,
+      "Non-target annotation symbol '~'": 101,
+      "Non-target annotation symbol 'A'": 30,
+      "Non-target annotation symbol '|'": 8,
+      "Boundary violation (within 144 samples of start or 216 samples of end)": 4,
+      "Non-target annotation symbol 'S'": 2,
+      "Non-target annotation symbol 'Q'": 2
+    }
+  }
+}

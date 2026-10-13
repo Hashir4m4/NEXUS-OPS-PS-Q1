@@ -1,0 +1,297 @@
+{
+  "project": "Project Q - IBM Quantum Qiskit Fall Fest 2026",
+  "challenge": "PS-Q1 - Biomedical Signal Classifier",
+  "team": "NEXUS-OPS",
+  "milestone": "5B.1 - Scientific Corrections & Team Review Package",
+  "decision_owner": "NEXUS-OPS team — pending confirmation",
+  "global_status": "PROPOSED_NOT_TEAM_APPROVED",
+  "project_owner_review_summary": {
+    "review_status": "INDIVIDUAL_SELECTIONS_RECORDED_NOT_TEAM_APPROVED",
+    "notes": "The project owner has individually reviewed the proposed choices and endorsed D5 (L=1), D6 (polarity: positive=VEB, negative=Normal), and D9 (MSE/Brier). These represent individual owner selections and do NOT constitute formal NEXUS-OPS team consensus. All decisions remain PROPOSED_NOT_TEAM_APPROVED pending full team sign-off."
+  },
+  "timestamp": "2026-10-12T23:10:00+05:30",
+  "decisions": [
+    {
+      "id": "D1",
+      "name": "Qubit count",
+      "proposed_choice": "6 qubits",
+      "status": "PROPOSED_NOT_TEAM_APPROVED",
+      "project_owner_position": "APPROVE",
+      "team_approval_status": "PENDING",
+      "verdict": "ACCEPTABLE FOR BASELINE",
+      "purpose": "Provide a 1:1 direct mapping from the 6 engineered biomedical features to individual qubits.",
+      "technical_advantages": [
+        "Retains all six physiological feature dimensions without lossy dimensionality reduction (e.g., PCA).",
+        "Theoretical state space dimension is 2^6 = 64, computationally lightweight for classical statevector simulation.",
+        "Allows local observable readout per feature domain."
+      ],
+      "limitations_and_risks": [
+        "Higher qubit requirement than compressed 3-qubit re-uploading architectures.",
+        "Physical NISQ implementation requires maintaining gate fidelity across all 6 physical qubits."
+      ],
+      "verification_requirements": [
+        "Verify that qubit index mapping strictly preserves feature column order (pre_rr -> q0, post_rr -> q1, qrs_rms -> q2, qrs_duration -> q3, p2p_amplitude -> q4, spectral_ratio -> q5).",
+        "Verify quantum register allocation in QuantumCircuit(6) once constructed."
+      ]
+    },
+    {
+      "id": "D2",
+      "name": "Feature encoding",
+      "proposed_choice": "First-order RY angle encoding",
+      "status": "PROPOSED_NOT_TEAM_APPROVED",
+      "project_owner_position": "APPROVE",
+      "team_approval_status": "PENDING",
+      "verdict": "ACCEPTABLE FOR BASELINE",
+      "purpose": "Encode normalized continuous features into single-qubit state rotations using the Ry basis.",
+      "technical_advantages": [
+        "Theoretical depth O(1) circuit with exactly zero two-qubit entangling gates in the encoding stage.",
+        "Generates purely real probability amplitudes, avoiding unnecessary phase complexity.",
+        "Rotation angles naturally span [0, pi], matching the preprocessed feature scaling interval."
+      ],
+      "limitations_and_risks": [
+        "Creates an unentangled product state at the encoding boundary; feature interactions must be learned solely by the downstream ansatz.",
+        "Crucial theoretical distinction: RY angle encoding does NOT make the VQC equivalent to classical logistic regression once followed by multi-qubit entanglement."
+      ],
+      "verification_requirements": [
+        "Verify feature inputs are strictly bounded in [0, pi] and clipped against out-of-range test values.",
+        "Verify parameter vector binding order during Qiskit circuit evaluation."
+      ]
+    },
+    {
+      "id": "D3",
+      "name": "Ansatz",
+      "proposed_choice": "RealAmplitudes",
+      "status": "PROPOSED_NOT_TEAM_APPROVED",
+      "project_owner_position": "APPROVE",
+      "team_approval_status": "PENDING",
+      "verdict": "ACCEPTABLE FOR BASELINE",
+      "purpose": "Parameterize the quantum state using alternating layers of parameterized Ry gates and fixed entanglers.",
+      "technical_advantages": [
+        "Preserves real-valued quantum statevectors (amplitudes in R^64), halving parameter count compared to SU(2) rotations.",
+        "Directly compatible with Qiskit 2.x circuit library and standard hardware native gate sets.",
+        "Compact parameter space accelerates classical optimization convergence."
+      ],
+      "limitations_and_risks": [
+        "Restricts variational state exploration to the real sub-manifold of Hilbert space, ignoring complex phase degrees of freedom.",
+        "Expressivity may be bounded compared to full EfficientSU2 if complex interference is needed."
+      ],
+      "verification_requirements": [
+        "Verify that gate construction matches standard RealAmplitudes parameter ordering.",
+        "Verify that no unexpected complex unitaries are introduced."
+      ]
+    },
+    {
+      "id": "D4",
+      "name": "Entanglement",
+      "proposed_choice": "Linear",
+      "status": "PROPOSED_NOT_TEAM_APPROVED",
+      "project_owner_position": "APPROVE",
+      "team_approval_status": "PENDING",
+      "verdict": "ACCEPTABLE FOR BASELINE",
+      "purpose": "Introduce quantum correlations between adjacent qubits via nearest-neighbor CNOT gates.",
+      "technical_advantages": [
+        "Minimal two-qubit gate count: theoretical expectation is n - 1 = 5 CNOT gates for 6 qubits.",
+        "Directly matches linear physical topology on superconducting processors without requiring SWAP overhead.",
+        "Significantly lower gate error accumulation than all-to-all entanglement (which requires 15 CNOTs theoretically)."
+      ],
+      "limitations_and_risks": [
+        "Information propagation between non-adjacent qubits (e.g., q0 and q5) is indirect and weak across a single layer.",
+        "Entanglement structure depends heavily on the ordering of input features assigned to qubits."
+      ],
+      "verification_requirements": [
+        "Verify CNOT directionality and pair order: (0, 1), (1, 2), (2, 3), (3, 4), (4, 5).",
+        "Verify that adjacent qubit pairs correlate clinically meaningful feature interactions."
+      ]
+    },
+    {
+      "id": "D5",
+      "name": "Ansatz repetitions",
+      "proposed_choice": "L = 1",
+      "status": "PROPOSED_NOT_TEAM_APPROVED",
+      "project_owner_position": "APPROVE",
+      "team_approval_status": "PENDING",
+      "verdict": "ACCEPTABLE FOR BASELINE",
+      "purpose": "Set the repetition depth of the parameterized entangling block to a single layer as the primary baseline.",
+      "technical_advantages": [
+        "Yields a compact theoretical parameter vector of 12 trainable parameters (6 initial Ry + 6 post-entanglement Ry).",
+        "Low circuit depth minimizes barren plateau risks and optimization landscape ruggedness.",
+        "Fast classical simulation runtime during multi-seed training."
+      ],
+      "limitations_and_risks": [
+        "Underfitting risk: a single layer may have insufficient expressive power to separate complex non-linear boundary regions.",
+        "Must be benchmarked against classical logistic regression to detect underfitting."
+      ],
+      "verification_requirements": [
+        "Verify theoretical parameter count equals 12 upon circuit construction.",
+        "Verify training loss converges and evaluate whether L=2 is warranted as an ablation study."
+      ]
+    },
+    {
+      "id": "D6",
+      "name": "Measurement",
+      "proposed_choice": "Average of six Z observables",
+      "status": "PROPOSED_NOT_TEAM_APPROVED",
+      "project_owner_position": "APPROVE",
+      "team_approval_status": "PENDING",
+      "verdict": "ACCEPTABLE FOR BASELINE (VERIFICATION REQUIRED ON POLARITY)",
+      "purpose": "Measure local Pauli-Z expectation value on each qubit and average the outcomes across the register.",
+      "technical_advantages": [
+        "Local observable structure provably avoids cost-function-dependent barren plateaus in shallow circuits.",
+        "Symmetric readout extracts information contributed by all six feature-encoding qubits.",
+        "Theoretical expectation value E in [-1, +1] maps linearly to probability p in [0, 1]."
+      ],
+      "limitations_and_risks": [
+        "Averaging across 6 qubits may dilute gradients if class separation is driven primarily by only 1-2 features.",
+        "Polarity convention: p(VEB) = (E + 1) / 2 assumes E -> +1 corresponds to VEB (class 1) and E -> -1 corresponds to Normal (class 0). The mathematical observation that E = +1 applies strictly when both input encoding angles and variational parameters are zero (x = 0, theta = 0). It does not imply that actual encoded ECG samples produce E = +1 at initialization. Initial predictions must be evaluated using the actual six scaled input features and initialized variational parameters to verify empirical polarity and alignment with dataset binary labels."
+      ],
+      "verification_requirements": [
+        "Verify dataset label convention: 0 = Normal, 1 = VEB.",
+        "Verify SparsePauliOp little-endian construction for the 6 Pauli-Z terms with weight 1/6 each.",
+        "Confirm that optimization drives Normal beats toward E < 0 and VEB beats toward E > 0 without introducing ad-hoc architecture changes."
+      ]
+    },
+    {
+      "id": "D7",
+      "name": "Optimizer",
+      "proposed_choice": "COBYLA",
+      "status": "PROPOSED_NOT_TEAM_APPROVED",
+      "project_owner_position": "APPROVE",
+      "team_approval_status": "PENDING",
+      "verdict": "ACCEPTABLE FOR BASELINE",
+      "purpose": "Execute classical parameter optimization using a derivative-free linear approximation method.",
+      "technical_advantages": [
+        "Derivative-free approach avoids expensive numerical or parameter-shift gradient evaluations.",
+        "Fast convergence in noise-free statevector simulation.",
+        "Standard, robust implementation available via scipy.optimize.minimize without third-party dependencies."
+      ],
+      "limitations_and_risks": [
+        "Gradient-free search can become trapped in shallow local minima.",
+        "COBYLA iterations and objective-function evaluations are distinct: an iteration may execute multiple function evaluations during trust-region management.",
+        "Step sizes are heuristic and can stall if initialization is near flat regions."
+      ],
+      "verification_requirements": [
+        "Cap maximum iterations at 150.",
+        "Log separately: iteration_count, objective_evaluation_count, best_objective_value, termination_reason, runtime_seconds, convergence_status."
+      ]
+    },
+    {
+      "id": "D8",
+      "name": "Initialization",
+      "proposed_choice": "Small random U[-0.1, 0.1]",
+      "status": "PROPOSED_NOT_TEAM_APPROVED",
+      "project_owner_position": "APPROVE",
+      "team_approval_status": "PENDING",
+      "verdict": "ACCEPTABLE FOR BASELINE",
+      "purpose": "Initialize variational parameters close to zero while breaking exact parameter symmetry.",
+      "technical_advantages": [
+        "Starts the ansatz near the identity operation W(0) = I, avoiding random state dispersion.",
+        "Guarantees initial gradients are well-behaved and avoids barren plateau initialization regions.",
+        "Deterministic control via fixed random seed generation."
+      ],
+      "limitations_and_risks": [
+        "Symmetric bounds [-0.1, 0.1] may bias initial optimization trajectories toward small rotation angles.",
+        "Performance could vary across seeds; requires multi-seed validation."
+      ],
+      "verification_requirements": [
+        "Verify random number generator seed control with np.random.default_rng(seed).",
+        "Verify parameter bounds are strictly enforced at t = 0."
+      ]
+    },
+    {
+      "id": "D9",
+      "name": "Loss",
+      "proposed_choice": "MSE / Brier score",
+      "status": "PROPOSED_NOT_TEAM_APPROVED",
+      "project_owner_position": "APPROVE",
+      "team_approval_status": "PENDING",
+      "verdict": "ACCEPTABLE FOR BASELINE",
+      "purpose": "Compute mean squared error between model-predicted probabilities and binary target labels.",
+      "technical_advantages": [
+        "Direct algebraic connection to Pauli expectation values: L = (1/4N) sum (E_i - (2y_i - 1))^2.",
+        "Smooth, bounded loss landscape in [0, 1] that pairs well with COBYLA.",
+        "Brier score directly evaluates probability calibration without requiring adaptive bias parameters."
+      ],
+      "limitations_and_risks": [
+        "MSE gradients can flatten when predictions saturate, whereas Binary Cross-Entropy provides stronger penalization for confident errors.",
+        "May produce narrow probability distributions around 0.5 if parameters underfit."
+      ],
+      "verification_requirements": [
+        "Verify loss function calculation: L = (1/N) sum (p(VEB|x_i, theta) - y_i)^2.",
+        "Verify numerical stability during optimization."
+      ]
+    },
+    {
+      "id": "D10",
+      "name": "Simulation",
+      "proposed_choice": "Ideal statevector training + 1,024-shot evaluation",
+      "status": "PROPOSED_NOT_TEAM_APPROVED",
+      "project_owner_position": "APPROVE",
+      "team_approval_status": "PENDING",
+      "verdict": "ACCEPTABLE FOR BASELINE",
+      "purpose": "Train variational parameters under exact analytical statevectors, then evaluate physical sampling robustness on the frozen model using 1,024 shots.",
+      "technical_advantages": [
+        "Decouples parameter optimization from statistical shot noise during training, preventing noisy gradient stalling.",
+        "Fast, reproducible training via Qiskit 2.x StatevectorEstimator.",
+        "Allows assessing the impact of finite-shot sampling variance on frozen parameters."
+      ],
+      "limitations_and_risks": [
+        "Finite-shot sampling introduces statistical variance. For S=1024 shots: theoretical standard error on E is SE(E) <= 1/sqrt(S) = 0.03125, and standard error on mapped probability p=(E+1)/2 is SE(p) <= 1/(2*sqrt(S)) = 0.015625 (approx 1.56%). This is a theoretical worst-case bound, NOT an experimentally measured variance.",
+        "Parameters converged on infinite shots may experience classification flips under shot noise if probabilities hover near 0.5."
+      ],
+      "verification_requirements": [
+        "Verify StatevectorEstimator is used exclusively during training.",
+        "Verify BackendEstimatorV2 with AerSimulator(shots=1024) is used for shot-based evaluation with fixed seed."
+      ]
+    }
+  ],
+  "resource_claims_classification": {
+    "theoretical_expectations_pre_implementation": {
+      "num_qubits": 6,
+      "feature_encoding_parameters": 6,
+      "trainable_parameters_formula": "n * (L + 1) = 6 * (1 + 1) = 12",
+      "ansatz_layers": 1,
+      "cnot_gates_untranspiled_expectation": 5,
+      "single_qubit_ry_untranspiled_expectation": 18,
+      "untranspiled_circuit_depth_expectation": 8,
+      "observables_count": 6
+    },
+    "verified_circuit_measurements": "NONE_YET — Requires constructing QuantumCircuit object in Milestone 5C",
+    "transpiled_hardware_metrics": "PENDING_TRANSPILATION — Depends on target backend basis gates, coupling map, and optimization level"
+  },
+  "training_protocol_spec": {
+    "seeds": [42, 101, 202, 303, 404],
+    "validation_folds": [
+      {
+        "fold": 1,
+        "train_record": 106,
+        "val_record": 119
+      },
+      {
+        "fold": 2,
+        "train_record": 119,
+        "val_record": 106
+      }
+    ],
+    "total_loro_runs": 10,
+    "full_train_runs": 5,
+    "max_iterations": 150,
+    "convergence_tolerance": 0.0001,
+    "convergence_patience": 5,
+    "optimizer_logging_fields": [
+      "iteration_count",
+      "objective_evaluation_count",
+      "best_objective_value",
+      "termination_reason",
+      "runtime_seconds",
+      "convergence_status"
+    ],
+    "held_out_test_records": [200, 208],
+    "test_set_usage": "STRICTLY_POST_HOC_OBSERVATIONAL_ONLY",
+    "historical_bias_disclosure": "Milestone 4.1 disclosed historical classical test-set selection bias; test set is strictly an observational benchmark."
+  },
+  "physiological_context_and_limitations": {
+    "record_208_wording": "Some normal-labelled beats in Record 208 exhibited relatively rapid RR intervals (0.48-0.56 s), which may contribute to classification difficulty when compared against training set ectopic intervals. Sinus tachycardia is an unconfirmed hypothesis and not an established clinical diagnosis.",
+    "scientific_limitations_count": 9,
+    "clinical_safety_claim": "None — academic benchmark prototype only, not clinically deployable."
+  }
+}

@@ -1,0 +1,287 @@
+{
+  "test_set_isolation_audit": {
+    "status": "CORRECTED_RETROSPECTIVELY",
+    "historical_flaw_identified": "Milestone 4 reporting partially cited test accuracy (92.0%) as justification for selecting Logistic Regression. In strict protocol, test set evaluations must be completely frozen and post-hoc; selecting a model using test results introduces test-set selection bias.",
+    "corrected_selection_rule": "Model selection is frozen exclusively using (1) pre-specified architectural parity with VQC single-qubit rotations (linear hyperplane in [0, pi]^6) and (2) training-cohort LORO discrimination (mean ROC-AUC = 1.0000 across folds 1 and 2). Test set results are strictly observational benchmark evaluations, not tuning feedback.",
+    "test_records": [
+      200,
+      208
+    ],
+    "participated_in_feature_selection": false,
+    "participated_in_hyperparameter_tuning": false,
+    "participated_in_scaler_fitting": false
+  },
+  "loro_investigation": {
+    "fold_1": {
+      "train_record": 106,
+      "val_record": 119,
+      "models": {
+        "logistic_regression": {
+          "roc_auc": 1.0,
+          "tn": 47,
+          "fp": 3,
+          "fn": 0,
+          "tp": 50,
+          "normal_prob_range": [
+            0.00764151384371612,
+            0.5082621172503339
+          ],
+          "veb_prob_range": [
+            0.9986830861068899,
+            0.999434059416613
+          ],
+          "probability_overlap": false,
+          "threshold_sensitivity_at_0_5": 1.0
+        },
+        "svm_rbf": {
+          "roc_auc": 1.0,
+          "tn": 43,
+          "fp": 7,
+          "fn": 0,
+          "tp": 50,
+          "normal_prob_range": [
+            0.015742948462074035,
+            0.7096417551000591
+          ],
+          "veb_prob_range": [
+            0.9571619333903432,
+            0.96907759861227
+          ],
+          "probability_overlap": false,
+          "threshold_sensitivity_at_0_5": 1.0
+        },
+        "random_forest": {
+          "roc_auc": 1.0,
+          "tn": 50,
+          "fp": 0,
+          "fn": 0,
+          "tp": 50,
+          "normal_prob_range": [
+            0.0,
+            0.3196666666666667
+          ],
+          "veb_prob_range": [
+            1.0,
+            1.0
+          ],
+          "probability_overlap": false,
+          "threshold_sensitivity_at_0_5": 1.0
+        }
+      }
+    },
+    "fold_2": {
+      "train_record": 119,
+      "val_record": 106,
+      "models": {
+        "logistic_regression": {
+          "roc_auc": 1.0,
+          "tn": 50,
+          "fp": 0,
+          "fn": 36,
+          "tp": 14,
+          "normal_prob_range": [
+            0.00032607678850825035,
+            0.009327427692580853
+          ],
+          "veb_prob_range": [
+            0.01197618048642472,
+            0.8735571502627894
+          ],
+          "probability_overlap": false,
+          "threshold_sensitivity_at_0_5": 0.28
+        },
+        "svm_rbf": {
+          "roc_auc": 1.0,
+          "tn": 50,
+          "fp": 0,
+          "fn": 40,
+          "tp": 10,
+          "normal_prob_range": [
+            0.019317441734041256,
+            0.04579441571141035
+          ],
+          "veb_prob_range": [
+            0.06281054221168716,
+            0.8693128623299728
+          ],
+          "probability_overlap": false,
+          "threshold_sensitivity_at_0_5": 0.2
+        },
+        "random_forest": {
+          "roc_auc": 0.9892,
+          "tn": 50,
+          "fp": 0,
+          "fn": 25,
+          "tp": 25,
+          "normal_prob_range": [
+            0.0,
+            0.18
+          ],
+          "veb_prob_range": [
+            0.18,
+            0.69
+          ],
+          "probability_overlap": true,
+          "threshold_sensitivity_at_0_5": 0.5
+        }
+      }
+    }
+  },
+  "loro_auc_explanation": "In Fold 2 (Train: 119, Val: 106), Logistic Regression and SVM achieve ROC-AUC = 1.0000 despite low sensitivity (28% and 20%) under the default 0.5 threshold. Investigation of predicted probabilities reveals that min(P(VEB)) = 0.0120 > max(P(Normal)) = 0.0093. Every single positive instance is ranked strictly above every negative instance, producing perfect rank discrimination (AUC = 1.0). However, the model intercept calibrated on Subject 218 is shifted relative to Subject 106, compressing all probabilities downward. This proves the vital distinction between ranking ability (discrimination) and thresholded classification accuracy (calibration).",
+  "false_positive_audit": {
+    "total_false_positives_logistic_regression": 8,
+    "false_positive_breakdown_by_record": {
+      "record_200": 3,
+      "record_208": 5
+    },
+    "individual_fp_traces": [
+      {
+        "segment_id": "REC200_B0357_N",
+        "record_id": 200,
+        "beat_index": 357,
+        "r_peak_sample": 84125,
+        "pre_rr_seconds": 0.6,
+        "post_rr_seconds": 0.6277777777777778,
+        "qrs_duration_seconds": 0.0444444444444444,
+        "spectral_ratio": 0.0193348905340156,
+        "logistic_probability": 0.5068851700366167
+      },
+      {
+        "segment_id": "REC200_B1157_N",
+        "record_id": 200,
+        "beat_index": 1157,
+        "r_peak_sample": 264002,
+        "pre_rr_seconds": 0.6666666666666666,
+        "post_rr_seconds": 0.7222222222222222,
+        "qrs_duration_seconds": 0.0555555555555555,
+        "spectral_ratio": 0.1787274948345415,
+        "logistic_probability": 0.6494194270708998
+      },
+      {
+        "segment_id": "REC200_B2687_N",
+        "record_id": 200,
+        "beat_index": 2687,
+        "r_peak_sample": 625017,
+        "pre_rr_seconds": 0.6694444444444444,
+        "post_rr_seconds": 0.95,
+        "qrs_duration_seconds": 0.0527777777777777,
+        "spectral_ratio": 0.1516688362133327,
+        "logistic_probability": 0.6979492288191382
+      },
+      {
+        "segment_id": "REC208_B0452_N",
+        "record_id": 208,
+        "beat_index": 452,
+        "r_peak_sample": 90834,
+        "pre_rr_seconds": 0.5638888888888889,
+        "post_rr_seconds": 0.4666666666666667,
+        "qrs_duration_seconds": 0.0305555555555555,
+        "spectral_ratio": 0.1042164090736721,
+        "logistic_probability": 0.5789039418646994
+      },
+      {
+        "segment_id": "REC208_B0607_N",
+        "record_id": 208,
+        "beat_index": 607,
+        "r_peak_sample": 122137,
+        "pre_rr_seconds": 0.5388888888888889,
+        "post_rr_seconds": 0.4916666666666666,
+        "qrs_duration_seconds": 0.0361111111111111,
+        "spectral_ratio": 0.1689996443741739,
+        "logistic_probability": 0.6223930332490634
+      },
+      {
+        "segment_id": "REC208_B2007_N",
+        "record_id": 208,
+        "beat_index": 2007,
+        "r_peak_sample": 428315,
+        "pre_rr_seconds": 0.4777777777777778,
+        "post_rr_seconds": 0.4916666666666666,
+        "qrs_duration_seconds": 0.0333333333333333,
+        "spectral_ratio": 0.1860607480156532,
+        "logistic_probability": 0.7419468243451796
+      },
+      {
+        "segment_id": "REC208_B2054_N",
+        "record_id": 208,
+        "beat_index": 2054,
+        "r_peak_sample": 436831,
+        "pre_rr_seconds": 0.5611111111111111,
+        "post_rr_seconds": 0.5861111111111111,
+        "qrs_duration_seconds": 0.0305555555555555,
+        "spectral_ratio": 0.1548702611161649,
+        "logistic_probability": 0.5336683141251687
+      },
+      {
+        "segment_id": "REC208_B2097_N",
+        "record_id": 208,
+        "beat_index": 2097,
+        "r_peak_sample": 445022,
+        "pre_rr_seconds": 0.5611111111111111,
+        "post_rr_seconds": 0.4861111111111111,
+        "qrs_duration_seconds": 0.0333333333333333,
+        "spectral_ratio": 0.1540081330105108,
+        "logistic_probability": 0.5534632517145885
+      }
+    ],
+    "evidence_based_explanation": "Auditing the false positives confirms that 5 of the 8 false positives originate in Record 208 and 3 originate in Record 200. In Record 208, the patient exhibits sinus tachycardia with normal RR intervals of 0.48-0.56 s. Because the training set Normal beats had mean Pre-RR of 0.92 s and VEBs had mean Pre-RR of 0.53 s, the model interprets the patient's baseline tachycardia as premature arrival, inflating the VEB probability above 0.5. The previous report's generic claims about 'baseline noise and bigeminy' were unverified hypotheses; the primary empirical driver is patient-level heart rate tachycardia."
+  },
+  "feature_interpretability_audit": {
+    "logistic_regression": {
+      "pre_rr": {
+        "coefficient_scaled_space": -3.1461398869865684,
+        "odds_ratio_per_radian": 0.04301786058926932,
+        "physical_unit": "seconds",
+        "physical_change_per_radian": 0.28736309169370006,
+        "physical_interpretation_note": "A 1.0-radian change in the scaled feature corresponds to a physical change of 0.2874 seconds. Odds ratios must NOT be interpreted as per-second or per-mV clinical multipliers."
+      },
+      "post_rr": {
+        "coefficient_scaled_space": 0.36845165943270114,
+        "odds_ratio_per_radian": 1.4454947629029085,
+        "physical_unit": "seconds",
+        "physical_change_per_radian": 0.33776215700613355,
+        "physical_interpretation_note": "A 1.0-radian change in the scaled feature corresponds to a physical change of 0.3378 seconds. Odds ratios must NOT be interpreted as per-second or per-mV clinical multipliers."
+      },
+      "qrs_rms": {
+        "coefficient_scaled_space": -0.5848077184651436,
+        "odds_ratio_per_radian": 0.5572129932817322,
+        "physical_unit": "mV",
+        "physical_change_per_radian": 0.38640996889367557,
+        "physical_interpretation_note": "A 1.0-radian change in the scaled feature corresponds to a physical change of 0.3864 mV. Odds ratios must NOT be interpreted as per-second or per-mV clinical multipliers."
+      },
+      "qrs_duration": {
+        "coefficient_scaled_space": 1.4920719474888962,
+        "odds_ratio_per_radian": 4.4462984786544935,
+        "physical_unit": "seconds",
+        "physical_change_per_radian": 0.020336464950631076,
+        "physical_interpretation_note": "A 1.0-radian change in the scaled feature corresponds to a physical change of 0.0203 seconds. Odds ratios must NOT be interpreted as per-second or per-mV clinical multipliers."
+      },
+      "p2p_amplitude": {
+        "coefficient_scaled_space": 0.4134118144091251,
+        "odds_ratio_per_radian": 1.5119675477657653,
+        "physical_unit": "mV",
+        "physical_change_per_radian": 1.1841127766037012,
+        "physical_interpretation_note": "A 1.0-radian change in the scaled feature corresponds to a physical change of 1.1841 mV. Odds ratios must NOT be interpreted as per-second or per-mV clinical multipliers."
+      },
+      "spectral_ratio": {
+        "coefficient_scaled_space": -0.89971550082778,
+        "odds_ratio_per_radian": 0.40668534492763475,
+        "physical_unit": "dimensionless",
+        "physical_change_per_radian": 0.138151300642773,
+        "physical_interpretation_note": "A 1.0-radian change in the scaled feature corresponds to a physical change of 0.1382 dimensionless. Odds ratios must NOT be interpreted as per-second or per-mV clinical multipliers."
+      }
+    },
+    "random_forest_disclaimer": "Gini feature importance reflects the frequency and variance reduction of tree splits within this specific training sample. It does NOT establish biological causation, clinical priority, or diagnostic necessity."
+  },
+  "clinical_safety_audit": {
+    "zero_false_negatives_qualification": "Zero false negatives observed among 50 VEB test examples is an empirical sample statistic reflecting the test cohort (Records 200 and 208). It is NOT proof of clinical safety, 100% sensitivity in the wild, or generalizability to other patients.",
+    "post_rr_latency_qualification": "Post-RR introduces a physiological lookahead delay (mean 0.75-1.05 s, max 1.48 s). The system is strictly an offline or retrospective beat classifier, unsuitable for instantaneous real-time alarm triggering.",
+    "cohort_limitation": "Total cohort consists of only four MIT-BIH records (two train, two test).",
+    "regulatory_disclaimer": "Academic engineering benchmark only; not for clinical diagnosis or patient triage."
+  },
+  "audit_verdict": {
+    "verdict": "CONDITIONAL PASS",
+    "verdict_summary": "The classical baseline methodology is sound, reproducible, and leak-free. However, the pass is CONDITIONAL upon acknowledging: (1) Logistic Regression is selected as the primary VQC benchmark based on pre-specified architectural linear parity and training LORO ranking, not post-hoc test set accuracy; (2) LORO Fold 2 AUC=1.0 is an artifact of monotonic ranking under probability miscalibration; (3) Record 208 false positives stem from tachycardia interval collision; and (4) the pipeline is strictly retrospective.",
+    "safe_to_proceed_to_vqc": true
+  }
+}

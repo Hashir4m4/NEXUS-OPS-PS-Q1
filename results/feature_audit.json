@@ -1,0 +1,178 @@
+{
+  "cross_validation_audit": {
+    "training_records": [
+      "106",
+      "119"
+    ],
+    "folds": {
+      "fold_1": {
+        "train_record": "106",
+        "val_record": "119",
+        "train_samples": 100,
+        "val_samples": 100,
+        "train_class_distribution": {
+          "N": 50,
+          "V": 50
+        },
+        "val_class_distribution": {
+          "N": 50,
+          "V": 50
+        }
+      },
+      "fold_2": {
+        "train_record": "119",
+        "val_record": "106",
+        "train_samples": 100,
+        "val_samples": 100,
+        "train_class_distribution": {
+          "N": 50,
+          "V": 50
+        },
+        "val_class_distribution": {
+          "N": 50,
+          "V": 50
+        }
+      }
+    },
+    "critical_methodological_limitations": [
+      "Sample size of subjects is N=2, precluding population-level variance estimation.",
+      "Single-subject training: each fold learns exclusively from one individual's anatomical and drug profile.",
+      "Record 106 (24 F, Inderal, multiform PVCs) and Record 119 (51 F, Pronestyl, uniform PVCs) exhibit strong inter-subject domain shift.",
+      "Ordinary 5-fold beat-level CV causes intra-patient leakage and MUST NOT be cited as evidence of patient generalization.",
+      "Test records (200, 208) remain strictly isolated and never participate in model selection."
+    ]
+  },
+  "scaler_clipping_audit": {
+    "features": {
+      "pre_rr": {
+        "train_min": 0.45,
+        "train_max": 1.352777777777778,
+        "test_below_count": 4,
+        "test_below_max_magnitude": 0.02777777777777779,
+        "test_above_count": 0,
+        "test_above_max_magnitude": 0.0,
+        "total_clipped": 4,
+        "clipping_rate_pct": 4.0
+      },
+      "post_rr": {
+        "train_min": 0.4194444444444444,
+        "train_max": 1.4805555555555556,
+        "test_below_count": 0,
+        "test_below_max_magnitude": 0.0,
+        "test_above_count": 0,
+        "test_above_max_magnitude": 0.0,
+        "total_clipped": 0,
+        "clipping_rate_pct": 0.0
+      },
+      "qrs_rms": {
+        "train_min": 0.3025488131091006,
+        "train_max": 1.5164915326593322,
+        "test_below_count": 0,
+        "test_below_max_magnitude": 0.0,
+        "test_above_count": 1,
+        "test_above_max_magnitude": 0.06412543548949778,
+        "total_clipped": 1,
+        "clipping_rate_pct": 1.0
+      },
+      "qrs_duration": {
+        "train_min": 0.0305555555555555,
+        "train_max": 0.0944444444444444,
+        "test_below_count": 2,
+        "test_below_max_magnitude": 0.002777777777777799,
+        "test_above_count": 1,
+        "test_above_max_magnitude": 0.0027777777777777957,
+        "total_clipped": 3,
+        "clipping_rate_pct": 3.0
+      },
+      "p2p_amplitude": {
+        "train_min": 0.88,
+        "train_max": 4.6,
+        "test_below_count": 0,
+        "test_below_max_magnitude": 0.0,
+        "test_above_count": 0,
+        "test_above_max_magnitude": 0.0,
+        "total_clipped": 0,
+        "clipping_rate_pct": 0.0
+      },
+      "spectral_ratio": {
+        "train_min": 0.0111977885028829,
+        "train_max": 0.4452128996860934,
+        "test_below_count": 5,
+        "test_below_max_magnitude": 0.0040293544325885,
+        "test_above_count": 1,
+        "test_above_max_magnitude": 0.001162058893683704,
+        "total_clipped": 6,
+        "clipping_rate_pct": 6.0
+      }
+    },
+    "total_test_scalar_evaluations": 600,
+    "total_clipping_events": 14,
+    "overall_clipping_rate_pct": 2.3333333333333335,
+    "scientific_conclusion": "Clipping events occur due to inter-patient anatomical variability. Clipping does NOT preserve zero information loss; it saturates out-of-distribution points at boundary rotational angles (0 or pi)."
+  },
+  "qrs_rms_audit": {
+    "window_specification": "[-25, +25] samples around annotated R-peak (sample 144), spanning 51 samples (~141.7 ms at 360 Hz)",
+    "baseline_correction_method": "Median subtraction of the 51-sample ROI prior to RMS calculation",
+    "raw_rms_statistics": {
+      "normal_mean": 0.6932059921102162,
+      "normal_std": 0.23804329168760474,
+      "veb_mean": 0.9846088798766387,
+      "veb_std": 0.2912642848189585
+    },
+    "baseline_corrected_rms_statistics": {
+      "normal_mean": 0.6716179347256327,
+      "normal_std": 0.17806562324891373,
+      "veb_mean": 0.8095509453219425,
+      "veb_std": 0.2709233581340163
+    },
+    "baseline_offset_statistics": {
+      "normal_mean": -0.47720000000000007,
+      "normal_std": 0.3975155562360603,
+      "veb_mean": 0.38070000000000004,
+      "veb_std": 0.597179340256786
+    },
+    "scientific_rationale": "Uncorrected RMS includes non-cardiac DC baseline wander squared: RMS^2 = RMS_true^2 + DC^2 + 2*DC*mean. Baseline-corrected RMS isolates genuine morphological depolarization energy."
+  },
+  "qrs_duration_audit": {
+    "search_window": "[-36, +36] samples around R-peak (sample 144), total 73 samples (~202.8 ms at 360 Hz)",
+    "threshold_criterion": "20% of peak envelope amplitude above local median baseline",
+    "left_boundary_clamped_count": 0,
+    "right_boundary_clamped_count": 0,
+    "peak_misaligned_from_annotation_count": 24,
+    "duration_range_seconds": [
+      0.027777777777777776,
+      0.09722222222222222
+    ],
+    "limitation_note": "Single-lead thresholding provides an estimated QRS duration (w_QRS_est). In 24 beats (8%), the envelope maximum was offset >3 samples from the annotation. This feature is designated an estimate unless validated against 12-lead cardiologist calipers."
+  },
+  "spectral_estimation_audit": {
+    "true_frequency_resolution_hz": 1.0,
+    "rayleigh_resolution_note": "Zero-padding to n=720 interpolates DTFT samples (0.5 Hz bin spacing) but does NOT increase physical frequency resolution, which is fundamentally bounded by T = 1.0 s (df = 1/T = 1.0 Hz).",
+    "rectangular_method": {
+      "normal_mean": 0.20933437078367906,
+      "normal_std": 0.11900487839003887,
+      "veb_mean": 0.04451058679221661,
+      "veb_std": 0.04857698075661509,
+      "sidelobe_suppression_db": -13.0
+    },
+    "detrended_hann_method": {
+      "normal_mean": 0.4009818575523234,
+      "normal_std": 0.06375006935064705,
+      "veb_mean": 0.0631137998574189,
+      "veb_std": 0.07907001937651374,
+      "sidelobe_suppression_db": -31.0
+    },
+    "correlation_between_methods": 0.7891414223118648,
+    "scientific_recommendation": "Rectangular FFT is prone to low-frequency leakage from baseline wander into broadband denominator. Linear detrending + Hann tapering suppresses sidelobe leakage to -31 dB."
+  },
+  "real_time_operational_constraint": {
+    "classification_mode": "Retrospective Beat Classifier",
+    "lookahead_requirement": "Post-RR interval requires detection of subsequent R-peak (R_{i+1})",
+    "latency_impact_seconds": {
+      "normal_mean_latency": 0.7460185185185185,
+      "veb_mean_latency": 1.0521296296296294,
+      "max_observed_latency": 1.4805555555555556
+    },
+    "operational_conclusion": "The classifier cannot trigger an instantaneous alarm at the moment of R-peak R_i. It operates with a physiological latency of ~0.75 s for sinus beats and ~1.05 s for VEBs. Post-RR is retained per protocol but explicitly documented as an offline/retrospective feature."
+  }
+}

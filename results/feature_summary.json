@@ -1,0 +1,359 @@
+{
+  "feature_names": [
+    "pre_rr",
+    "post_rr",
+    "qrs_rms",
+    "qrs_duration",
+    "p2p_amplitude",
+    "spectral_ratio"
+  ],
+  "feature_metadata": {
+    "pre_rr": {
+      "unit": "seconds",
+      "description": "Preceding RR interval from prior annotated R-peak"
+    },
+    "post_rr": {
+      "unit": "seconds",
+      "description": "Succeeding RR interval to subsequent annotated R-peak"
+    },
+    "qrs_rms": {
+      "unit": "mV",
+      "description": "Root Mean Square signal amplitude across core QRS window"
+    },
+    "qrs_duration": {
+      "unit": "seconds",
+      "description": "QRS complex temporal width via 20% envelope threshold"
+    },
+    "p2p_amplitude": {
+      "unit": "mV",
+      "description": "Peak-to-peak amplitude excursion in 360-sample window"
+    },
+    "spectral_ratio": {
+      "unit": "dimensionless",
+      "description": "Power spectral ratio: P(10-25 Hz) / P(0.5-40 Hz)"
+    }
+  },
+  "sample_counts": {
+    "train": 200,
+    "test": 100,
+    "total": 300
+  },
+  "scaler_parameters": {
+    "target_min": 0.0,
+    "target_max": 3.141592653589793,
+    "clip": true,
+    "feature_names": [
+      "pre_rr",
+      "post_rr",
+      "qrs_rms",
+      "qrs_duration",
+      "p2p_amplitude",
+      "spectral_ratio"
+    ],
+    "data_min": [
+      0.45,
+      0.41944444444444445,
+      0.30254881310910064,
+      0.030555555555555555,
+      0.88,
+      0.011197788502882961
+    ],
+    "data_max": [
+      1.3527777777777779,
+      1.4805555555555556,
+      1.5164915326593322,
+      0.09444444444444444,
+      4.6,
+      0.4452128996860934
+    ],
+    "data_range": [
+      0.9027777777777779,
+      1.0611111111111111,
+      1.2139427195502317,
+      0.06388888888888888,
+      3.7199999999999998,
+      0.43401511118321046
+    ],
+    "scale": [
+      3.479918016284078,
+      2.960663233749543,
+      2.587924951478567,
+      49.1727545779272,
+      0.8445141541908047,
+      7.2384407193224085
+    ]
+  },
+  "unscaled_statistics": {
+    "pre_rr": {
+      "overall": {
+        "mean": 0.7242685185185186,
+        "std": 0.2525346446839023,
+        "min": 0.4222222222222222,
+        "q25": 0.5270833333333333,
+        "median": 0.5819444444444445,
+        "q75": 0.9055555555555556,
+        "max": 1.3527777777777779
+      },
+      "class_0_normal": {
+        "mean": 0.9227407407407406,
+        "std": 0.2172448705383785,
+        "median": 0.9055555555555556
+      },
+      "class_1_veb": {
+        "mean": 0.5257962962962963,
+        "std": 0.038327330240682723,
+        "median": 0.5277777777777778
+      },
+      "train_mean": 0.7744166666666666,
+      "test_mean": 0.6239722222222222
+    },
+    "post_rr": {
+      "overall": {
+        "mean": 0.8990740740740739,
+        "std": 0.28612931516711865,
+        "min": 0.41944444444444445,
+        "q25": 0.6256944444444444,
+        "median": 0.8916666666666667,
+        "q75": 1.1618055555555555,
+        "max": 1.4805555555555556
+      },
+      "class_0_normal": {
+        "mean": 0.7460185185185185,
+        "std": 0.19229460750889943,
+        "median": 0.775
+      },
+      "class_1_veb": {
+        "mean": 1.0521296296296294,
+        "std": 0.28310027859096615,
+        "median": 1.151388888888889
+      },
+      "train_mean": 0.996611111111111,
+      "test_mean": 0.7040000000000001
+    },
+    "qrs_rms": {
+      "overall": {
+        "mean": 0.8389074359934273,
+        "std": 0.30300665898757306,
+        "min": 0.30254881310910064,
+        "q25": 0.5542093993596144,
+        "median": 0.8492385239646763,
+        "q75": 1.046504141695313,
+        "max": 1.58061696814883
+      },
+      "class_0_normal": {
+        "mean": 0.6932059921102162,
+        "std": 0.23804329168760474,
+        "median": 0.688426578702933
+      },
+      "class_1_veb": {
+        "mean": 0.9846088798766387,
+        "std": 0.2912642848189585,
+        "median": 1.0109508878292974
+      },
+      "train_mean": 0.9040787343973509,
+      "test_mean": 0.7085648391855804
+    },
+    "qrs_duration": {
+      "overall": {
+        "mean": 0.05819444444444444,
+        "std": 0.024003236092506135,
+        "min": 0.027777777777777776,
+        "q25": 0.03611111111111111,
+        "median": 0.05,
+        "q75": 0.08611111111111111,
+        "max": 0.09722222222222222
+      },
+      "class_0_normal": {
+        "mean": 0.037796296296296286,
+        "std": 0.005665363957623275,
+        "median": 0.03611111111111111
+      },
+      "class_1_veb": {
+        "mean": 0.07859259259259259,
+        "std": 0.016921206503711515,
+        "median": 0.08611111111111111
+      },
+      "train_mean": 0.05693055555555555,
+      "test_mean": 0.060722222222222226
+    },
+    "p2p_amplitude": {
+      "overall": {
+        "mean": 2.6903666666666672,
+        "std": 0.9270847602734751,
+        "min": 0.88,
+        "q25": 2.0862499999999997,
+        "median": 2.505,
+        "q75": 3.1325,
+        "max": 4.6
+      },
+      "class_0_normal": {
+        "mean": 2.2959333333333336,
+        "std": 0.5800686683102763,
+        "median": 2.395
+      },
+      "class_1_veb": {
+        "mean": 3.0848,
+        "std": 1.0368304631886416,
+        "median": 2.8475
+      },
+      "train_mean": 2.9236750000000002,
+      "test_mean": 2.22375
+    },
+    "spectral_ratio": {
+      "overall": {
+        "mean": 0.12692247878794782,
+        "std": 0.1226692635747195,
+        "min": 0.007168434070294403,
+        "q25": 0.020264323863023508,
+        "median": 0.08346006839001091,
+        "q75": 0.18528648877525608,
+        "max": 0.4463749585797771
+      },
+      "class_0_normal": {
+        "mean": 0.20933437078367906,
+        "std": 0.11900487839003887,
+        "median": 0.18236282777781504
+      },
+      "class_1_veb": {
+        "mean": 0.04451058679221661,
+        "std": 0.04857698075661509,
+        "median": 0.02070379809700024
+      },
+      "train_mean": 0.11454687210748127,
+      "test_mean": 0.15167369214888096
+    }
+  },
+  "scaled_statistics": {
+    "pre_rr_scaled": {
+      "train_min": 0.0,
+      "train_max": 3.141592653589793,
+      "test_min": 0.0,
+      "test_max": 2.397276855662365
+    },
+    "post_rr_scaled": {
+      "train_min": 0.0,
+      "train_max": 3.141592653589793,
+      "test_min": 0.13980909714928397,
+      "test_max": 2.031343940933714
+    },
+    "qrs_rms_scaled": {
+      "train_min": 0.0,
+      "train_max": 3.141592653589793,
+      "test_min": 0.18236972583449262,
+      "test_max": 3.141592653589793
+    },
+    "qrs_duration_scaled": {
+      "train_min": 0.0,
+      "train_max": 3.141592653589793,
+      "test_min": 0.0,
+      "test_max": 3.141592653589793
+    },
+    "p2p_amplitude_scaled": {
+      "train_min": 0.0,
+      "train_max": 3.141592653589793,
+      "test_min": 0.24068653394437936,
+      "test_max": 2.803786991913472
+    },
+    "spectral_ratio_scaled": {
+      "train_min": 0.0,
+      "train_max": 3.141592653589793,
+      "test_min": 0.0,
+      "test_max": 3.141592653589793
+    }
+  },
+  "correlation_matrix": {
+    "pre_rr": {
+      "pre_rr": 1.0,
+      "post_rr": -0.6321510341258634,
+      "qrs_rms": -0.35198095085746867,
+      "qrs_duration": -0.7651649421177398,
+      "p2p_amplitude": -0.3803174159745498,
+      "spectral_ratio": 0.5321576619690369
+    },
+    "post_rr": {
+      "pre_rr": -0.6321510341258634,
+      "post_rr": 1.0,
+      "qrs_rms": 0.5285592862035388,
+      "qrs_duration": 0.7455949832403156,
+      "p2p_amplitude": 0.4383134633083083,
+      "spectral_ratio": -0.4473451022406476
+    },
+    "qrs_rms": {
+      "pre_rr": -0.35198095085746867,
+      "post_rr": 0.5285592862035388,
+      "qrs_rms": 1.0,
+      "qrs_duration": 0.6340273735161325,
+      "p2p_amplitude": 0.894249090101118,
+      "spectral_ratio": -0.45015087927094466
+    },
+    "qrs_duration": {
+      "pre_rr": -0.7651649421177398,
+      "post_rr": 0.7455949832403156,
+      "qrs_rms": 0.6340273735161325,
+      "qrs_duration": 1.0,
+      "p2p_amplitude": 0.7001101767899897,
+      "spectral_ratio": -0.6644750678861956
+    },
+    "p2p_amplitude": {
+      "pre_rr": -0.3803174159745498,
+      "post_rr": 0.4383134633083083,
+      "qrs_rms": 0.894249090101118,
+      "qrs_duration": 0.7001101767899897,
+      "p2p_amplitude": 1.0,
+      "spectral_ratio": -0.3444152015930441
+    },
+    "spectral_ratio": {
+      "pre_rr": 0.5321576619690369,
+      "post_rr": -0.4473451022406476,
+      "qrs_rms": -0.45015087927094466,
+      "qrs_duration": -0.6644750678861956,
+      "p2p_amplitude": -0.3444152015930441,
+      "spectral_ratio": 1.0
+    }
+  },
+  "outlier_analysis": {
+    "pre_rr": {
+      "iqr_lower_bound": -0.09826388888888882,
+      "iqr_upper_bound": 1.5711805555555554,
+      "train_outliers_count": 0,
+      "test_outliers_count": 0
+    },
+    "post_rr": {
+      "iqr_lower_bound": 0.24270833333333364,
+      "iqr_upper_bound": 1.8899305555555552,
+      "train_outliers_count": 0,
+      "test_outliers_count": 0
+    },
+    "qrs_rms": {
+      "iqr_lower_bound": 0.054191674300968384,
+      "iqr_upper_bound": 1.817736460054078,
+      "train_outliers_count": 0,
+      "test_outliers_count": 0
+    },
+    "qrs_duration": {
+      "iqr_lower_bound": -0.039930555555555566,
+      "iqr_upper_bound": 0.16284722222222223,
+      "train_outliers_count": 0,
+      "test_outliers_count": 0
+    },
+    "p2p_amplitude": {
+      "iqr_lower_bound": 0.2893750000000006,
+      "iqr_upper_bound": 5.824375,
+      "train_outliers_count": 0,
+      "test_outliers_count": 0
+    },
+    "spectral_ratio": {
+      "iqr_lower_bound": -0.15026608625900686,
+      "iqr_upper_bound": 0.2920379234738385,
+      "train_outliers_count": 29,
+      "test_outliers_count": 18
+    }
+  },
+  "validation_checks": {
+    "train_has_nan": false,
+    "test_has_nan": false,
+    "train_scaled_in_bounds_0_pi": true,
+    "test_scaled_in_bounds_0_pi": true,
+    "zero_leakage_guarantee": true
+  }
+}
