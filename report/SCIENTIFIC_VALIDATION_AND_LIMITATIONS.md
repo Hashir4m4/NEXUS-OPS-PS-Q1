@@ -123,11 +123,11 @@ The classical $L_2$-regularized Logistic Regression baseline was trained on all 
 
 Both models were evaluated on the identical, unseen $N=100$ held-out test cohort (Records 200 & 208) and both achieved **100.00% empirical Sensitivity on VEB beats** (identifying all 50 class `V` beats with zero false negatives in this sample).
 
-**Patient-Stratified Specificity Disaggregation:**
-Evaluating specificities across the two held-out test patients reveals inter-subject distribution shifts:
+**Record-Stratified Specificity Disaggregation:**
+Evaluating specificities across the two held-out test records reveals inter-subject distribution shifts:
 - **Record 200 ($N=50$, 25 Normal, 25 VEB):** Specificity is **68.00%** (17 / 25) in ideal simulation and **68.00%** (17 / 25) under noisy simulation (Sensitivity: 100.0%, 25 / 25).
 - **Record 208 ($N=50$, 25 Normal, 25 VEB):** Specificity is **36.00%** (9 / 25) in ideal simulation and **40.00%** (10 / 25) under noisy simulation (Sensitivity: 100.0%, 25 / 25).
-Across both test patients combined, the overall specificity is **52.00%** (26 / 50) ideal and **54.00%** (27 / 50) noisy.
+Across both test records combined, the overall specificity is **52.00%** (26 / 50) ideal and **54.00%** (27 / 50) noisy.
 
 ---
 
@@ -138,7 +138,7 @@ In accordance with strict scientific integrity guidelines, NEXUS-OPS explicitly 
 1. **Retrospective / Offline Scope Disclosure:**
    The `post_rr` feature measures the interval to the subsequent R-peak ($t_{R_{i+1}} - t_{R_i}$). Consequently, computing this feature requires observing the succeeding beat, introducing a one-beat latency ($\sim 0.6\text{--}1.0\text{ s}$). The classifier is therefore designed for retrospective Holter tape scanning, automated batch triage, or delayed telemetry review—**it is not a zero-lookahead real-time detector**.
 2. **Empirical Sensitivity Limitation:**
-   The 100.00% sensitivity reported on the held-out test cohort represents an empirical result on a fixed sample of 50 VEB beats across two patient recordings. **It does not constitute an unconstrained clinical guarantee, diagnostic certification, or medical device clearance across broader patient populations**.
+   The 100.00% sensitivity reported on the held-out test cohort represents an empirical result on a fixed sample of 50 VEB beats across two held-out records. **It does not constitute an unconstrained clinical guarantee, diagnostic certification, or medical device clearance across broader clinical populations**.
 3. **Window Overlap Disclosure:**
    ECG segments are extracted using 360-sample ($1.0\text{ s}$) windows centered on annotated R-peaks. For heart rates exceeding $60\text{ bpm}$ ($R\text{-}R < 1.0\text{ s}$), adjacent temporal windows exhibit partial sample overlap, although each window represents an independent annotated cardiac event.
 4. **Simulation Boundary:**

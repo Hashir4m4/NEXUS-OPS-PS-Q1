@@ -43,7 +43,7 @@ Processor A Topology Diagram:
 (Q0) ────── (Q1) ────── (Q2) ────── (Q3) ────── (Q4)
 ```
 
-### 2.2 Processor B (9 Physical Qubits — Heavy-Hex Sparse Tree)
+### 2.2 Processor B (9 Physical Qubits — Simulated Heavy-Hex-Inspired Tree)
 - **Node Count:** 9 physical qubits ($Q_0 \dots Q_8$).
 - **Edge Count:** 8 bidirectional edges (16 directed pairs).
 - **Coupling Map:**
@@ -150,7 +150,7 @@ At $S=4096$ shots, the empirical standard error across the 6-qubit ensemble obse
 3. **Does the auxiliary 5-qubit circuit classify ECG beats?**
    *Defense:* No. We maintain strict scientific transparency: the 5-qubit reference is strictly an architectural routing benchmark. We never conflate routing metrics with clinical accuracy.
 4. **Why does Processor B achieve 0 SWAP gates?**
-   *Defense:* The linear nearest-neighbor CX cascade ($q_0 \to q_1 \to q_2 \to q_3 \to q_4 \to q_5$) forms a path graph $P_6$. The sub-path $Q_0 \to Q_1 \to Q_2 \to Q_4 \to Q_5 \to Q_6$ in Processor B's heavy-hex tree is an isomorphic sub-graph. The compiler embeds this path with zero routing overhead.
+   *Defense:* The linear nearest-neighbor CX cascade ($q_0 \to q_1 \to q_2 \to q_3 \to q_4 \to q_5$) forms a path graph $P_6$. The sub-path $Q_0 \to Q_1 \to Q_2 \to Q_4 \to Q_5 \to Q_6$ in Processor B's simulated heavy-hex-inspired tree is an isomorphic sub-graph. The compiler embeds this path with zero routing overhead.
 5. **Why is transpiled depth exactly 15?**
    *Defense:* Each linear CX layer requires 1 two-qubit execution layer. In standard basis decomposition, 1 repetition of `RealAmplitudes` with 5 CX gates plus initial and final `Rz-Sx-Rz` Euler single-qubit rotations compiles into exactly 15 sequential time slices.
 6. **How was the noise model verified?**

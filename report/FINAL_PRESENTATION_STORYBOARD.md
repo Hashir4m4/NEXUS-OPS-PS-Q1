@@ -33,7 +33,7 @@ flowchart LR
   - Center: High-contrast split diagram showing an ECG waveform transitioning into a 6-qubit quantum state on a heavy-hex lattice.
   - Bottom Callout Boxes:
     - Metric 1: **100% Clinical Sensitivity** (50/50 Ventricular Ectopic Beats Detected).
-    - Metric 2: **0 SWAP Gates** on IBM Heavy-Hex Architecture (Depth 15).
+    - Metric 2: **0 SWAP Gates** on Simulated Heavy-Hex Architecture (Depth 15).
     - Metric 3: **116 / 116 Tests Passing** (100% Reproducible in 14 Seconds).
 - **Exact Figures to Display:**
   - `docs/figures/architecture_overview.png` (or high-level schematic).
@@ -43,10 +43,10 @@ flowchart LR
   - Depth 15, 5 CNOTs, 0 SWAPs on Processor B.
   - 116 automated pytest unit/integration tests.
 - **Speaker Script / Talking Points (60s):**
-  > "Distinguished judges, welcome to the NEXUS-OPS defense for Project Q, Problem Statement PS-Q1. Cardiovascular diseases claim over 18 million lives annually, with sudden ventricular arrhythmias being the leading cause of out-of-hospital mortality. In this work, we present a clinically grounded, hardware-native Variational Quantum Classifier. Rather than treating quantum computing as a black-box optimizer or running toy benchmarks, we bridged the gap between real human clinical electrophysiology from MIT-BIH and physical superconducting quantum hardware. Across a completely held-out patient cohort, our 6-qubit model achieved 100% clinical sensitivity under realistic hardware noise, while our circuit-hardware co-design achieved zero SWAP routing overhead on IBM's heavy-hex topology. Over the next 9 minutes, we will walk you through the clinical rigor, mathematical hardware proofs, and software engineering behind this submission."
+  > "Distinguished judges, welcome to the NEXUS-OPS defense for Project Q, Problem Statement PS-Q1. Cardiovascular diseases claim over 18 million lives annually, with sudden ventricular arrhythmias being the leading cause of out-of-hospital mortality. In this work, we present a clinically grounded, hardware-native Variational Quantum Classifier. Rather than treating quantum computing as a black-box optimizer or running toy benchmarks, we bridged the gap between real human clinical electrophysiology from MIT-BIH and physical superconducting quantum hardware. Across a completely held-out test cohort, our 6-qubit model achieved 100% clinical sensitivity under realistic hardware noise, while our circuit-hardware co-design achieved zero SWAP routing overhead on the simulated heavy-hex-inspired topology. Over the next 9 minutes, we will walk you through the clinical rigor, mathematical hardware proofs, and software engineering behind this submission."
 - **Anticipated Judge Questions & Quick Cues:**
   - *Q: Did you run on a real IBM quantum computer?*
-    *Cue:* "We transpiled against exact IBM Falcon/Eagle backend coupling maps and benchmarked under challenge-specified gate depolarizing and readout noise models (evaluated at 4096 shots) to guarantee automated test reproducibility."
+    *Cue:* "We transpiled against the challenge-provided coupling maps (including our 9-qubit simulated heavy-hex-inspired tree) and benchmarked under challenge-specified gate depolarizing and readout noise models (evaluated at 4096 shots) to guarantee automated test reproducibility."
 - **Evidence Citations:** `README.md`, `report/JUDGING_COMMITTEE_READINESS_REPORT.md:Executive Summary`.
 
 ---
@@ -72,7 +72,7 @@ flowchart LR
   - Pre-RR ratio: $< 0.85$ (Prematurity); Post-RR ratio: $> 1.15$ (Compensatory pause).
   - 50 Normal vs. 50 Ventricular Ectopic test heartbeats in the held-out cohort.
 - **Speaker Script / Talking Points (60s):**
-  > "To understand our technical architecture, we must first understand the clinical reality. Ventricular Ectopic Beats originate not from the heart's natural pacemaker—the Sinoatrial node—but from ectopic foci in the ventricular myocardium. Because the electrical wavefront propagates slowly through muscle tissue rather than the rapid His-Purkinje conduction network, the resulting QRS complex is widened, morphologically bizarre, and disrupted in timing. In post-myocardial infarction patients, frequent ventricular ectopics can degenerate into ventricular fibrillation and sudden cardiac death. Clinically, a false negative is catastrophic. A false positive merely requires downstream physician review. Therefore, an algorithm must prioritize complete sensitivity. However, wearable monitors face extreme battery and compute constraints, motivating the search for efficient, low-parameter edge classification models."
+  > "To understand our technical architecture, we must first understand the clinical reality. Ventricular Ectopic Beats originate not from the heart's natural pacemaker—the Sinoatrial node—but from ectopic foci in the ventricular myocardium. Because the electrical wavefront propagates slowly through muscle tissue rather than the rapid His-Purkinje conduction network, the resulting QRS complex is widened, morphologically bizarre, and disrupted in timing. In post-myocardial infarction individuals, frequent ventricular ectopics can degenerate into ventricular fibrillation and sudden cardiac death. Clinically, a false negative is catastrophic. A false positive merely requires downstream physician review. Therefore, an algorithm must prioritize complete sensitivity. However, wearable monitors face extreme battery and compute constraints, motivating the search for efficient, low-parameter edge classification models."
 - **Anticipated Judge Questions & Quick Cues:**
   - *Q: Why only classify Normal vs Ventricular beats instead of all 15 MIT-BIH classes?*
     *Cue:* "AAMI EC57 groups MIT-BIH into 5 major superclasses. Distinguishing Class N (Normal/Supraventricular) from Class V (Ventricular Ectopic) is the critical boundary for sudden cardiac death prevention."
@@ -128,10 +128,10 @@ flowchart LR
   - Development Cohort: 200 beats; Test Cohort: 100 beats.
   - Zero overlapping records; zero data leakage.
 - **Speaker Script / Talking Points (60s):**
-  > "Many machine learning studies report inflated performance because of data leakage: mixing heartbeats from the same patient across training and test sets. When heartbeats from the same individual are in both sets, the algorithm simply memorizes patient-specific ECG morphology rather than general arrhythmia characteristics. We strictly prevented this through record-level isolation. Our model was developed on Records 106 and 119, and evaluated on an independent held-out test cohort: Records 200 and 208. Furthermore, our six features were selected with clinical precision: pre-RR and post-RR capture rhythm timing (with post-RR introducing a 1-beat latency for offline classification); QRS RMS and duration capture the slow, abnormal depolarization of ventricular tissue; peak-to-peak amplitude measures vector voltage; and spectral ratio captures high-frequency waveform content. Every feature is clinically essential."
+  > "Many machine learning studies report inflated performance because of data leakage: mixing heartbeats from the same recording session across training and test sets. When heartbeats from the same recording are in both sets, the algorithm simply memorizes record-specific ECG morphology rather than general arrhythmia characteristics. We strictly prevented this through record-level isolation. Our model was developed on Records 106 and 119, and evaluated on an independent held-out test cohort: Records 200 and 208. Furthermore, our six features were selected with clinical precision: pre-RR and post-RR capture rhythm timing (with post-RR introducing a 1-beat latency for offline classification); QRS RMS and duration capture the slow, abnormal depolarization of ventricular tissue; peak-to-peak amplitude measures vector voltage; and spectral ratio captures high-frequency waveform content. Every feature is clinically essential."
 - **Anticipated Judge Questions & Quick Cues:**
   - *Q: Why did you clamp test features to $[0, \pi]$?*
-    *Cue:* "If an unseen patient exhibits extreme outlier values beyond the training range, clamping prevents phase wrapping on the Bloch sphere, ensuring numerical stability."
+    *Cue:* "If an unseen subject recording exhibits extreme outlier values beyond the training range, clamping prevents phase wrapping on the Bloch sphere, ensuring numerical stability."
 - **Evidence Citations:** `src/feature_extraction.py`, `report/SCIENTIFIC_VALIDATION_AND_LIMITATIONS.md:Section 2 & 3`.
 
 ---
@@ -167,7 +167,7 @@ flowchart LR
 
 - **Slide Title:** Variational Circuit Architecture & Trainability
 - **Subtitle:** Shallow Depth, Linear Nearest-Neighbor Entanglement, and Ensemble Observable Design
-- **Key Message:** By combining Sim et al. Circuit Template 9 with an ensemble average observable ($\hat{O} = \frac{1}{6}\sum_{i=0}^5 Z_i$), our 12-parameter ansatz guarantees trainability and provably avoids barren plateaus.
+- **Key Message:** By combining Sim et al. Circuit Template 9 with an ensemble average observable ($\hat{O} = \frac{1}{6}\sum_{i=0}^5 Z_i$), our 12-parameter ansatz supports trainability and theoretically mitigates barren plateau susceptibility.
 - **Visual Layout:**
   - Circuit Diagram:
     - Layer 1: Angle Encoding $\bigotimes_{i=1}^6 R_y(x_i)$.
@@ -175,10 +175,10 @@ flowchart LR
     - Layer 3: Linear Entangling Cascade: $CX(5,4) \rightarrow CX(4,3) \rightarrow CX(3,2) \rightarrow CX(2,1) \rightarrow CX(1,0)$.
     - Layer 4: Final Rotations $\bigotimes_{i=1}^6 R_y(\theta_{i+6})$.
     - Measurement: Ensemble average Pauli-Z operator across 6 qubits ($\hat{O} = \frac{1}{6}\sum_{i=0}^5 Z_i$).
-  - Callout Box: "Barren Plateau Defense Mechanisms":
+  - Callout Box: "Barren Plateau Mitigation Rationale":
     1. Shallow depth: $L = 1$ layer (Total depth 15).
     2. Linear entanglement: 5 CNOTs (Prevents 2-design saturation).
-    3. 1-Local ensemble observable: $\mathcal{O}(1/\text{poly}(n))$ gradient variance (Cerezo et al. 2021).
+    3. 1-Local ensemble observable: $\mathcal{O}(1/\text{poly}(n))$ gradient variance in shallow regime (Cerezo et al. 2021).
 - **Exact Figures to Display:**
   - `docs/figures/circuit_diagram.png` (Exact Qiskit circuit schematic).
 - **Data Points & Metrics:**
@@ -186,7 +186,7 @@ flowchart LR
   - Circuit depth: 15; Total gates: 23 (18 single-qubit $R_y$, 5 two-qubit CX).
   - Training convergence: 48 COBYLA iterations.
 - **Speaker Script / Talking Points (60s):**
-  > "Here is our complete variational quantum circuit architecture. We adopted a modified Sim et al. Circuit Template 9, consisting of an initial angle encoding layer, a 6-parameter rotation layer, a linear nearest-neighbor CNOT entangling cascade, and a final 6-parameter rotation layer, totaling exactly 12 trainable parameters. A critical challenge in QML is the barren plateau phenomenon, where gradients vanish exponentially. We systematically mitigated this through three architectural proofs: First, we restricted circuit depth to a single shallow layer of depth 15, preventing the state space from forming a 2-design. Second, we used linear nearest-neighbor entanglement with only 5 CNOTs rather than all-to-all connectivity. Third, and most importantly, we measured an ensemble average of 1-local Pauli-Z operators across all 6 qubits—which Cerezo et al. mathematically proved exhibits polynomially bounded gradient variance, guaranteeing trainability without global barren plateau concentration."
+  > "Here is our complete variational quantum circuit architecture. We adopted a modified Sim et al. Circuit Template 9, consisting of an initial angle encoding layer, a 6-parameter rotation layer, a linear nearest-neighbor CNOT entangling cascade, and a final 6-parameter rotation layer, totaling exactly 12 trainable parameters. A critical challenge in QML is the barren plateau phenomenon, where gradients vanish exponentially. We theoretically mitigate this susceptibility through three architectural design principles: First, we restricted circuit depth to a single shallow layer of depth 15, preventing the state space from forming a 2-design. Second, we used linear nearest-neighbor entanglement with only 5 CNOTs rather than all-to-all connectivity. Third, and most importantly, we measured an ensemble average of 1-local Pauli-Z operators across all 6 qubits—which Cerezo et al. proved exhibits polynomially bounded gradient variance in shallow regimes, supporting trainability without global barren plateau concentration."
 - **Anticipated Judge Questions & Quick Cues:**
   - *Q: Why reverse the CX order from 5 down to 0?*
     *Cue:* "The linear entangling cascade establishes correlations across all qubits, while the ensemble observable pools expectation values symmetrically from all 6 features."
@@ -197,14 +197,14 @@ flowchart LR
 ## Slide 7: Hardware Characterization: Processor A vs. Processor B
 
 - **Slide Title:** Hardware Characterization & Native Topologies
-- **Subtitle:** Architectural Comparison of IBM 5-Qubit Linear Chain vs. 9-Qubit Heavy-Hex Sparse Tree
-- **Key Message:** Hardware selection must respect quantum capacity; Processor B's heavy-hex coupling natively embeds the 6-qubit classification ansatz with zero routing overhead.
+- **Subtitle:** Architectural Comparison of 5-Qubit Linear Chain vs. 9-Qubit Simulated Heavy-Hex-Inspired Tree
+- **Key Message:** Hardware selection must respect quantum capacity; Processor B's simulated heavy-hex-inspired coupling natively embeds the 6-qubit classification ansatz with zero routing overhead.
 - **Visual Layout:**
   - Left Panel: **Processor A (5-Qubit Linear Chain)**:
     - Coupling graph: `Q0 — Q1 — Q2 — Q3 — Q4`.
     - Nodes: 5 | Edges: 4 | Max Degree: 2.
     - Status: **CAPACITY EXCEEDED** ($k=6 > n=5$). Rejection enforced by Pigeonhole Principle.
-  - Right Panel: **Processor B (9-Qubit Heavy-Hex Sparse Tree)**:
+  - Right Panel: **Processor B (9-Qubit Simulated Heavy-Hex-Inspired Tree)**:
     - Coupling graph showing central hub `Q2` branching to `Q1`, `Q3`, `Q4`.
     - Nodes: 9 | Edges: 8 | Max Degree: 3.
     - Subgraph Mapping: Native path `[0 - 1 - 2 - 4 - 5 - 6]`.
@@ -216,7 +216,7 @@ flowchart LR
   - Processor B: 9 qubits, 8 edges, diameter 5, average degree 1.78, center degree 3.
   - Subgraph embedding search time: $< 5\,\text{ms}$ via `VF2Layout`.
 - **Speaker Script / Talking Points (60s):**
-  > "The hackathon problem statement mandated an evaluation of two distinct quantum processors: Processor A, a 5-qubit linear chain, and Processor B, a 9-qubit heavy-hex sparse tree. On Processor A, executing our 6-qubit biomedical classifier is physically impossible: six independent features cannot map to five physical qubits without loss of clinical dimensions. Rather than forcing an artificial truncation, our hardware loader deterministically catches this violation and rejects Processor A. On Processor B, however, we have 9 physical qubits arranged in a sparse tree. Our ansatz requires an open 5-edge path graph $P_6$. Through subgraph isomorphism, Qiskit's VF2Layout identifies an exact native embedding along physical qubits `0, 1, 2, 4, 5, and 6`. Every single two-qubit gate matches a physical coupling edge."
+  > "The hackathon problem statement mandated an evaluation of two distinct quantum processors: Processor A, a 5-qubit linear chain, and Processor B, a 9-qubit simulated heavy-hex-inspired tree. On Processor A, executing our 6-qubit biomedical classifier is physically impossible: six independent features cannot map to five physical qubits without loss of clinical dimensions. Rather than forcing an artificial truncation, our hardware loader deterministically catches this violation and rejects Processor A. On Processor B, however, we have 9 physical qubits arranged in a sparse tree. Our ansatz requires an open 5-edge path graph $P_6$. Through subgraph isomorphism, Qiskit's VF2Layout identifies an exact native embedding along physical qubits `0, 1, 2, 4, 5, and 6`. Every single two-qubit gate matches a physical coupling edge."
 - **Anticipated Judge Questions & Quick Cues:**
   - *Q: Did you evaluate any circuit on Processor A?*
     *Cue:* "Yes, we benchmarked an auxiliary 5-qubit circuit on Processor A, achieving depth 16 and 4 CX gates, and performed full permutation routing audits."
@@ -228,7 +228,7 @@ flowchart LR
 
 - **Slide Title:** Mathematical Proof of Processor Capacity & Permutation Overhead
 - **Subtitle:** Why 6 Features Cannot Execute on 5 Qubits, and Why Topology Dictates NISQ Fidelity
-- **Key Message:** The Pigeonhole Principle forbids 6Q execution on 5Q hardware; on linear topologies, non-native routing incurs a $3\times$ depth penalty that heavy-hex architectures eliminate.
+- **Key Message:** The Pigeonhole Principle forbids 6Q execution on 5Q hardware; on linear topologies, non-native routing incurs a $3\times$ depth penalty that the simulated heavy-hex tree topology eliminates.
 - **Visual Layout:**
   - Left: Formal Proof Card:
     - Theorem: Injective mapping $f: \mathcal{Q} \rightarrow \mathcal{P}$ requires $|\mathcal{Q}| \le |\mathcal{P}|$.
@@ -238,7 +238,7 @@ flowchart LR
     - Optimal linear layout: 0 SWAPs, Depth 15, 5 CX.
     - Average permutation on Linear Chain: 2.2 SWAPs (+6.6 CX, Depth 27).
     - Worst-case permutation on Linear Chain: 4 SWAPs (+12 CX, Depth 39 — $2.6\times$ penalty!).
-    - Heavy-Hex shortcut advantage: central node `Q2` reduces worst-case diameter and SWAP count by 33%.
+    - Simulated heavy-hex shortcut advantage: central node `Q2` reduces worst-case diameter and SWAP count by 33%.
 - **Exact Figures to Display:**
   - Bar chart comparing circuit depth across different physical routing permutations.
 - **Data Points & Metrics:**
@@ -306,7 +306,7 @@ flowchart LR
   - Zero false negatives achieved on held-out test cohort.
   - Honest disclosure: Classical baseline trained on $N=200$ (Records 106 & 119 pooled); VQC trained on $N=100$ (Record 106 fold). Disaggregated test specificity: Record 200 = 68.0% (both ideal & noisy), Record 208 = 36.0% (ideal) / 40.0% (noisy).
 - **Speaker Script / Talking Points (60s):**
-  > "Here are our full experimental results on the held-out test cohort of 100 heartbeats from Records 200 and 208. We report ideal statevector simulation, noisy simulation at 4096 shots, and a classical Logistic Regression baseline. The most critical takeaway is clinical recall: all three models achieved 100% sensitivity, successfully catching all 50 ventricular ectopic beats with zero false negatives. In an honest scientific comparison, the classical baseline achieved higher overall accuracy (92% vs 77%) and higher specificity (84% vs 54%). We disclose the training protocol difference: the classical model was trained on 200 beats from Records 106 and 119 pooled, while the VQC was trained on 100 beats from the Record 106 fold. Furthermore, disaggregated patient analysis shows Record 200 reached 68% specificity while Record 208 reached 36% (ideal) / 40% (noisy) specificity due to complex morphology. The VQC achieved an exceptional ROC-AUC of 0.9988, proving robust underlying distribution separation."
+  > "Here are our full experimental results on the held-out test cohort of 100 heartbeats from Records 200 and 208. We report ideal statevector simulation, noisy simulation at 4096 shots, and a classical Logistic Regression baseline. The most critical takeaway is clinical recall: all three models achieved 100% sensitivity, successfully catching all 50 ventricular ectopic beats with zero false negatives. In an honest scientific comparison, the classical baseline achieved higher overall accuracy (92% vs 77%) and higher specificity (84% vs 54%). We disclose the training protocol difference: the classical model was trained on 200 beats from Records 106 and 119 pooled, while the VQC was trained on 100 beats from the Record 106 fold. Furthermore, disaggregated record-stratified analysis shows Record 200 reached 68% specificity while Record 208 reached 36% (ideal) / 40% (noisy) specificity due to complex morphology. The VQC achieved an exceptional ROC-AUC of 0.9988, proving robust underlying distribution separation."
 - **Anticipated Judge Questions & Quick Cues:**
   - *Q: Why report a quantum model if classical logistic regression gets higher accuracy?*
     *Cue:* "Scientific integrity requires reporting genuine findings. Our goal is proving that a 12-parameter quantum circuit can achieve clinical-grade sensitivity under noise, creating a foundation for future quantum edge hardware."
@@ -357,7 +357,7 @@ flowchart LR
   - Right: Phase 7 Roadmap Timeline:
     - Milestone 1: Physical IBM Quantum QPU execution via Qiskit Runtime (`EstimatorV2`).
     - Milestone 2: Quantum Error Mitigation (Zero-Noise Extrapolation + Readout Twirling).
-    - Milestone 3: Full-cohort training on all 48 MIT-BIH records to systematically improve specificity across diverse patient morphologies.
+    - Milestone 3: Full-cohort training on all 48 MIT-BIH records to systematically improve specificity across diverse subject morphologies.
     - Milestone 4: Edge C++/Wasm runtime integration for wearable cardiac patches.
 - **Exact Figures to Display:**
   - Phase 7 milestone timeline graphic.
@@ -366,7 +366,7 @@ flowchart LR
   - Target Phase 7 cohort size: 10,000+ heartbeats.
   - Target Specificity: Systematic specificity improvement while maintaining $100\%$ Sensitivity.
 - **Speaker Script / Talking Points (60s):**
-  > "To conclude, NEXUS-OPS has demonstrated that quantum machine learning can be grounded in clinical reality and physical hardware topology. By pairing an electrophysiologically sound 6-feature representation with a zero-SWAP isomorphic heavy-hex circuit embedding, we achieved 100% sensitivity for ventricular ectopic beat detection under realistic hardware noise. We openly disclose our current limitations: our 1-beat latency makes this an offline Holter triage tool rather than a real-time defibrillator trigger, and our overall specificity of 54% (68% on Record 200, 36–40% on Record 208) reflects our compact training set. Looking forward to Phase 7, our roadmap includes physical IBM QPU execution via Qiskit Runtime, Zero-Noise Extrapolation error mitigation, and scaling to the full 48-record MIT-BIH database to systematically improve specificity without sacrificing sensitivity. Thank you, and we welcome your questions."
+  > "To conclude, NEXUS-OPS has demonstrated that quantum machine learning can be grounded in clinical reality and physical hardware topology. By pairing an electrophysiologically sound 6-feature representation with a zero-SWAP isomorphic simulated heavy-hex-inspired circuit embedding, we achieved 100% sensitivity for ventricular ectopic beat detection under realistic hardware noise. We openly disclose our current limitations: our 1-beat latency makes this an offline Holter triage tool rather than a real-time defibrillator trigger, and our overall specificity of 54% (68% on Record 200, 36–40% on Record 208) reflects our compact training set. Looking forward to Phase 7, our roadmap includes physical IBM QPU execution via Qiskit Runtime, Zero-Noise Extrapolation error mitigation, and scaling to the full 48-record MIT-BIH database to systematically improve specificity without sacrificing sensitivity. Thank you, and we welcome your questions."
 - **Anticipated Judge Questions & Quick Cues:**
   - *Q: How long will it take to run on a physical IBM QPU?*
     *Cue:* "With Qiskit Runtime Sessions and our depth-15 circuit, running 100 test beats at 4096 shots takes under 5 minutes of total QPU execution time."

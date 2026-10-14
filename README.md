@@ -19,7 +19,7 @@ Cardiovascular disease remains the leading cause of mortality globally. Ventricu
 ### Research Objective
 This project designs, trains, and validates a 6-qubit **Variational Quantum Classifier (VQC)** to discriminate between **MIT-BIH annotation class `N` (Normal beats, class 0)** and **annotation class `V` (Ventricular Ectopic Beats, class 1)**. The implementation strictly investigates:
 1. High-fidelity quantum state encoding of morphological and interval ECG features.
-2. Leakage-controlled, patient-stratified Leave-One-Record-Out (LORO) machine learning evaluation.
+2. Leakage-controlled, record-level Leave-One-Record-Out (LORO) machine learning evaluation.
 3. Hardware compilation and topological compatibility on designated challenge architectures: **Processor A (5 physical qubits)** and **Processor B (9 physical qubits)**.
 
 ---
@@ -27,7 +27,7 @@ This project designs, trains, and validates a 6-qubit **Variational Quantum Clas
 ## 2. Dataset Construction & Leakage-Controlled Evaluation Pipeline
 
 ### 2.1 Data Provenance
-The benchmark dataset was constructed by the NEXUS-OPS team from the open-access **PhysioNet MIT-BIH Arrhythmia Database** (Moody & Mark, 1992/2001). 
+The benchmark dataset was constructed by the NEXUS-OPS team from the open-access **PhysioNet MIT-BIH Arrhythmia Database** (Moody & Mark, 1992/2001).
 
 > **Provenance Disclosure:** The MIT-BIH dataset was independently extracted and curated by the NEXUS-OPS team in accordance with challenge guidelines; it was not supplied as a pre-packaged download by hackathon organizers.
 
@@ -126,7 +126,7 @@ The frozen model was evaluated on the unseen test cohort (Records `200` & `208`)
 | **Brier / MSE Score** | 0.0547 | **0.1626** | **0.1644** |
 | **Class Polarity $\Delta p$** | +0.4429 | **+0.2317** | **+0.2246** |
 
-> **Evaluation Protocol & Benchmark Comparison Disclosure:** On the unseen held-out test cohort ($N=100$, Records 200 & 208), the classical $L_2$-regularized Logistic Regression baseline achieved 92.00% accuracy and 0.9259 F1-score when trained on the combined development cohort ($N=200$, Records 106 & 119). In contrast, the frozen 6-qubit VQC (`fold_1_seed_303`) was trained under strict Leave-One-Record-Out cross-validation on the Record 106 partition ($N=100$), achieving 76.00% accuracy (0.8065 F1) in ideal statevector simulation and 77.00% accuracy (0.8130 F1) under synthetic noise. Both quantum and classical models demonstrated **100.00% empirical Sensitivity on VEBs** (identifying all 50 class `V` beats with 0 false negatives in this 100-beat sample). Note: This 100% sensitivity is an empirical result on a fixed test set of 50 VEBs from two patients; it does not constitute a generalized clinical guarantee, medical device certification, or diagnostic claim across unconstrained clinical populations.
+> **Evaluation Protocol & Benchmark Comparison Disclosure:** On the unseen held-out test cohort ($N=100$, Records 200 & 208), the classical $L_2$-regularized Logistic Regression baseline achieved 92.00% accuracy and 0.9259 F1-score when trained on the combined development cohort ($N=200$, Records 106 & 119). In contrast, the frozen 6-qubit VQC (`fold_1_seed_303`) was trained under strict Leave-One-Record-Out cross-validation on the Record 106 partition ($N=100$), achieving 76.00% accuracy (0.8065 F1) in ideal statevector simulation and 77.00% accuracy (0.8130 F1) under synthetic noise. Both quantum and classical models demonstrated **100.00% empirical Sensitivity on VEBs** (identifying all 50 class `V` beats with 0 false negatives in this 100-beat sample). Note: This 100% sensitivity is an empirical result on a fixed test set of 50 VEBs from two held-out records; it does not constitute a generalized clinical guarantee, medical device certification, or diagnostic claim across unconstrained clinical populations.
 
 ---
 
@@ -134,7 +134,7 @@ The frozen model was evaluated on the unseen test cohort (Records `200` & `208`)
 
 In compliance with IBM Quantum Qiskit Fall Fest Phase 1 rules, the classifier was evaluated across challenge-specified processor topologies:
 
-### 5.1 Processor B: 9-Qubit Heavy-Hex Sparse Tree (Primary Execution Target)
+### 5.1 Processor B: 9-Qubit Simulated Heavy-Hex-Inspired Tree (Primary Target)
 - **Physical Capacity:** 9 physical qubits.
 - **Coupling Map:** 8 bidirectional pairs: `[(0,1), (1,2), (2,3), (2,4), (4,5), (5,6), (4,7), (7,8)]`.
 - **Target Basis Gates:** `['rz', 'sx', 'x', 'cx']`.

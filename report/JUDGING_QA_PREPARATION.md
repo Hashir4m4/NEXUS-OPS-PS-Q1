@@ -14,7 +14,7 @@
 This dossier prepares the NEXUS-OPS defense team for intensive cross-examination across five judge archetypes:
 1. **The IBM Quantum Systems Researcher** (Hardware, transpilation, topology, routing, native gates, noise models)
 2. **The Theoretical QML Scientist** (Expressibility, barren plateaus, gradient variance, entanglement spectra, generalization bounds)
-3. **The Biomedical Signal Processing Expert** (AAMI EC57 compliance, filtering, ECG morphology, patient leakage, clinical utility)
+3. **The Biomedical Signal Processing Expert** (AAMI EC57 alignment, filtering, ECG morphology, inter-record data leakage, clinical utility)
 4. **The Software Engineering & Reproducibility Auditor** (Clean code, testing, determinism, data leakage, isolation)
 5. **The Hackathon Competition Judge** (Rubric adherence, innovation, problem statement scope, trade-off honesty)
 
@@ -33,7 +33,7 @@ Each entry provides:
 #### Q1: "Why does Processor B achieve 0 SWAP overhead while Processor A fails entirely?"
 - **Archetype:** IBM Quantum Systems Researcher
 - **Core Tension:** Did you just arbitrarily pick an easy mapping, or is there a fundamental structural reason?
-- **Authoritative Response:** "Processor A has a strict physical capacity of $n=5$ qubits arranged in a linear topology (`[0-1-2-3-4]`). Our AAMI-aligned biomedical feature extractor isolates $k=6$ independent electrophysiological dimensions. By the Pigeonhole Principle ($k > n$), mapping 6 features to 5 qubits is impossible without either destructive dimensionality loss or circuit multiplexing. Conversely, Processor B is a 9-qubit heavy-hex sparse tree (`[0-1-2-3-4-5-6-7-8]`). Our linear nearest-neighbor ansatz requires a 5-edge path graph $P_6$. Subgraph isomorphism identifies an exact native embedding along physical path `[0 - 1 - 2 - 4 - 5 - 6]`. Because every CX gate in our ansatz matches a physical coupling edge, the Qiskit transpiler requires exactly 0 SWAP gates, preserving circuit depth at 15 and CX count at 5."
+- **Authoritative Response:** "Processor A has a strict physical capacity of $n=5$ qubits arranged in a linear topology (`[0-1-2-3-4]`). Our AAMI-aligned biomedical feature extractor isolates $k=6$ independent electrophysiological dimensions. By the Pigeonhole Principle ($k > n$), mapping 6 features to 5 qubits is impossible without either destructive dimensionality loss or circuit multiplexing. Conversely, Processor B is a 9-qubit simulated heavy-hex-inspired tree (`[0-1-2-3-4-5-6-7-8]`). Our linear nearest-neighbor ansatz requires a 5-edge path graph $P_6$. Subgraph isomorphism identifies an exact native embedding along physical path `[0 - 1 - 2 - 4 - 5 - 6]`. Because every CX gate in our ansatz matches a physical coupling edge, the Qiskit transpiler requires exactly 0 SWAP gates, preserving circuit depth at 15 and CX count at 5."
 - **Evidence Citation:** `processors/processor_a.py`, `processors/processor_b.py`, `src/transpilation_experiments.py:60-140`, `report/PROCESSOR_A_B_JUDGING_DEFENSE.md:Section 2`, `results/transpilation_comparison.json`.
 - **What NOT to Say:** "Processor A is a bad processor" or "Processor B is just faster." (Processor A is a valid 5Q architecture; the mismatch is dimensional capacity).
 
@@ -47,7 +47,7 @@ Each entry provides:
 #### Q3: "Did you benchmark an auxiliary 5-qubit circuit on Processor A to verify its coupling map?"
 - **Archetype:** IBM Quantum Systems Researcher / Hackathon Judge
 - **Core Tension:** Did you just reject Processor A and do no work on it?
-- **Authoritative Response:** "We engineered a dedicated 5-qubit auxiliary circuit specifically to benchmark Processor A's linear routing. Using features 1 through 5, transpiling onto Processor A's linear chain `[0-1-2-3-4]` required depth 16 and 4 CX gates with 0 SWAPs, confirming optimal linear embedding. Furthermore, in `report/PROCESSOR_A_B_JUDGING_DEFENSE.md` Section 3, we analyze all 720 possible permutations: on a 5-qubit linear chain, non-adjacent couplings require up to 4 SWAP gates (adding 12 CX gates and tripling circuit depth to 39). Processor B's heavy-hex degree-3 central node `Q2` enables routing shortcuts that reduce worst-case permutation overhead by 33%."
+- **Authoritative Response:** "We engineered a dedicated 5-qubit auxiliary circuit specifically to benchmark Processor A's linear routing. Using features 1 through 5, transpiling onto Processor A's linear chain `[0-1-2-3-4]` required depth 16 and 4 CX gates with 0 SWAPs, confirming optimal linear embedding. Furthermore, in `report/PROCESSOR_A_B_JUDGING_DEFENSE.md` Section 3, we analyze all 720 possible permutations: on a 5-qubit linear chain, non-adjacent couplings require up to 4 SWAP gates (adding 12 CX gates and tripling circuit depth to 39). Processor B's simulated heavy-hex degree-3 central node `Q2` enables routing shortcuts that reduce worst-case permutation overhead by 33%."
 - **Evidence Citation:** `processors/processor_a.py:130-180`, `tests/test_processor_ab.py:75-140`, `report/PROCESSOR_A_B_JUDGING_DEFENSE.md:Section 3`, `results/transpilation_comparison.json`.
 - **What NOT to Say:** "Processor A was useless so we ignored it."
 
@@ -86,7 +86,7 @@ Each entry provides:
 #### Q8: "How does your ansatz protect against barren plateaus?"
 - **Archetype:** Theoretical QML Scientist
 - **Core Tension:** Variational quantum circuits suffer from exponentially vanishing gradients as depth and entanglement increase.
-- **Authoritative Response:** "Barren plateaus occur when the ansatz forms an approximate 2-design over the unitary group, causing gradient variance to vanish as $\mathcal{O}(2^{-n})$. We mitigated this through three architectural constraints: (1) Shallow depth of $L=1$ layer (depth 15), preventing 2-design saturation; (2) Linear nearest-neighbor entanglement with only 5 CX gates instead of all-to-all ($\binom{6}{2}=15$ CX); (3) Ensemble average observable $\hat{O} = \frac{1}{6}\sum_{i=0}^5 Z_i$ composed of 1-local Pauli-Z operators rather than a global multi-qubit observable (such as $Z^{\otimes 6}$), which Cerezo et al. (2021) proved exhibits polynomially bounded gradients $\mathcal{O}(1/\text{poly}(n))$ in shallow regimes while utilizing measurement statistics across all active physical qubits."
+- **Authoritative Response:** "Barren plateaus occur when the ansatz forms an approximate 2-design over the unitary group, causing gradient variance to vanish as $\mathcal{O}(2^{-n})$. We theoretically mitigate barren plateau susceptibility through three architectural design principles: (1) Shallow depth of $L=1$ layer (depth 15), preventing 2-design saturation; (2) Linear nearest-neighbor entanglement with only 5 CX gates instead of all-to-all ($\binom{6}{2}=15$ CX); (3) Ensemble average observable $\hat{O} = \frac{1}{6}\sum_{i=0}^5 Z_i$ composed of 1-local Pauli-Z operators rather than a global multi-qubit observable (such as $Z^{\otimes 6}$), which Cerezo et al. (2021) proved exhibits polynomially bounded gradients $\mathcal{O}(1/\text{poly}(n))$ in shallow regimes. We emphasize that while Cerezo et al. establish theoretical motivation for local observables in shallow architectures, this represents a deliberate mitigation rationale rather than an empirical proof of barren plateau immunity across arbitrary depths."
 - **Evidence Citation:** `src/vqc_circuit.py:70-108`, `report/vqc_architecture_decision_review.md`, `tests/test_vqc_circuit.py`.
 - **What NOT to Say:** "Our circuit is immune to barren plateaus because Qiskit fixes it."
 
@@ -125,9 +125,9 @@ Each entry provides:
 #### Q13: "What specific arrhythmia classes are in your dataset, and does it follow AAMI EC57?"
 - **Archetype:** Biomedical Signal Processing Expert
 - **Core Tension:** Many hackathon submissions confuse beat types or merge unrelated arrhythmias.
-- **Authoritative Response:** "Our dataset aligns with the AAMI EC57 standard categorization while maintaining strict annotation precision. Under AAMI EC57, heartbeats are grouped into superclasses including Non-Ectopic (N) and Ventricular Ectopic (V). In our constructed benchmark cohort of 300 segments, the non-ectopic class is strictly filtered to normal sinus rhythm beats annotated exclusively as symbol 'N' (0 bundle branch block annotations such as 'L' or 'R' were included, preventing morphological confounding). The ventricular ectopic class consists strictly of Premature Ventricular Contractions annotated as symbol 'V'. All beats are extracted from the gold-standard MIT-BIH Arrhythmia Database using modified limb Lead II (MLII) at 360 Hz with record-level separation."
+- **Authoritative Response:** "The AAMI EC57 standard defines superclasses for heartbeat categorization, grouping normal sinus rhythm along with bundle branch blocks (L, R) into a non-ectopic superclass. However, our actual dataset extraction deliberately isolates annotation symbol 'N' (normal sinus rhythm) only, excluding bundle branch blocks ('L', 'R') to avoid morphological confounding. The ectopic class isolates ventricular ectopic beats (symbol 'V', Premature Ventricular Contractions). Therefore, while our classification boundary is informed by the clinical distinction between non-ectopic and ventricular ectopic arrhythmias in AAMI EC57, we do not claim full AAMI EC57 compliance across all fifteen MIT-BIH annotation symbols or bundle branch morphologies. All beats are extracted from the gold-standard PhysioNet MIT-BIH Arrhythmia Database using modified limb Lead II (MLII) at 360 Hz with strict record-level separation."
 - **Evidence Citation:** `src/acquire_and_inspect_mitbih.py:20-85`, `src/dataset_builder.py:40-110`, `report/SCIENTIFIC_VALIDATION_AND_LIMITATIONS.md:Section 1`, `results/dataset_validation.json`.
-- **What NOT to Say:** "We classify all types of heart diseases and stroke."
+- **What NOT to Say:** "We claim full AAMI EC57 compliance across all clinical arrhythmia categories."
 
 #### Q14: "Why are the specific 6 features you selected physiologically meaningful for PVC detection?"
 - **Archetype:** Biomedical Signal Processing Expert
@@ -146,7 +146,7 @@ Each entry provides:
 #### Q15: "Why did you use Lead II (MLII) instead of V1 or a multi-lead configuration?"
 - **Archetype:** Biomedical Signal Processing Expert
 - **Core Tension:** Lead II does not always capture all ectopic morphologies.
-- **Authoritative Response:** "In the MIT-BIH Arrhythmia Database, Lead MLII (Modified Lead II) is the primary continuous channel available across the vast majority of records (45 out of 48 records). MLII aligns closely with the cardiac electrical axis from the right shoulder to the left lower abdomen, maximizing the visibility of the QRS complex and ventricular depolarizations. To maintain cohort consistency across different patients, we used MLII across all training and test records."
+- **Authoritative Response:** "In the MIT-BIH Arrhythmia Database, Lead MLII (Modified Lead II) is the primary continuous channel available across the vast majority of records (45 out of 48 records). MLII aligns closely with the cardiac electrical axis from the right shoulder to the left lower abdomen, maximizing the visibility of the QRS complex and ventricular depolarizations. To maintain cohort consistency across different records, we used MLII across all training and test records."
 - **Evidence Citation:** `src/acquire_and_inspect_mitbih.py:40-75`, `report/dataset_validation.md`.
 - **What NOT to Say:** "We only looked at one lead because we didn't want to load more data."
 
@@ -257,7 +257,7 @@ Each entry provides:
 - **Archetype:** Hackathon Competition Judge
 - **Core Tension:** Is this just another standard VQC tutorial copied from Qiskit documentation?
 - **Authoritative Response:** "Our primary innovation is the rigorous cross-domain synthesis between clinical electrophysiology and quantum hardware topology:
-  1. We designed an ansatz whose two-qubit interaction graph is an exact isomorphic subgraph of IBM's heavy-hex sparse tree architecture, achieving zero SWAP gates and minimal circuit depth (depth 15).
+  1. We designed an ansatz whose two-qubit interaction graph is an exact isomorphic subgraph of the simulated heavy-hex-inspired sparse tree architecture, achieving zero SWAP gates and minimal circuit depth (depth 15).
   2. We maintained absolute methodological integrity by enforcing Leave-One-Record-Out (LORO) record isolation, proving our quantum classifier generalizes across distinct held-out ECG recording sessions rather than memorizing beat signatures.
   3. We provide an exhaustive mathematical proof of processor mapping feasibility rather than empirical trial-and-error."
 - **Evidence Citation:** `report/PROCESSOR_A_B_JUDGING_DEFENSE.md`, `report/SCIENTIFIC_VALIDATION_AND_LIMITATIONS.md`.
@@ -288,7 +288,7 @@ Each entry provides:
 - **Authoritative Response:** "Phase 7 focuses on four targeted clinical and hardware expansions:
   1. Full physical QPU execution on IBM Quantum Heron/Eagle systems using Qiskit Runtime Sampler/Estimator.
   2. Quantum Error Mitigation (QEM) integration via Zero-Noise Extrapolation (ZNE) and Twirled Readout Error Extrapolation (TREX).
-  3. Expanding the development cohort from 200 to 10,000 beats across all 48 MIT-BIH records to improve general specificity beyond 54% across diverse patient morphologies.
+  3. Expanding the development cohort from 200 to 10,000 beats across all 48 MIT-BIH records to improve general specificity beyond 54% across diverse subject morphologies.
   4. Packaging the preprocessing and inference pipeline into an edge-deployable C++/WebAssembly runtime for wearable ECG patches."
 - **Evidence Citation:** `report/JUDGING_COMMITTEE_READINESS_REPORT.md:Section 5`.
 - **What NOT to Say:** "We haven't thought about what to do next."
@@ -307,7 +307,7 @@ Each entry provides:
 #### Q32: "Why linear nearest-neighbor entanglement? Doesn't all-to-all entanglement give higher expressibility?"
 - **Archetype:** Theoretical QML Scientist
 - **Core Tension:** Linear entanglement seems like a compromise that restricts quantum correlations.
-- **Authoritative Response:** "All-to-all entanglement on a 6-qubit register requires $\binom{6}{2} = 15$ two-qubit CX gates per layer. On planar or heavy-hex superconducting architectures, non-local CX gates require multiple SWAP insertions, dramatically increasing circuit depth, two-qubit gate error accumulation, and decoherence. Furthermore, theoretical work by McClean et al. and Holmes et al. proves that higher entanglement directly accelerates barren plateau onset. Linear entanglement achieves the optimal trade-off: it generates genuine multi-qubit entanglement across all 6 qubits with exactly 5 CX gates, maps directly to hardware with zero SWAP overhead, and avoids barren plateaus."
+- **Authoritative Response:** "All-to-all entanglement on a 6-qubit register requires $\binom{6}{2} = 15$ two-qubit CX gates per layer. On planar or heavy-hex superconducting architectures, non-local CX gates require multiple SWAP insertions, dramatically increasing circuit depth, two-qubit gate error accumulation, and decoherence. Furthermore, theoretical work by McClean et al. and Holmes et al. proves that higher entanglement directly accelerates barren plateau onset. Linear entanglement achieves the optimal trade-off: it generates genuine multi-qubit entanglement across all 6 qubits with exactly 5 CX gates, maps directly to hardware with zero SWAP overhead, and theoretically mitigates barren plateau susceptibility."
 - **Evidence Citation:** `src/vqc_circuit.py:82-98`, `report/PROCESSOR_A_B_JUDGING_DEFENSE.md:Section 2`.
 - **What NOT to Say:** "Linear entanglement is always better than all-to-all."
 
@@ -385,12 +385,12 @@ Each entry provides:
 - **Core Tension:** Four records are not representative of global population diversity.
 - **Authoritative Response:** "We selected these 4 records specifically because they contain rigorously verified, gold-standard annotations of normal sinus rhythm and ventricular ectopic beats with clean Lead II signals. Training was performed on Records 106 and 119 ($N=200$ beats total), while Records 200 and 208 ($N=100$ beats total: 50 from Record 200, 50 from Record 208) were held out completely as an unseen test cohort. Zero test beats were ever seen during scaler fitting or hyperparameter selection. Record-level separation ensures that the quantum classifier generalizes across distinct recording sessions rather than memorizing beat morphology from training records."
 - **Evidence Citation:** `src/acquire_and_inspect_mitbih.py:20-85`, `src/dataset_builder.py:40-110`, `report/SCIENTIFIC_VALIDATION_AND_LIMITATIONS.md:Section 1`.
-- **What NOT to Say:** "Four patients is plenty of data for any medical AI."
+- **What NOT to Say:** "Four records is plenty of data for any medical AI."
 
 #### Q43: "You didn't run on real IBM hardware. Isn't this just a simulation project?"
 - **Archetype:** IBM Quantum Systems Researcher / Competition Judge
 - **Core Tension:** Hackathons often prioritize teams that show a real QPU execution graph.
-- **Authoritative Response:** "We made an intentional, principled engineering trade-off: real QPU cloud queues during hackathons introduce multi-hour wait times, making continuous automated regression testing and rigorous noise characterization infeasible. Instead, we transpiled directly to physical IBM Eagle/Heron architectures, proved 0-SWAP topological compatibility, and evaluated our circuits under an empirically calibrated noise model incorporating single-qubit depolarizing ($p_{1q}=0.001$), two-qubit CX depolarizing ($p_{2q}=0.005$), and readout measurement errors ($p_{\text{meas}}=0.010$) at 4096 shots. Our code is 100% Qiskit Runtime compatible (`EstimatorV2`) and ready for immediate single-click execution on physical QPUs."
+- **Authoritative Response:** "We made an intentional, principled engineering trade-off: real QPU cloud queues during hackathons introduce multi-hour wait times, making continuous automated regression testing and rigorous noise characterization infeasible. Instead, we transpiled directly to simulated target topologies (including our 9-qubit simulated heavy-hex-inspired tree), proved 0-SWAP topological compatibility, and evaluated our circuits under an empirically calibrated noise model incorporating single-qubit depolarizing ($p_{1q}=0.001$), two-qubit CX depolarizing ($p_{2q}=0.005$), and readout measurement errors ($p_{\text{meas}}=0.010$) at 4096 shots. Our code is 100% Qiskit Runtime compatible (`EstimatorV2`) and ready for immediate single-click execution on physical QPUs."
 - **Evidence Citation:** `report/PROCESSOR_A_B_JUDGING_DEFENSE.md:Section 4`, `src/noise_experiments.py:50-160`.
 - **What NOT to Say:** "We ran out of IBM Quantum credits" or "Simulators are better than real hardware."
 
@@ -408,14 +408,14 @@ Each entry provides:
 - **Evidence Citation:** `results/vqc_model_selection.json`, `report/vqc_model_selection_protocol.md`.
 - **What NOT to Say:** "COBYLA is the best optimizer for all quantum algorithms."
 
-#### Q46: "Your post-RR feature requires future data. Doesn't that make this useless for alerting patients to sudden cardiac arrest?"
+#### Q46: "Your post-RR feature requires future data. Doesn't that make this useless for alerting to sudden cardiac arrest in real time?"
 - **Archetype:** Biomedical Signal Processing Expert
 - **Core Tension:** If you have to wait for the next beat, can you prevent ventricular fibrillation?
 - **Authoritative Response:** "Ventricular Ectopic Beats are diagnostic biomarkers of myocardial irritability and arrhythmia risk; they are monitored over 24- to 48-hour Holter recordings to calculate PVC burden (% of total beats). In Holter monitoring, retrospective 1-beat latency (less than 1 second) is completely acceptable and standard practice across all commercial clinical software. We explicitly do not claim zero-lookahead defibrillator trigger capability, ensuring our claims match clinical reality."
 - **Evidence Citation:** `report/SCIENTIFIC_VALIDATION_AND_LIMITATIONS.md:Section 4`, `results/publication_blocker_verification.json`.
-- **What NOT to Say:** "1 second of delay doesn't matter to a dying patient."
+- **What NOT to Say:** "1 second of delay doesn't matter in a critical emergency."
 
-#### Q47: "What happens if the patient has a bundle branch block? Doesn't that fool your QRS duration feature?"
+#### Q47: "What happens if a subject has a bundle branch block? Doesn't that fool your QRS duration feature?"
 - **Archetype:** Biomedical Signal Processing Expert
 - **Core Tension:** Bundle branch blocks (LBBB/RBBB) widen the QRS complex without being ventricular ectopics.
 - **Authoritative Response:** "Under AAMI EC57 standards, bundle branch blocks are categorized under Class `N` (Non-ectopic / supraventricular), whereas PVCs are Class `V`. While bundle branch blocks do widen the QRS complex, they maintain normal sinus rhythm (`pre_rr` and `post_rr` intervals remain regular and balanced). Ectopic ventricular beats exhibit the simultaneous conjunction of prematurity (`pre_rr < 0.8`), compensatory pause (`post_rr > 1.2`), and altered spectral distribution. Because our VQC entangles all 6 features, it relies on multi-feature conjunction rather than QRS duration alone."
@@ -449,9 +449,9 @@ Each entry provides:
 
 | Judge Archetype | What They Care About Most | Primary Defense Weapon | What Destroys Credibility |
 | :--- | :--- | :--- | :--- |
-| **IBM Quantum Researcher** | Native gates, coupling maps, SWAP overhead, noise models | `PROCESSOR_A_B_JUDGING_DEFENSE.md`, Pigeonhole proof, 0 SWAPs on heavy-hex | Claiming real QPU execution when using AerSimulator |
+| **IBM Quantum Researcher** | Native gates, coupling maps, SWAP overhead, noise models | `PROCESSOR_A_B_JUDGING_DEFENSE.md`, Pigeonhole proof, 0 SWAPs on simulated heavy-hex tree | Claiming real QPU execution when using AerSimulator |
 | **Theoretical QML Scientist** | Expressibility, barren plateaus, gradient variance, loss geometry | Ensemble observable $\hat{O} = \frac{1}{6}\sum Z_i$, shallow depth 15, Sim et al. Template 9 | Claiming quantum advantage over classical ML on accuracy |
-| **Biomedical Signal Expert** | AAMI EC57 standards, patient leakage, clinical utility | Record-level separation on Records 200 & 208, 100% sensitivity, 1-beat latency disclosure | Claiming real-time zero-lookahead alerting |
+| **Biomedical Signal Expert** | AAMI EC57 standards, inter-record data leakage, clinical utility | Record-level separation on Records 200 & 208, 100% sensitivity, 1-beat latency disclosure | Claiming real-time zero-lookahead alerting |
 | **Software QA Auditor** | Test coverage, reproducibility, data isolation, dependencies | 116 passing unit/integration tests, scaler isolation, 2s demo | Broken demo script, unpinned dependencies |
 | **Hackathon Judge** | Problem statement fulfillment, rubric alignment, honesty | 100-point rubric matrix, official organizer confirmation | Defensiveness, arrogance, concealing limitations |
 
