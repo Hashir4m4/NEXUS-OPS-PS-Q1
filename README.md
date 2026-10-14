@@ -63,7 +63,7 @@ To prevent data contamination and preserve experimental validity, the preprocess
 
 ## ECG Data Pipeline and Validation Architecture
 
-![ECG Data Pipeline and Validation Architecture](docs/images/ecg-data-pipeline.png)
+![ECG Data Pipeline and Validation Architecture](docs/images/ecg-data-pipeline.svg)
 
 The end-to-end data curation, validation, and feature-to-quantum embedding architecture follows a modular pipeline designed for strict reproducibility and data hygiene:
 

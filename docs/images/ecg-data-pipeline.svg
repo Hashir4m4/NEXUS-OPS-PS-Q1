@@ -1,0 +1,465 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 1820" width="1280" height="1820" style="background-color: #FAFAFC; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <!-- Drop Shadow Filters -->
+    <filter id="shadow-card" x="-4%" y="-4%" width="108%" height="112%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.06"/>
+    </filter>
+    <filter id="shadow-pill" x="-8%" y="-8%" width="116%" height="120%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#0F172A" flood-opacity="0.08"/>
+    </filter>
+
+    <!-- Arrowhead Markers -->
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#7C3AED"/>
+    </marker>
+    <marker id="arrow-rose" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#E11D48"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#D97706"/>
+    </marker>
+    <marker id="arrow-slate" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <!-- Canvas Border -->
+  <rect x="8" y="8" width="1264" height="1804" rx="16" fill="#FAFAFC" stroke="#E2E8F0" stroke-width="2"/>
+
+  <!-- ========================================== -->
+  <!-- 0. HEADER TITLE & METADATA                 -->
+  <!-- ========================================== -->
+  <rect x="60" y="24" width="1160" height="48" rx="8" fill="#1E293B"/>
+  <text x="640" y="45" text-anchor="middle" font-size="16" font-weight="700" fill="#FFFFFF" letter-spacing="0.5">NEXUS-OPS: ECG DATA PROCESSING, VALIDATION &amp; QUANTUM-CLASSICAL EVALUATION</text>
+  <text x="640" y="62" text-anchor="middle" font-size="11.5" font-weight="400" fill="#94A3B8">End-to-End Scientific Architecture: From MIT-BIH Acquisition to 6-Qubit VQC &amp; Classical ML Benchmarking</text>
+
+  <!-- ========================================== -->
+  <!-- 1. DATA ACQUISITION & INGESTION (Y: 90-175)-->
+  <!-- ========================================== -->
+  <!-- Biomedical Researcher -->
+  <g filter="url(#shadow-card)">
+    <circle cx="150" cy="135" r="32" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2"/>
+    <text x="150" y="132" text-anchor="middle" font-size="12" font-weight="600" fill="#1E40AF">Biomedical</text>
+    <text x="150" y="146" text-anchor="middle" font-size="12" font-weight="600" fill="#1E40AF">Researcher</text>
+  </g>
+
+  <!-- MIT-BIH Source Database -->
+  <g filter="url(#shadow-card)">
+    <rect x="290" y="105" width="410" height="60" rx="8" fill="#F8FAFC" stroke="#64748B" stroke-width="2"/>
+    <text x="495" y="128" text-anchor="middle" font-size="13" font-weight="700" fill="#0F172A">PhysioNet MIT-BIH Arrhythmia Database</text>
+    <text x="495" y="146" text-anchor="middle" font-size="11.5" fill="#475569">Lead II Continuous Records 106, 119, 200, 208 (360 Hz, .dat, .hea, .atr)</text>
+  </g>
+
+  <!-- Ingestion Module -->
+  <g filter="url(#shadow-card)">
+    <rect x="800" y="105" width="420" height="60" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2"/>
+    <text x="1010" y="128" text-anchor="middle" font-size="13" font-weight="700" fill="#1E40AF">WFDB Record Loader &amp; Signal Inspector</text>
+    <text x="1010" y="146" text-anchor="middle" font-size="11" font-family="'SF Mono', Consolas, monospace" fill="#2563EB">src/data_loader.py | src/acquire_and_inspect_mitbih.py</text>
+  </g>
+
+  <!-- Flow Arrows for Zone 1 -->
+  <path d="M 184 135 L 288 135" fill="none" stroke="#3B82F6" stroke-width="1.8" marker-end="url(#arrow-blue)"/>
+  <path d="M 702 135 L 798 135" fill="none" stroke="#3B82F6" stroke-width="1.8" marker-end="url(#arrow-blue)"/>
+
+  <!-- ========================================== -->
+  <!-- 2. PREPROCESSING & SEGMENTATION (Y: 195-315)-->
+  <!-- ========================================== -->
+  <rect x="60" y="195" width="1160" height="120" rx="12" fill="#F8FAFC" stroke="#94A3B8" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <rect x="490" y="185" width="300" height="22" rx="11" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1"/>
+  <text x="640" y="200" text-anchor="middle" font-size="11.5" font-weight="700" fill="#334155" letter-spacing="0.5">ECG PREPROCESSING &amp; BEAT SEGMENTATION</text>
+
+  <!-- Signal Preprocessing Node -->
+  <g filter="url(#shadow-card)">
+    <rect x="85" y="225" width="340" height="65" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.8"/>
+    <text x="255" y="247" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1E40AF">Two-Stage Median &amp; Bandpass Filter</text>
+    <text x="255" y="264" text-anchor="middle" font-size="10.5" fill="#3B82F6">200 ms &amp; 600 ms baseline removal; 0.5–40 Hz filter</text>
+    <text x="255" y="278" text-anchor="middle" font-size="9.5" font-family="'SF Mono', Consolas, monospace" fill="#64748B">src/signal_preprocessing.py</text>
+  </g>
+
+  <!-- R-Peak Centered Segmentation Node -->
+  <g filter="url(#shadow-card)">
+    <rect x="470" y="225" width="340" height="65" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.8"/>
+    <text x="640" y="247" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1E40AF">R-Peak Centered Beat Windowing</text>
+    <text x="640" y="264" text-anchor="middle" font-size="10.5" fill="#3B82F6">360-sample (1.0 s) windows centered at index 144</text>
+    <text x="640" y="278" text-anchor="middle" font-size="9.5" font-family="'SF Mono', Consolas, monospace" fill="#64748B">Pre-R: 144 samples (400 ms) | Post-R: 216 samples (600 ms)</text>
+  </g>
+
+  <!-- Binary Annotation Filtering Node -->
+  <g filter="url(#shadow-card)">
+    <rect x="855" y="225" width="345" height="65" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.8"/>
+    <text x="1027" y="247" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1E40AF">N/V Binary Annotation Selection</text>
+    <text x="1027" y="264" text-anchor="middle" font-size="10.5" fill="#3B82F6">Isolates Normal ('N', class 0) &amp; VEB ('V', class 1)</text>
+    <text x="1027" y="278" text-anchor="middle" font-size="9.5" font-family="'SF Mono', Consolas, monospace" fill="#64748B">src/dataset_builder.py (N = 300 total balanced beats)</text>
+  </g>
+
+  <!-- Connecting Flows in Zone 2 -->
+  <path d="M 1010 167 L 1010 190 Q 1010 205 640 205 L 255 205 L 255 223" fill="none" stroke="#3B82F6" stroke-width="1.8" marker-end="url(#arrow-blue)"/>
+  <path d="M 427 257 L 468 257" fill="none" stroke="#3B82F6" stroke-width="1.8" marker-end="url(#arrow-blue)"/>
+  <path d="M 812 257 L 853 257" fill="none" stroke="#3B82F6" stroke-width="1.8" marker-end="url(#arrow-blue)"/>
+
+  <!-- ======================================================= -->
+  <!-- 3. EXPLICIT RECORD-LEVEL DATA PARTITION (Y: 335-465)   -->
+  <!-- ======================================================= -->
+  <rect x="60" y="335" width="1160" height="130" rx="12" fill="#F1F5F9" stroke="#64748B" stroke-width="2"/>
+  <rect x="440" y="325" width="400" height="22" rx="11" fill="#0F172A" stroke="#0F172A" stroke-width="1"/>
+  <text x="640" y="340" text-anchor="middle" font-size="11.5" font-weight="700" fill="#FFFFFF" letter-spacing="0.5">EXPLICIT RECORD-LEVEL DATA PARTITIONING (LORO PROTOCOL A)</text>
+
+  <!-- Development Cohort Box -->
+  <g filter="url(#shadow-card)">
+    <rect x="85" y="360" width="500" height="75" rx="8" fill="#F8FAFC" stroke="#2563EB" stroke-width="2"/>
+    <text x="335" y="380" text-anchor="middle" font-size="13" font-weight="700" fill="#1E40AF">Development Cohort (N = 200 Segments)</text>
+    <text x="335" y="398" text-anchor="middle" font-size="11.5" fill="#1E293B">Record 106: 100 beats (50 N, 50 V) | Record 119: 100 beats (50 N, 50 V)</text>
+    <text x="335" y="415" text-anchor="middle" font-size="10" font-weight="600" fill="#059669">Role: Benchmark Scaler Fitted on Both Records (106 &amp; 119) | LORO Model Selection</text>
+    <text x="335" y="428" text-anchor="middle" font-size="9" font-family="'SF Mono', Consolas, monospace" fill="#64748B">data/processed/train.csv</text>
+  </g>
+
+  <!-- Held-Out Test Cohort Box -->
+  <g filter="url(#shadow-card)">
+    <rect x="695" y="360" width="505" height="75" rx="8" fill="#FFF1F2" stroke="#E11D48" stroke-width="2"/>
+    <text x="947" y="380" text-anchor="middle" font-size="13" font-weight="700" fill="#9F1239">Quarantined Held-Out Test Cohort (N = 100 Segments)</text>
+    <text x="947" y="398" text-anchor="middle" font-size="11.5" fill="#1E293B">Record 200: 50 beats (25 N, 25 V) | Record 208: 50 beats (25 N, 25 V)</text>
+    <text x="947" y="415" text-anchor="middle" font-size="10" font-weight="600" fill="#E11D48">Role: Quarantined Single-Pass Evaluation Under Frozen Parameters</text>
+    <text x="947" y="428" text-anchor="middle" font-size="9" font-family="'SF Mono', Consolas, monospace" fill="#64748B">data/processed/test.csv</text>
+  </g>
+
+  <!-- Partition Disclosures / Badges -->
+  <rect x="595" y="385" width="90" height="26" rx="13" fill="#FFFFFF" stroke="#64748B" stroke-width="1.5"/>
+  <text x="640" y="401" text-anchor="middle" font-size="10" font-weight="700" fill="#334155">STRICT SPLIT</text>
+  <text x="640" y="455" text-anchor="middle" font-size="10.5" font-style="italic" fill="#475569">Enforces strict record-level separation (independent recording streams, not verified patient identities)</text>
+
+  <!-- Flow to Partition -->
+  <path d="M 1027 292 L 1027 315 Q 1027 325 640 325 L 335 325 L 335 358" fill="none" stroke="#2563EB" stroke-width="1.8" marker-end="url(#arrow-blue)"/>
+  <path d="M 1027 292 L 1027 358" fill="none" stroke="#E11D48" stroke-width="1.8" marker-end="url(#arrow-rose)"/>
+
+  <!-- ======================================================= -->
+  <!-- 4. QUALITY ASSURANCE & INTEGRITY AUDITS (Y: 480-555)   -->
+  <!-- ======================================================= -->
+  <rect x="60" y="480" width="1160" height="75" rx="10" fill="#FEF2F2" stroke="#FDA4AF" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <rect x="470" y="470" width="340" height="20" rx="10" fill="#FFE4E6" stroke="#FDA4AF" stroke-width="1"/>
+  <text x="640" y="484" text-anchor="middle" font-size="11" font-weight="700" fill="#9F1239" letter-spacing="0.5">DATASET INTEGRITY &amp; SCIENTIFIC AUDIT GUARDRAILS</text>
+
+  <!-- 3 Audit Badges (Passive Verification - Non-Mutating) -->
+  <g filter="url(#shadow-card)">
+    <rect x="85" y="497" width="345" height="46" rx="6" fill="#FFFFFF" stroke="#F43F5E" stroke-width="1.5"/>
+    <text x="257" y="516" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9F1239">Dataset Validation Suite</text>
+    <text x="257" y="532" text-anchor="middle" font-size="10" fill="#64748B">Zero NaNs, 360-sample length, exact 50/50 balance (src/dataset_validation.py)</text>
+  </g>
+  <g filter="url(#shadow-card)">
+    <rect x="465" y="497" width="350" height="46" rx="6" fill="#FFFFFF" stroke="#F43F5E" stroke-width="1.5"/>
+    <text x="640" y="516" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9F1239">Baseline Integrity &amp; Leakage Audit</text>
+    <text x="640" y="532" text-anchor="middle" font-size="10" fill="#64748B">Zero record overlap across splits verified (src/classical_baseline_audit.py)</text>
+  </g>
+  <g filter="url(#shadow-card)">
+    <rect x="850" y="497" width="350" height="46" rx="6" fill="#FFFFFF" stroke="#F43F5E" stroke-width="1.5"/>
+    <text x="1025" y="516" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9F1239">Feature Distribution &amp; Bound Audit</text>
+    <text x="1025" y="532" text-anchor="middle" font-size="10" fill="#64748B">Multivariate outlier checks &amp; physiology verification (src/feature_audit.py)</text>
+  </g>
+
+  <!-- ======================================================= -->
+  <!-- 5. PHYSIOLOGICAL FEATURE EXTRACTION (Y: 575-690)        -->
+  <!-- ======================================================= -->
+  <rect x="60" y="575" width="1160" height="115" rx="12" fill="#FFFBEB" stroke="#F59E0B" stroke-width="2"/>
+  <rect x="460" y="565" width="360" height="22" rx="11" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+  <text x="640" y="580" text-anchor="middle" font-size="11.5" font-weight="700" fill="#92400E" letter-spacing="0.5">PHYSIOLOGICAL FEATURE EXTRACTION (6 FEATURES)</text>
+
+  <!-- 6 Biomarker Pills -->
+  <g filter="url(#shadow-card)">
+    <rect x="85" y="595" width="1110" height="50" rx="8" fill="#FFFFFF" stroke="#FCD34D" stroke-width="1.5"/>
+    <text x="175" y="616" text-anchor="middle" font-size="11" font-weight="700" fill="#92400E">1. pre_rr (s)</text>
+    <text x="175" y="632" text-anchor="middle" font-size="9.5" fill="#78350F">Prior R-R prematurity</text>
+
+    <text x="360" y="616" text-anchor="middle" font-size="11" font-weight="700" fill="#92400E">2. post_rr (s)</text>
+    <text x="360" y="632" text-anchor="middle" font-size="9.5" fill="#78350F">Compensatory pause</text>
+
+    <text x="545" y="616" text-anchor="middle" font-size="11" font-weight="700" fill="#92400E">3. qrs_rms (mV)</text>
+    <text x="545" y="632" text-anchor="middle" font-size="9.5" fill="#78350F">QRS depolarization power</text>
+
+    <text x="735" y="616" text-anchor="middle" font-size="11" font-weight="700" fill="#92400E">4. qrs_duration (s)</text>
+    <text x="735" y="632" text-anchor="middle" font-size="9.5" fill="#78350F">Conduction delay width</text>
+
+    <text x="920" y="616" text-anchor="middle" font-size="11" font-weight="700" fill="#92400E">5. p2p_amplitude (mV)</text>
+    <text x="920" y="632" text-anchor="middle" font-size="9.5" fill="#78350F">Peak-to-peak voltage</text>
+
+    <text x="1105" y="616" text-anchor="middle" font-size="11" font-weight="700" fill="#92400E">6. spectral_ratio</text>
+    <text x="1105" y="632" text-anchor="middle" font-size="9.5" fill="#78350F">Energy band concentration</text>
+  </g>
+  <text x="640" y="668" text-anchor="middle" font-size="11" font-weight="600" fill="#B45309">Extraction Module: src/feature_extraction.py | Yields: features_train.csv (200x6) &amp; features_test.csv (100x6)</text>
+  <text x="640" y="682" text-anchor="middle" font-size="9.5" font-style="italic" fill="#78350F">Latency note: post_rr requires observing succeeding beat, introducing a 1-beat retrospective processing latency</text>
+
+  <!-- Flow to Feature Extraction -->
+  <path d="M 335 437 L 335 573" fill="none" stroke="#2563EB" stroke-width="1.8" marker-end="url(#arrow-blue)"/>
+  <path d="M 947 437 L 947 573" fill="none" stroke="#E11D48" stroke-width="1.8" marker-end="url(#arrow-rose)"/>
+
+  <!-- ======================================================= -->
+  <!-- 6. PARALLEL EVALUATION TRACKS (SIDE-BY-SIDE Y: 710-1410)-->
+  <!-- ======================================================= -->
+
+  <!-- ======================================================= -->
+  <!-- TRACK A: CLASSICAL ML BENCHMARK (LEFT COLUMN)           -->
+  <!-- ======================================================= -->
+  <rect x="60" y="710" width="565" height="715" rx="14" fill="#F0FDF4" stroke="#16A34A" stroke-width="2"/>
+  <rect x="170" y="700" width="345" height="22" rx="11" fill="#15803D" stroke="#15803D" stroke-width="1"/>
+  <text x="342" y="715" text-anchor="middle" font-size="11.5" font-weight="700" fill="#FFFFFF" letter-spacing="0.5">TRACK A: CLASSICAL ML BENCHMARK</text>
+
+  <!-- Step A1: Classical Preprocessing -->
+  <g filter="url(#shadow-card)">
+    <rect x="85" y="735" width="515" height="65" rx="8" fill="#FFFFFF" stroke="#22C55E" stroke-width="1.5"/>
+    <text x="342" y="756" text-anchor="middle" font-size="12.5" font-weight="700" fill="#166534">Classical Feature Preprocessing</text>
+    <text x="342" y="773" text-anchor="middle" font-size="11" fill="#15803D">Standard normalization fitted strictly on Development Cohort (N = 200)</text>
+    <text x="342" y="789" text-anchor="middle" font-size="9.5" font-family="'SF Mono', Consolas, monospace" fill="#64748B">src/classical_models.py</text>
+  </g>
+
+  <!-- Step A2: Candidate Models Training -->
+  <g filter="url(#shadow-card)">
+    <rect x="85" y="825" width="515" height="135" rx="8" fill="#FFFFFF" stroke="#22C55E" stroke-width="1.5"/>
+    <text x="342" y="846" text-anchor="middle" font-size="12.5" font-weight="700" fill="#166534">Classical Candidate Model Training (N = 200)</text>
+    
+    <rect x="100" y="858" width="485" height="26" rx="4" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1"/>
+    <text x="115" y="875" font-size="11" font-weight="600" fill="#166534">Logistic Regression:</text>
+    <text x="250" y="875" font-size="10.5" fill="#14532D">L2 penalty (C=1.0), liblinear solver, balanced weights</text>
+
+    <rect x="100" y="890" width="485" height="26" rx="4" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1"/>
+    <text x="115" y="907" font-size="11" font-weight="600" fill="#166534">Support Vector Machine:</text>
+    <text x="265" y="907" font-size="10.5" fill="#14532D">RBF kernel (C=1.0, scale gamma), probability calibration</text>
+
+    <rect x="100" y="922" width="485" height="26" rx="4" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1"/>
+    <text x="115" y="939" font-size="11" font-weight="600" fill="#166534">Random Forest:</text>
+    <text x="210" y="939" font-size="10.5" fill="#14532D">100 trees, max depth 5, balanced class weighting</text>
+  </g>
+
+  <!-- Step A3: Held-Out Classical Evaluation -->
+  <g filter="url(#shadow-card)">
+    <rect x="85" y="985" width="515" height="255" rx="8" fill="#FFFFFF" stroke="#22C55E" stroke-width="1.5"/>
+    <text x="342" y="1007" text-anchor="middle" font-size="12.5" font-weight="700" fill="#166534">Held-Out Test Cohort Evaluation (N = 100)</text>
+    <text x="342" y="1024" text-anchor="middle" font-size="10.5" fill="#15803D">Evaluated on Quarantined Records 200 &amp; 208 (src/classical_evaluation.py)</text>
+
+    <!-- Table Header -->
+    <rect x="100" y="1038" width="485" height="24" rx="4" fill="#DCFCE7"/>
+    <text x="115" y="1054" font-size="10.5" font-weight="700" fill="#14532D">Classifier</text>
+    <text x="270" y="1054" font-size="10.5" font-weight="700" fill="#14532D">Accuracy</text>
+    <text x="360" y="1054" font-size="10.5" font-weight="700" fill="#14532D">Sensitivity (V)</text>
+    <text x="475" y="1054" font-size="10.5" font-weight="700" fill="#14532D">Specificity (N)</text>
+
+    <!-- Row 1: Logistic Regression -->
+    <rect x="100" y="1066" width="485" height="34" rx="4" fill="#F0FDF4" stroke="#22C55E" stroke-width="1.5"/>
+    <text x="115" y="1083" font-size="11" font-weight="700" fill="#15803D">Logistic Regression (Best)</text>
+    <text x="115" y="1094" font-size="9" fill="#166534">C=1.0, L2, liblinear</text>
+    <text x="270" y="1087" font-size="12" font-weight="700" fill="#15803D">92.0%</text>
+    <text x="360" y="1087" font-size="12" font-weight="700" fill="#15803D">100.0% (50/50)</text>
+    <text x="475" y="1087" font-size="12" font-weight="700" fill="#15803D">84.0% (42/50)</text>
+
+    <!-- Row 2: SVM RBF -->
+    <rect x="100" y="1104" width="485" height="30" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="115" y="1123" font-size="10.5" font-weight="600" fill="#334155">Support Vector Machine</text>
+    <text x="270" y="1123" font-size="11" font-weight="600" fill="#334155">91.0%</text>
+    <text x="360" y="1123" font-size="11" font-weight="600" fill="#334155">100.0% (50/50)</text>
+    <text x="475" y="1123" font-size="11" font-weight="600" fill="#334155">82.0% (41/50)</text>
+
+    <!-- Row 3: Random Forest -->
+    <rect x="100" y="1138" width="485" height="30" rx="4" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1"/>
+    <text x="115" y="1157" font-size="10.5" font-weight="600" fill="#334155">Random Forest (depth=5)</text>
+    <text x="270" y="1157" font-size="11" font-weight="600" fill="#334155">77.0%</text>
+    <text x="360" y="1157" font-size="11" font-weight="600" fill="#334155">100.0% (50/50)</text>
+    <text x="475" y="1157" font-size="11" font-weight="600" fill="#334155">54.0% (27/50)</text>
+
+    <text x="342" y="1195" text-anchor="middle" font-size="10" font-weight="600" fill="#15803D">Artifact: results/classical_baseline.json</text>
+    <text x="342" y="1215" text-anchor="middle" font-size="9.5" fill="#475569">Confusion Matrix (LR): TN=42, FP=8, FN=0, TP=50 | F1-Macro: 0.92</text>
+    <text x="342" y="1230" text-anchor="middle" font-size="9.5" fill="#475569">Interpretability: Pre-RR &amp; QRS Duration deliver highest predictive weight</text>
+  </g>
+
+  <!-- Step A4: Classical Benchmark Summary -->
+  <g filter="url(#shadow-card)">
+    <rect x="85" y="1260" width="515" height="145" rx="8" fill="#FFFFFF" stroke="#22C55E" stroke-width="1.5"/>
+    <text x="342" y="1282" text-anchor="middle" font-size="12" font-weight="700" fill="#166534">Classical ML Baseline Conclusion</text>
+    <text x="105" y="1305" font-size="10.5" fill="#14532D">• Linear/logistic boundary separates morphological ECG features effectively.</text>
+    <text x="105" y="1325" font-size="10.5" fill="#14532D">• 100% Sensitivity on VEBs: Zero missed ventricular ectopic beats.</text>
+    <text x="105" y="1345" font-size="10.5" fill="#14532D">• High Specificity (84%): Low false positive rate on normal sinus beats.</text>
+    <text x="105" y="1365" font-size="10.5" font-weight="600" fill="#047857">• Establishes the classical reference baseline (92%) for comparison.</text>
+    <text x="105" y="1385" font-size="9.5" font-style="italic" fill="#64748B">• No hyperparameter tuning performed on held-out test cohort.</text>
+  </g>
+
+  <!-- Flow Arrows inside Track A -->
+  <path d="M 342 690 L 342 733" fill="none" stroke="#16A34A" stroke-width="1.8" marker-end="url(#arrow-green)"/>
+  <path d="M 342 800 L 342 823" fill="none" stroke="#16A34A" stroke-width="1.8" marker-end="url(#arrow-green)"/>
+  <path d="M 342 960 L 342 983" fill="none" stroke="#16A34A" stroke-width="1.8" marker-end="url(#arrow-green)"/>
+  <path d="M 342 1240 L 342 1258" fill="none" stroke="#16A34A" stroke-width="1.8" marker-end="url(#arrow-green)"/>
+
+  <!-- ======================================================= -->
+  <!-- TRACK B: QUANTUM ML (6-QUBIT VQC) (RIGHT COLUMN)        -->
+  <!-- ======================================================= -->
+  <rect x="655" y="710" width="565" height="715" rx="14" fill="#FAF5FF" stroke="#9333EA" stroke-width="2"/>
+  <rect x="745" y="700" width="385" height="22" rx="11" fill="#7E22CE" stroke="#7E22CE" stroke-width="1"/>
+  <text x="937" y="715" text-anchor="middle" font-size="11.5" font-weight="700" fill="#FFFFFF" letter-spacing="0.5">TRACK B: QUANTUM ML (6-QUBIT VQC PIPELINE)</text>
+
+  <!-- Step B1: Quantum Feature Scaling & Validation Disclosures -->
+  <g filter="url(#shadow-card)">
+    <rect x="680" y="735" width="515" height="92" rx="8" fill="#FFFFFF" stroke="#A855F7" stroke-width="1.5"/>
+    <text x="937" y="753" text-anchor="middle" font-size="12" font-weight="700" fill="#6B21A8">Quantum Feature Scaling &amp; Preprocessing</text>
+    <text x="937" y="769" text-anchor="middle" font-size="10.5" font-weight="600" fill="#7E22CE">Fitted on Full Development Cohort: Records 106 &amp; 119 (N = 200)</text>
+    <text x="937" y="784" text-anchor="middle" font-size="9.5" fill="#3B0764">Linearly maps 6 features to [0, pi] rotational angles for single-qubit Ry encoding</text>
+    <text x="937" y="798" text-anchor="middle" font-size="9.5" fill="#DC2626">Validation limitation: Benchmark scaler incorporates Record 119, not Record 106 alone</text>
+    <text x="937" y="812" text-anchor="middle" font-size="8.5" font-family="'SF Mono', Consolas, monospace" fill="#64748B">Test records 200 &amp; 208 strictly quarantined; clamped to [0, pi] (src/feature_scaling.py)</text>
+  </g>
+
+  <!-- Step B2: VQC LORO Training & Checkpoint Selection -->
+  <g filter="url(#shadow-card)">
+    <rect x="680" y="842" width="515" height="150" rx="8" fill="#FFFFFF" stroke="#A855F7" stroke-width="1.5"/>
+    <text x="937" y="863" text-anchor="middle" font-size="12.5" font-weight="700" fill="#6B21A8">VQC LORO Training &amp; Checkpoint Selection</text>
+
+    <!-- Training Box -->
+    <rect x="695" y="875" width="235" height="50" rx="6" fill="#FAF5FF" stroke="#C084FC" stroke-width="1"/>
+    <text x="812" y="893" text-anchor="middle" font-size="11" font-weight="700" fill="#581C87">Training: Record 106</text>
+    <text x="812" y="908" text-anchor="middle" font-size="9.5" fill="#6B21A8">100 beats (50 N, 50 V)</text>
+    <text x="812" y="920" text-anchor="middle" font-size="9" fill="#7E22CE">Optimizes 12 parameters (Adam)</text>
+
+    <!-- Validation Box -->
+    <rect x="945" y="875" width="235" height="50" rx="6" fill="#FAF5FF" stroke="#C084FC" stroke-width="1"/>
+    <text x="1062" y="893" text-anchor="middle" font-size="11" font-weight="700" fill="#581C87">Validation: Record 119</text>
+    <text x="1062" y="908" text-anchor="middle" font-size="9.5" fill="#6B21A8">100 beats (50 N, 50 V)</text>
+    <text x="1062" y="920" text-anchor="middle" font-size="9" fill="#7E22CE">Ranks checkpoints via balance score</text>
+
+    <!-- Selected Checkpoint Banner -->
+    <rect x="695" y="932" width="485" height="48" rx="6" fill="#F3E8FF" stroke="#9333EA" stroke-width="1.5"/>
+    <text x="937" y="950" text-anchor="middle" font-size="11" font-weight="700" fill="#581C87">Selected Checkpoint: fold_1_seed_303 (Frozen Parameter Vector theta*)</text>
+    <text x="937" y="965" text-anchor="middle" font-size="9.5" fill="#6B21A8">Val Score = 0.9592 | Val MSE = 0.1020 | Val Acc = 100% | Optimal 12 theta frozen</text>
+    <text x="937" y="976" text-anchor="middle" font-size="8.5" font-family="'SF Mono', Consolas, monospace" fill="#64748B">results/vqc_model_selection.json | src/vqc_training.py</text>
+  </g>
+
+  <!-- Step B3: 6-Qubit VQC Architecture -->
+  <g filter="url(#shadow-card)">
+    <rect x="680" y="1008" width="515" height="150" rx="8" fill="#FFFFFF" stroke="#A855F7" stroke-width="1.5"/>
+    <text x="937" y="1028" text-anchor="middle" font-size="12.5" font-weight="700" fill="#6B21A8">Approved 6-Qubit VQC Architecture (src/vqc_circuit.py)</text>
+
+    <rect x="695" y="1040" width="485" height="26" rx="4" fill="#FAF5FF" stroke="#D8B4FE" stroke-width="1"/>
+    <text x="710" y="1057" font-size="11" font-weight="600" fill="#6B21A8">Encoding Circuit:</text>
+    <text x="825" y="1057" font-size="10.5" fill="#3B0764">6 single-qubit Ry(x_i) rotations (x_0 ... x_5 in [0, pi])</text>
+
+    <rect x="695" y="1071" width="485" height="26" rx="4" fill="#FAF5FF" stroke="#D8B4FE" stroke-width="1"/>
+    <text x="710" y="1088" font-size="11" font-weight="600" fill="#6B21A8">Variational Ansatz:</text>
+    <text x="835" y="1088" font-size="10.5" fill="#3B0764">RealAmplitudes (reps=1, linear CX entanglement, 12 params)</text>
+
+    <rect x="695" y="1102" width="485" height="26" rx="4" fill="#FAF5FF" stroke="#D8B4FE" stroke-width="1"/>
+    <text x="710" y="1119" font-size="11" font-weight="600" fill="#6B21A8">Ensemble Observable:</text>
+    <text x="850" y="1119" font-size="10.5" fill="#3B0764">O = 1/6 sum_{i=0}^5 Z_i (1-body local Hamiltonian)</text>
+
+    <rect x="695" y="1133" width="485" height="18" rx="4" fill="#FAF5FF"/>
+    <text x="937" y="1146" text-anchor="middle" font-size="10" font-weight="600" fill="#7E22CE">Expectation to Probability: P(VEB) = (1 - &lt;O&gt;) / 2</text>
+  </g>
+
+  <!-- Step B4: Frozen Held-Out Evaluation -->
+  <g filter="url(#shadow-card)">
+    <rect x="680" y="1175" width="515" height="230" rx="8" fill="#FFFFFF" stroke="#A855F7" stroke-width="1.5"/>
+    <text x="937" y="1196" text-anchor="middle" font-size="12.5" font-weight="700" fill="#6B21A8">Held-Out Test Cohort Evaluation (N = 100)</text>
+    <text x="937" y="1213" text-anchor="middle" font-size="10.5" fill="#7E22CE">Quarantined Records 200 &amp; 208 under Frozen Parameters theta* (src/vqc_evaluation.py)</text>
+
+    <!-- Metrics Table -->
+    <rect x="695" y="1225" width="485" height="85" rx="6" fill="#FAF5FF" stroke="#A855F7" stroke-width="1.5"/>
+    
+    <text x="755" y="1247" text-anchor="middle" font-size="10.5" font-weight="700" fill="#581C87">Accuracy</text>
+    <text x="755" y="1270" text-anchor="middle" font-size="16" font-weight="800" fill="#7E22CE">76.0%</text>
+    <text x="755" y="1287" text-anchor="middle" font-size="9" fill="#6B21A8">76 / 100 beats</text>
+
+    <text x="860" y="1247" text-anchor="middle" font-size="10.5" font-weight="700" fill="#581C87">Sensitivity (V)</text>
+    <text x="860" y="1270" text-anchor="middle" font-size="16" font-weight="800" fill="#059669">100.0%</text>
+    <text x="860" y="1287" text-anchor="middle" font-size="9" fill="#047857">50 / 50 VEB detected</text>
+
+    <text x="965" y="1247" text-anchor="middle" font-size="10.5" font-weight="700" fill="#581C87">Specificity (N)</text>
+    <text x="965" y="1270" text-anchor="middle" font-size="16" font-weight="800" fill="#D97706">52.0%</text>
+    <text x="965" y="1287" text-anchor="middle" font-size="9" fill="#B45309">26 / 50 Normal</text>
+
+    <text x="1075" y="1247" text-anchor="middle" font-size="10.5" font-weight="700" fill="#581C87">ROC AUC</text>
+    <text x="1075" y="1270" text-anchor="middle" font-size="16" font-weight="800" fill="#7E22CE">0.9988</text>
+    <text x="1075" y="1287" text-anchor="middle" font-size="9" fill="#6B21A8">High ranking power</text>
+
+    <text x="937" y="1327" text-anchor="middle" font-size="10" font-weight="600" fill="#581C87">Artifact: results/vqc_heldout_evaluation.json</text>
+    <text x="937" y="1343" text-anchor="middle" font-size="9.5" fill="#475569">Confusion Matrix: TN=26, FP=24, FN=0, TP=50 | F1-Score: 0.806 | MSE Loss: 0.1626</text>
+    <text x="937" y="1359" text-anchor="middle" font-size="9.5" font-weight="600" fill="#15803D">Held-out benchmark: 100% sensitivity on 50/50 VEB samples (zero false negatives)</text>
+    <text x="937" y="1375" text-anchor="middle" font-size="9.5" fill="#475569">Specificity limit (52%): Modest specificity reflects baseline shift on held-out records</text>
+    <text x="937" y="1391" text-anchor="middle" font-size="9" font-style="italic" fill="#64748B">The VQC matches the classical baseline's sensitivity on this test set, but has lower accuracy and specificity.</text>
+  </g>
+
+  <!-- Flow Arrows inside Track B -->
+  <path d="M 947 690 L 947 733" fill="none" stroke="#7C3AED" stroke-width="1.8" marker-end="url(#arrow-purple)"/>
+  <path d="M 937 827 L 937 840" fill="none" stroke="#7C3AED" stroke-width="1.8" marker-end="url(#arrow-purple)"/>
+  <path d="M 937 992 L 937 1006" fill="none" stroke="#7C3AED" stroke-width="1.8" marker-end="url(#arrow-purple)"/>
+  <path d="M 937 1158 L 937 1173" fill="none" stroke="#7C3AED" stroke-width="1.8" marker-end="url(#arrow-purple)"/>
+
+  <!-- ======================================================= -->
+  <!-- 7. HARDWARE TRANSPILATION TARGETS (Y: 1445-1595)       -->
+  <!-- ======================================================= -->
+  <rect x="60" y="1445" width="1160" height="150" rx="12" fill="#F8FAFC" stroke="#475569" stroke-width="1.8"/>
+  <rect x="420" y="1435" width="440" height="22" rx="11" fill="#334155" stroke="#334155" stroke-width="1"/>
+  <text x="640" y="1450" text-anchor="middle" font-size="11.5" font-weight="700" fill="#FFFFFF" letter-spacing="0.5">TARGET HARDWARE TOPOLOGY TRANSPILATION (SIMULATED)</text>
+
+  <!-- Processor A Box -->
+  <g filter="url(#shadow-card)">
+    <rect x="85" y="1470" width="515" height="108" rx="8" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.5"/>
+    <text x="342" y="1490" text-anchor="middle" font-size="12" font-weight="700" fill="#334155">Processor A: 5-Qubit Linear Chain [0-1-2-3-4]</text>
+    <text x="342" y="1507" text-anchor="middle" font-size="10" fill="#64748B">Capacity Limit: 6-Qubit VQC exceeds 5 physical qubits</text>
+    <text x="342" y="1523" text-anchor="middle" font-size="10" font-weight="600" fill="#DC2626">• The selected six-qubit encoding cannot be directly mapped to this five-qubit target.</text>
+    <text x="342" y="1539" text-anchor="middle" font-size="9.5" fill="#334155">• Possible redesign options include circuit cutting, feature reduction (to 5),</text>
+    <text x="342" y="1553" text-anchor="middle" font-size="9.5" fill="#334155">  or alternative sub-architectures (not mandatory solutions).</text>
+    <text x="342" y="1567" text-anchor="middle" font-size="8.5" font-family="'SF Mono', Consolas, monospace" fill="#64748B">results/processor_ab_transpilation.json | src/processor_simulation.py</text>
+  </g>
+
+  <!-- Processor B Box -->
+  <g filter="url(#shadow-card)">
+    <rect x="680" y="1470" width="515" height="108" rx="8" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.8"/>
+    <text x="937" y="1490" text-anchor="middle" font-size="12" font-weight="700" fill="#15803D">Processor B: 9-Qubit Simulated Heavy-Hex-Inspired Tree (Primary Target)</text>
+    <text x="937" y="1507" text-anchor="middle" font-size="10" fill="#166534">Transpilation Results (Simulation Only, Not a Physical QPU Execution)</text>
+    <text x="937" y="1524" text-anchor="middle" font-size="10.5" font-weight="700" fill="#15803D">Transpiled Metrics: Circuit Depth = 15 | CX Gates = 5 | SWAP Gates = 0</text>
+    <text x="937" y="1539" text-anchor="middle" font-size="9.5" fill="#14532D">• Simulated mapping to physical path [0-1-2-4-5-6] requires 0 SWAPs</text>
+    <text x="937" y="1553" text-anchor="middle" font-size="9.5" fill="#14532D">• Zero routing overhead: Linear CX ansatz connectivity matches tree sub-path</text>
+    <text x="937" y="1567" text-anchor="middle" font-size="8.5" font-family="'SF Mono', Consolas, monospace" fill="#64748B">Basis: ['rz', 'sx', 'x', 'cx'] | Opt Level 1 | results/processor_ab_transpilation.json</text>
+  </g>
+
+  <!-- Flow to Hardware -->
+  <path d="M 937 1405 L 937 1468" fill="none" stroke="#475569" stroke-width="1.8" marker-end="url(#arrow-slate)"/>
+
+  <!-- ======================================================= -->
+  <!-- 8. SCIENTIFIC METHODOLOGY & GOVERNANCE DISCLOSURES     -->
+  <!-- ======================================================= -->
+  <rect x="60" y="1610" width="1160" height="145" rx="12" fill="#F8FAFC" stroke="#64748B" stroke-width="1.5"/>
+  <rect x="430" y="1600" width="420" height="20" rx="10" fill="#475569" stroke="#475569" stroke-width="1"/>
+  <text x="640" y="1614" text-anchor="middle" font-size="11" font-weight="700" fill="#FFFFFF" letter-spacing="0.5">SCIENTIFIC METHODOLOGY &amp; RESEARCH GOVERNANCE BOUNDARIES</text>
+
+  <!-- 3 Limitation Cards -->
+  <g filter="url(#shadow-card)">
+    <rect x="85" y="1630" width="350" height="110" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+    <text x="260" y="1648" text-anchor="middle" font-size="11" font-weight="700" fill="#0F172A">1. Cohort Partitioning Boundary</text>
+    <text x="100" y="1668" font-size="9.5" fill="#334155">• Enforces strict record-level separation between training</text>
+    <text x="100" y="1681" font-size="9.5" fill="#334155">  (106, 119) and held-out test (200, 208) datasets.</text>
+    <text x="100" y="1695" font-size="9.5" font-weight="600" fill="#DC2626">• Patient-level separation has not been verified.</text>
+    <text x="100" y="1709" font-size="9.5" fill="#334155">• Preserves scientific honesty regarding external generalization.</text>
+    <text x="100" y="1723" font-size="8.5" font-style="italic" fill="#64748B">All performance claims are strictly scoped to record-level splits.</text>
+  </g>
+
+  <g filter="url(#shadow-card)">
+    <rect x="465" y="1630" width="350" height="110" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+    <text x="640" y="1648" text-anchor="middle" font-size="11" font-weight="700" fill="#0F172A">2. Quantum Execution Boundary</text>
+    <text x="480" y="1668" font-size="9.5" fill="#334155">• All quantum simulations conducted on Qiskit Aer 0.17.2.</text>
+    <text x="480" y="1682" font-size="9.5" fill="#334155">• Uses noiseless statevector &amp; noisy depolarizing shots.</text>
+    <text x="480" y="1696" font-size="9.5" font-weight="600" fill="#DC2626">• NO physical quantum processing unit (QPU) execution claimed.</text>
+    <text x="480" y="1710" font-size="9.5" fill="#334155">• Transpilation metrics represent compile-time routing models.</text>
+    <text x="480" y="1724" font-size="8.5" font-style="italic" fill="#64748B">Hardware noise simulated via depolarizing + readout models.</text>
+  </g>
+
+  <g filter="url(#shadow-card)">
+    <rect x="845" y="1630" width="350" height="110" rx="6" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+    <text x="1020" y="1648" text-anchor="middle" font-size="11" font-weight="700" fill="#0F172A">3. Quantum Advantage Boundary</text>
+    <text x="860" y="1666" font-size="9" fill="#334155">• This project is an exploratory NISQ feasibility benchmark.</text>
+    <text x="860" y="1679" font-size="9" fill="#334155">• NO claim of quantum advantage or supremacy is made.</text>
+    <text x="860" y="1692" font-size="9" fill="#334155">• Classical Logistic Regression achieves higher accuracy (92% vs 76%).</text>
+    <text x="860" y="1706" font-size="9" font-weight="600" fill="#1E40AF">• The VQC matches the classical baseline's sensitivity on</text>
+    <text x="860" y="1719" font-size="9" font-weight="600" fill="#1E40AF">  this test set, but has lower accuracy and specificity.</text>
+  </g>
+
+  <!-- Footer Watermark / Repo Citation -->
+  <text x="1220" y="1780" text-anchor="end" font-size="11" font-family="'SF Mono', Consolas, monospace" fill="#94A3B8">NEXUS-OPS PS-Q1 | IBM Quantum Qiskit Fall Fest 2026 | github.com/Hashir4m4/NEXUS-OPS-PS-Q1</text>
+</svg>
