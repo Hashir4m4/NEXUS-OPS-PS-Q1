@@ -31,10 +31,10 @@ The benchmark dataset was constructed by the NEXUS-OPS team from the open-access
 
 > **Provenance Disclosure:** The MIT-BIH dataset was independently extracted and curated by the NEXUS-OPS team in accordance with challenge guidelines; it was not supplied as a pre-packaged download by hackathon organizers.
 
-### 2.2 Patient-Level Cohort Partitioning (LORO Protocol A)
-Standard random k-fold cross-validation in ECG analysis causes severe data leakage when beats from the same patient appear in both training and test sets. To enforce rigorous external validity, NEXUS-OPS implemented a strict patient-stratified cohort split:
+### 2.2 Record-Level Cohort Partitioning (LORO Protocol A)
+Standard random k-fold cross-validation in ECG analysis causes severe data leakage when beats from the same recording appear in both training and test sets. To enforce rigorous external validity, NEXUS-OPS implemented strict record-level separation between training and held-out test records:
 
-| Cohort Role | Patient Records | Sample Count | Class Balance | Methodological Status |
+| Cohort Role | Record IDs | Sample Count | Class Balance | Methodological Status |
 |:---|:---:|:---:|:---:|:---|
 | **Development Cohort** | Records `106` & `119` | $N = 200$ | 100 Normal, 100 VEB | Used for feature scaling and LORO cross-validation model selection |
 | **Held-Out Test Cohort** | Records `200` & `208` | $N = 100$ | 50 Normal, 50 VEB | **Quarantined:** Evaluated once under frozen model parameters |
@@ -54,7 +54,7 @@ Raw electrocardiogram signals undergo two-stage median filtering (200 ms and 600
 ### 2.4 Leakage Controls & Boundary Disclosures
 To prevent data contamination and preserve experimental validity, the preprocessing pipeline enforces four specific controls:
 
-- **Patient-Level Separation (LORO Protocol A):** Development records (`106`, `119`) and held-out test records (`200`, `208`) are strictly isolated at the patient level. No beats or patient identity information cross the partition boundary.
+- **Record-Level Separation (LORO Protocol A):** Record-level separation between training (`106`, `119`) and held-out test records (`200`, `208`) guarantees that no beats or annotations cross the partition boundary.
 - **Strict Scaler Quarantine:** The `QuantumFeatureScaler` linear min/max parameters are fitted **exclusively on the development cohort** and applied to test beats with boundary clamping to $[0, \pi]$, ensuring zero distribution lookahead.
 - **Continuous Stream R-R Calculation:** The `pre_rr` and `post_rr` features are computed using the full continuous annotation stream of the source recording. In prospective streaming deployments, `post_rr` requires observing the next consecutive beat, introducing a one-beat retrospective latency.
 - **Window Segmentation Overlap:** Beats are segmented into 360-sample ($1.0\text{ s}$) windows centered on annotated R-peaks. When consecutive beats occur with an R-R interval under 1.0 s ($> 60\text{ bpm}$), adjacent temporal windows may partially overlap in raw samples, though each segment represents an independent annotated cardiac event.
@@ -255,7 +255,7 @@ To maintain the highest standards of scientific integrity, the following limitat
 2. **Provisional Noise Model:** The synthetic noise parameters ($p_{1q}=0.001$, $p_{2q}=0.005$, $p_{\text{meas}}=0.010$) are provisional challenge simulation assumptions. As clarified in the 13 October 2026 Organizer FAQ, final noise models and native basis sets will be confirmed post-Phase 1 shortlisting.
 3. **Research Benchmark Nature:** The MIT-BIH Arrhythmia Database is a retrospective open-source research cohort. This software is an engineering benchmark, not a certified clinical diagnostic medical device.
 4. **Post-RR Feature Lookahead & Window Overlap:** The `post_rr` interval feature requires the occurrence of the subsequent heartbeat, introducing a one-beat latency in real-time streaming implementations. Additionally, for heart rates above 60 bpm where consecutive R-R intervals are shorter than 1.0 s, adjacent 360-sample (1.0 s) windows centered on consecutive R-peaks may partially overlap in raw signal samples.
-5. **Record 208 Distribution Shift:** Test Record 208 exhibited lower specificity ($48\%$) than Record 200 ($60\%$). This reflects patient-specific distribution shift; its physiological origin has not been established.
+5. **Record 208 Distribution Shift:** Test Record 208 exhibited lower specificity (36.0% ideal, 40.0% noisy) than Record 200 (68.0% ideal, 68.0% noisy). This reflects subject-specific distribution shift; its physiological origin has not been established.
 6. **Track Demarcation:** In accordance with organizer clarifications, Problem Statement PS-Q1 (Biomedical Classifier) is strictly isolated from Problem Statement PS-O1 (Max-Cut graph optimization). Combinatorial vertex-reduction concepts do not apply to continuous biomedical features.
 
 ---

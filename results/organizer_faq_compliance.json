@@ -1,0 +1,240 @@
+{
+  "compliance_metadata": {
+    "timestamp": "2026-10-13T14:45:00Z",
+    "project": "IBM Quantum Qiskit Fall Fest 2026 | Project Q | PS-Q1 Biomedical Classifier",
+    "document": "Organizer FAQ Compliance & Specification Reconciliation",
+    "organizer_faq_date": "2026-10-13",
+    "overall_compliance_status": "VERIFIED WITH LIMITATIONS",
+    "authoritative_sources": [
+      "Updated_Challenge_Kit.pdf (Pinned Google Drive folder)",
+      "Organizer FAQ dated 13 October 2026",
+      "Participant_Instructions.pdf"
+    ],
+    "reconciliation_report": "report/ORGANIZER_FAQ_COMPLIANCE_RECONCILIATION.md"
+  },
+  "project_identity_demarcation": {
+    "status": "VERIFIED",
+    "project_name": "NEXUS-OPS",
+    "registered_track": "Quantum Machine Learning (QML) Track",
+    "registered_problem_statement": "PS-Q1: Biomedical Signal Classifier",
+    "dataset": "PhysioNet MIT-BIH Arrhythmia Database",
+    "classification_task": "Supervised binary classification (Normal 'N' vs Ventricular Ectopic Beat 'V')",
+    "variables": 6,
+    "variable_nature": "Continuous biomedical signal features (pre-RR, post-RR, QRS RMS amplitude, QRS duration, peak-to-peak amplitude, spectral ratio)",
+    "qubit_allocation": 6,
+    "ansatz": "RealAmplitudes with linear entanglement (12 trainable parameters)",
+    "observable": "Ensemble average Pauli-Z: O = (Z0 + Z1 + Z2 + Z3 + Z4 + Z5) / 6",
+    "unrelated_problem_statement_in_faq": {
+      "problem_id": "PS-O1",
+      "track": "Quantum Optimization Track",
+      "problem_title": "Max-Cut on a Weighted Graph",
+      "problem_variables": "6 discrete graph vertices mapping to Ising spins",
+      "vertex_reduction_status": "Vertex fixing or reduction is NOT officially approved",
+      "isolation_directive": "PS-O1 graph constraints and vertex-fixing discussions do not apply to PS-Q1"
+    }
+  },
+  "processor_specifications_reconciliation": {
+    "processor_a": {
+      "status": "VERIFIED WITH LIMITATIONS",
+      "physical_qubits": 5,
+      "coupling_topology": "Linear chain 0-1-2-3-4 (bidirectional CX)",
+      "source": "Updated_Challenge_Kit.pdf Section 3.1, p. 3 & 13 Oct 2026 FAQ",
+      "capacity_instruction": "For problems requiring >5 logical qubits, do not delete variables merely to force into A. Treat A as a capacity/routing reference.",
+      "full_size_execution_status": "NOT APPROVED FOR 6-VARIABLE PROBLEMS",
+      "nexus_ops_psq1_handling": "Documented 6Q transpilation infeasibility as an architectural capacity finding; constructed auxiliary 5Q reference circuit as comparator",
+      "outstanding_organizer_clarification": "The expected handling of 6-variable problems on 5-qubit Processor A will be clarified in Phase 2 specifications"
+    },
+    "processor_b": {
+      "status": "VERIFIED",
+      "physical_qubits": 9,
+      "coupling_topology": "Heavy-hex sparse tree (8 bidirectional pairs: 0-1, 1-2, 2-3, 2-4, 4-5, 5-6, 4-7, 7-8)",
+      "source": "Updated_Challenge_Kit.pdf Section 3.2, p. 3 & 13 Oct 2026 FAQ",
+      "superseded_statements": "Older draft descriptions mentioning 7 qubits are formally superseded",
+      "execution_status": "Primary required execution target for full-size 6Q circuit"
+    }
+  },
+  "noise_and_basis_gate_reclassification": {
+    "status": "VERIFIED WITH LIMITATIONS",
+    "organizer_ruling": "Final noise parameters and supported basis gates are not official in Phase 1 and will be clarified after Phase 1 shortlisting",
+    "reclassified_parameters": [
+      {
+        "parameter": "Single-qubit depolarizing rate p_1q",
+        "value": 0.001,
+        "classification": "PROVISIONAL SIMULATION ASSUMPTION",
+        "notes": "Sourced from Section 3.4 of Updated Challenge Kit; used for simulated sensitivity analysis"
+      },
+      {
+        "parameter": "Two-qubit CX depolarizing rate p_2q (Kit)",
+        "value": 0.005,
+        "classification": "PROVISIONAL SIMULATION ASSUMPTION",
+        "notes": "Sourced from Section 3.4 of Updated Challenge Kit; conflicting illustrative value awaiting Phase 2 confirmation"
+      },
+      {
+        "parameter": "Two-qubit CX depolarizing rate p_2q (Starter)",
+        "value": 0.010,
+        "classification": "CONFLICTING ILLUSTRATIVE EXAMPLE",
+        "notes": "Present in Starter Guide code; superseded by kit and declared non-official in FAQ"
+      },
+      {
+        "parameter": "Readout bit-flip error rate p_meas",
+        "value": 0.010,
+        "classification": "PROVISIONAL SIMULATION ASSUMPTION",
+        "notes": "Sourced from Section 3.4 of Updated Challenge Kit"
+      },
+      {
+        "parameter": "Basis gate set",
+        "value": ["rz", "sx", "x", "cx"],
+        "classification": "PROVISIONAL TARGET BASIS",
+        "notes": "Standard IBM universal compilation set; hardware native basis clarified post-shortlisting"
+      },
+      {
+        "parameter": "Shot budget",
+        "value": 4096,
+        "classification": "STANDARDIZED BENCHMARK BUDGET",
+        "notes": "Sourced from Section 3.4 for finite-sampling analysis"
+      },
+      {
+        "parameter": "Transpiler settings",
+        "value": "optimization_level=1, routing_method='sabre', seed_transpiler=42",
+        "classification": "STANDARDIZED REPRODUCIBILITY BASELINE",
+        "notes": "Standardized across teams for deterministic benchmark comparisons"
+      }
+    ],
+    "results_preservation_policy": "All Phase 6 simulation outputs remain valid as simulated benchmarks under provisional challenge parameters"
+  },
+  "phase_boundaries_reconciliation": {
+    "status": "VERIFIED",
+    "phase_1_scope": {
+      "execution_targets": ["Processor A (capacity/comparator)", "Processor B (full benchmark)"],
+      "required_metrics": [
+        "Problem-specific metrics (accuracy, F1, recall)",
+        "Architecture-related metrics (depth, CX count, SWAP count, routing overhead)"
+      ],
+      "status": "COMPLETED AND VERIFIED"
+    },
+    "phase_2_scope": {
+      "execution_targets": ["Processor C (13 qubits reference/study)", "Processor D (custom hardware design)"],
+      "status": "RESERVED FOR PHASE 2 (NOT APPLICABLE IN PHASE 1)"
+    }
+  },
+  "conflict_resolution_matrix": [
+    {
+      "issue_id": "CONF-01",
+      "topic": "Scope of PS-O1 vs PS-Q1",
+      "source_document": "13 Oct 2026 FAQ Item 1; Updated Challenge Kit Section 7 & 9",
+      "previous_statement": "Implicit assumption of uniform 6-variable handling across tracks",
+      "latest_organizer_clarification": "PS-O1 has 6 vertices in Max-Cut; vertex reduction is not approved; PS-Q1 is a separate QML classifier",
+      "final_treatment": "Segregated PS-Q1 from PS-O1; graph vertex constraints do not apply to continuous biomedical ECG features",
+      "evidence_status": "VERIFIED"
+    },
+    {
+      "issue_id": "CONF-02",
+      "topic": "Processor A Capacity Limit",
+      "source_document": "13 Oct 2026 FAQ Item 2 & 4; Updated Challenge Kit Section 3.1 & 12",
+      "previous_statement": "6Q cannot map to 5Q Processor A; used 5Q reference circuit as comparator",
+      "latest_organizer_clarification": "Processor A has 5 qubits; do not assume vertex reduction or variable truncation is approved; Phase 2 will clarify",
+      "final_treatment": "Preserved 5Q reference circuit as auxiliary comparator; documented capacity limit; awaiting Phase 2 guidance",
+      "evidence_status": "VERIFIED WITH LIMITATIONS"
+    },
+    {
+      "issue_id": "CONF-03",
+      "topic": "Processor B Capacity Definition",
+      "source_document": "13 Oct 2026 FAQ Item 3; Updated Challenge Kit Section 3.2 & 12",
+      "previous_statement": "Processor B is 9 qubits; older drafts mentioned 7 qubits",
+      "latest_organizer_clarification": "Processor B has 9 qubits; do not revert to older 7-qubit descriptions",
+      "final_treatment": "Confirmed 9-qubit heavy-hex sparse tree as authoritative; marked all 7-qubit references as SUPERSEDED",
+      "evidence_status": "VERIFIED"
+    },
+    {
+      "issue_id": "CONF-04",
+      "topic": "Conflicting CX Error Rates",
+      "source_document": "13 Oct 2026 FAQ Item 6; Updated Challenge Kit Section 3.4; Starter Guide",
+      "previous_statement": "p_2q = 0.005 treated as challenge specification",
+      "latest_organizer_clarification": "Conflicting CX rates (0.005 in kit vs 0.01 in Starter Guide) are illustrative, not official",
+      "final_treatment": "Reclassified p_2q = 0.005 as PROVISIONAL SIMULATION ASSUMPTION; preserved simulation results with explicit caveat",
+      "evidence_status": "VERIFIED WITH LIMITATIONS"
+    },
+    {
+      "issue_id": "CONF-05",
+      "topic": "Noise Model & Basis Gate Finality",
+      "source_document": "13 Oct 2026 FAQ Item 7; Updated Challenge Kit Section 3.4",
+      "previous_statement": "Basis {rz, sx, x, cx} and noise parameters treated as official baseline",
+      "latest_organizer_clarification": "Final noise parameters and supported basis gates clarified post-Phase 1 shortlisting",
+      "final_treatment": "Reclassified all noise parameters and basis gates as PROVISIONAL / AWAITING CONFIRMATION",
+      "evidence_status": "VERIFIED WITH LIMITATIONS"
+    },
+    {
+      "issue_id": "CONF-06",
+      "topic": "Phase 1 Required Comparisons",
+      "source_document": "13 Oct 2026 FAQ Item 8; Participant Instructions p. 7",
+      "previous_statement": "Required Processor A vs Processor B comparison, metrics, and routing",
+      "latest_organizer_clarification": "Phase 1 requires Processor A/B comparison, problem-specific metrics, and architecture metrics",
+      "final_treatment": "Verified that existing deliverables provide complete A/B routing, depth, CX, accuracy, and F1 comparisons",
+      "evidence_status": "VERIFIED"
+    },
+    {
+      "issue_id": "CONF-07",
+      "topic": "Processor C and Processor D Scope",
+      "source_document": "13 Oct 2026 FAQ Item 9; Participant Instructions p. 8",
+      "previous_statement": "Exploratory Processor D concepts discussed in Phase 1 planning",
+      "latest_organizer_clarification": "Processor C (13Q) and custom Processor D belong to Phase 2",
+      "final_treatment": "Confirmed Phase 1 scope stops at Processor A and B; Processor C and D reserved for Phase 2",
+      "evidence_status": "VERIFIED"
+    },
+    {
+      "issue_id": "CONF-08",
+      "topic": "Authoritative Information Source",
+      "source_document": "13 Oct 2026 FAQ Item 10; Updated Challenge Kit p. 1",
+      "previous_statement": "Updated Challenge Kit PDF treated as main reference",
+      "latest_organizer_clarification": "Pinned Google Drive folder is authoritative location for Phase 1 instructions, notebooks, and structure",
+      "final_treatment": "Synchronized all project documentation with pinned Drive kit; noted Drive repository structure guidelines",
+      "evidence_status": "VERIFIED"
+    }
+  ],
+  "scientific_findings_retention": {
+    "exact_statevector_variance": {
+      "status": "VERIFIED",
+      "formula": "Var_psi(O) = 1/6 + (1/18) * sum_{j < k} <Z_j Z_k>_psi - <O>_psi^2",
+      "mean_measured_variance": 0.334035,
+      "theoretical_noiseless_se_4096": 0.008870
+    },
+    "retraction_of_0_533_claim": {
+      "status": "RETRACTED AND REPLACED",
+      "retracted_claim": "0.533 measured covariance",
+      "correction": "0.533 was an inverted back-calculation (0.011403/0.015625)^2 = 0.5326 from noisy 3-seed simulation dispersion, not measured covariance"
+    },
+    "test_evidence_reconciliation": {
+      "status": "VERIFIED",
+      "unit_test_shots": 50000,
+      "unit_test_max_diff": 0.00159047,
+      "benchmark_script_shots": 500000,
+      "benchmark_script_max_diff": 0.00090153
+    },
+    "processor_b_transpilation": {
+      "status": "VERIFIED",
+      "swap_gates": 0,
+      "cx_gates": 5,
+      "circuit_depth": 24,
+      "routing_permutation": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    }
+  },
+  "physical_hardware_execution": {
+    "status": "NOT PERFORMED",
+    "note": "No physical IBM Quantum QPU jobs were dispatched. All hardware evaluations reflect transpilation analysis and simulated Qiskit Aer 0.17.2 execution."
+  },
+  "repository_evidence": {
+    "status": "VERIFIED",
+    "git_ls_files_tracked": [],
+    "git_status_modified_tracked": 0,
+    "git_status_staged": 0,
+    "git_status_untracked_files_present": true,
+    "working_tree_interpretation": "Tracked files have zero uncommitted modifications. Untracked files strictly represent active development artifacts, tests, and safety backups."
+  },
+  "regression_test_suite": {
+    "status": "VERIFIED",
+    "total_tests": 116,
+    "passed_tests": 116,
+    "failed_tests": 0,
+    "execution_time_seconds": 12.78
+  }
+}

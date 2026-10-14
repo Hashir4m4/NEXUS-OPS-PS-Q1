@@ -1,0 +1,217 @@
+{
+  "evidence_manifest_metadata": {
+    "project": "NEXUS-OPS \u2014 Project Q",
+    "challenge": "PS-Q1 Biomedical Signal Classifier",
+    "hackathon": "IBM Quantum Qiskit Fall Fest 2026 (SRM University-AP)",
+    "generation_date": "2026-10-14T11:15:00+05:30",
+    "purpose": "Traceable verification linking all scientific, architectural, software, and presentation claims to exact repository artifacts.",
+    "commit_hash": "c1e05004274949eb3bea2409967435960bcca4af"
+  },
+  "claims": [
+    {
+      "claim_id": "CLM-01",
+      "statement": "VQC achieves 100% sensitivity (50/50 VEBs detected) on the held-out test cohort under ideal statevector simulation.",
+      "evidence_type": "EXPERIMENTAL_RESULT",
+      "source_file": "results/vqc_heldout_evaluation.json",
+      "code_file": "src/vqc_evaluation.py",
+      "test_file": "tests/test_vqc_evaluation.py",
+      "metric_value": {
+        "sensitivity": 1.0,
+        "true_positives": 50,
+        "false_negatives": 0,
+        "support": 50
+      },
+      "verification_command": "pytest tests/test_vqc_evaluation.py"
+    },
+    {
+      "claim_id": "CLM-02",
+      "statement": "VQC retains 100% sensitivity (50/50 VEBs detected) and 77% accuracy under challenge depolarizing and readout noise modeling.",
+      "evidence_type": "SIMULATION_RESULT",
+      "source_file": "results/noisy_simulation_results.json",
+      "code_file": "src/noise_experiments.py",
+      "test_file": "tests/test_hardware_experiments.py",
+      "metric_value": {
+        "sensitivity": 1.0,
+        "accuracy": 0.77,
+        "roc_auc": 0.9984,
+        "shots": 4096,
+        "error_rates": {
+          "single_qubit_depolarizing_p": 0.001,
+          "cx_depolarizing_p": 0.005,
+          "readout_error_p": 0.01
+        }
+      },
+      "verification_command": "pytest tests/test_hardware_experiments.py"
+    },
+    {
+      "claim_id": "CLM-03",
+      "statement": "Processor A (5-qubit linear chain) deterministically rejects the 6-qubit circuit with a ValueError due to physical capacity constraints.",
+      "evidence_type": "HARDWARE_CAPACITY_PROOF",
+      "source_file": "report/PROCESSOR_A_B_JUDGING_DEFENSE.md",
+      "code_file": "processors/processor_a.py",
+      "test_file": "tests/test_processor_ab.py",
+      "implementation_details": {
+        "function": "check_processor_capacity",
+        "processor_a_nodes": 5,
+        "circuit_qubits": 6,
+        "error_raised": "ValueError"
+      },
+      "verification_command": "pytest tests/test_processor_ab.py -k test_processor_a"
+    },
+    {
+      "claim_id": "CLM-04",
+      "statement": "Processor B (9-qubit heavy-hex sparse tree) natively embeds the 6-qubit circuit with 0 SWAP overhead, depth 15, and 5 CX gates.",
+      "evidence_type": "HARDWARE_TRANSPILATION",
+      "source_file": "results/transpilation_comparison.json",
+      "code_file": "src/transpilation_experiments.py",
+      "test_file": "tests/test_processor_ab.py",
+      "transpilation_metrics": {
+        "physical_layout": [
+          0,
+          1,
+          2,
+          4,
+          5,
+          6
+        ],
+        "depth": 15,
+        "cx_count": 5,
+        "swap_count": 0,
+        "optimization_level": 3
+      },
+      "verification_command": "pytest tests/test_processor_ab.py -k test_processor_b"
+    },
+    {
+      "claim_id": "CLM-05",
+      "statement": "Auxiliary 5-qubit circuit transpiles on Processor A with depth 16, 4 CX gates, and 0 SWAPs, confirming optimal linear routing.",
+      "evidence_type": "AUXILIARY_BENCHMARK",
+      "source_file": "results/transpilation_comparison.json",
+      "code_file": "processors/processor_a.py",
+      "test_file": "tests/test_processor_ab.py",
+      "metrics": {
+        "depth": 16,
+        "cx_count": 4,
+        "swap_count": 0
+      },
+      "verification_command": "pytest tests/test_processor_ab.py -k test_auxiliary"
+    },
+    {
+      "claim_id": "CLM-06",
+      "statement": "Record-level separation guarantees zero data leakage between development and test cohorts.",
+      "evidence_type": "DATA_INTEGRITY_AUDIT",
+      "source_file": "report/SCIENTIFIC_VALIDATION_AND_LIMITATIONS.md",
+      "code_file": "src/dataset_builder.py",
+      "test_file": "tests/test_vqc_preprocessing.py",
+      "cohort_allocation": {
+        "development_records": [
+          "106",
+          "119"
+        ],
+        "held_out_test_records": [
+          "200",
+          "208"
+        ],
+        "development_beats": 200,
+        "test_beats": 100,
+        "scaler_isolation": "QuantumFeatureScaler fitted exclusively on development data"
+      },
+      "verification_command": "pytest tests/test_vqc_preprocessing.py"
+    },
+    {
+      "claim_id": "CLM-07",
+      "statement": "Test features are strictly clamped to [0, pi] to avoid unconstrained phase rotations on out-of-distribution values.",
+      "evidence_type": "PREPROCESSING_GUARANTEE",
+      "source_file": "report/SCIENTIFIC_VALIDATION_AND_LIMITATIONS.md",
+      "code_file": "src/dataset_builder.py",
+      "test_file": "tests/test_vqc_preprocessing.py",
+      "clamping_bounds": [
+        0.0,
+        3.141592653589793
+      ]
+    },
+    {
+      "claim_id": "CLM-08",
+      "statement": "All 116 automated pytest unit and integration tests execute synchronously and pass with 100% success rate in ~9.5 seconds.",
+      "evidence_type": "SOFTWARE_QA",
+      "source_file": "tests/",
+      "test_file_count": 14,
+      "total_tests": 116,
+      "passed_tests": 116,
+      "failed_tests": 0,
+      "skipped_tests": 0,
+      "runtime_seconds": 9.45,
+      "verification_command": "pytest -q"
+    },
+    {
+      "claim_id": "CLM-09",
+      "statement": "demo.py runs standalone in ~4 seconds, evaluating test beats using pre-extracted features and frozen weights without retraining.",
+      "evidence_type": "DEMONSTRATION_VERIFICATION",
+      "source_file": "demo.py",
+      "test_file": "tests/test_vqc_evaluation.py",
+      "runtime_seconds": 4.0,
+      "exit_code": 0,
+      "verification_command": "python demo.py"
+    },
+    {
+      "claim_id": "CLM-10",
+      "statement": "Classical baseline (Logistic Regression) achieves 92% accuracy, 100% sensitivity, 84% specificity, and 0.9960 ROC-AUC.",
+      "evidence_type": "CLASSICAL_BENCHMARK",
+      "source_file": "results/classical_baseline.json",
+      "code_file": "src/classical_models.py",
+      "test_file": "tests/test_classical_evaluation.py",
+      "metrics": {
+        "accuracy": 0.92,
+        "sensitivity": 1.0,
+        "specificity": 0.84,
+        "roc_auc": 0.996,
+        "train_cohort_size": 200,
+        "test_cohort_size": 100,
+        "training_protocol": "Trained on pooled development Records 106 & 119 (N=200 beats), evaluated on held-out Records 200 & 208 (N=100 beats)"
+      },
+      "verification_command": "pytest tests/test_classical_evaluation.py"
+    },
+    {
+      "claim_id": "CLM-11",
+      "statement": "Implementation transparently discloses retrospective 1-beat latency (due to post_rr) and does not claim zero-lookahead real-time pacing.",
+      "evidence_type": "CLINICAL_DISCLOSURE",
+      "source_file": "report/SCIENTIFIC_VALIDATION_AND_LIMITATIONS.md",
+      "portal_draft_file": "report/FINAL_PHASE1_PUBLICATION_READINESS.md",
+      "disclosure_text": "QuantumFeatureScaler was fitted exclusively on development data and applied to the held-out cohort with values clamped to [0, pi]. The post_rr feature uses the succeeding R-peak; therefore, the current implementation is intended for retrospective/offline classification and is not a zero-lookahead real-time detector."
+    },
+    {
+      "claim_id": "CLM-12",
+      "statement": "Official hackathon organizers confirmed acceptance of 6-qubit MIT-BIH biomedical adaptation and Processor A capacity documentation.",
+      "evidence_type": "ORGANIZER_RULING",
+      "source_file": "report/ORGANIZER_FAQ_COMPLIANCE_RECONCILIATION.md",
+      "communication_channel": "WhatsApp Organizer Discussion",
+      "date": "2026-10-13",
+      "rulings": [
+        "MIT-BIH biomedical dataset and 6-qubit continuous feature adaptation ACCEPTED.",
+        "Documenting Processor A 5-qubit capacity limitation and auxiliary 5-qubit benchmark ACCEPTED.",
+        "4-qubit toy synthetic experiment confirmed OPTIONAL ('gives a bigger edge', not mandatory)."
+      ]
+    }
+  ],
+  "artifact_sha256": {
+    "demo.py": "fd50f6ecc5f5289ce363fd72f14e205ad8c1bdbe4fdad4678ae6868d84e4dc7e",
+    "processors/processor_a.py": "badf268253a000fca9c1b343e2bac984a967df8383905f011a9b3c53c7ece4aa",
+    "report/FINAL_PHASE1_PUBLICATION_READINESS.md": "71f7c564cac883f4aaf83a87a67af496e51b1832685aa3902dfeec9be9d1c7f5",
+    "report/ORGANIZER_FAQ_COMPLIANCE_RECONCILIATION.md": "1dd9b1d16697b1eeb64a3238f66d78f93f7f08ab1ca292f3a0a97ea9f6d6fe69",
+    "report/PROCESSOR_A_B_JUDGING_DEFENSE.md": "d22961e12779f494d96d9093dbe0e0ddef8a597584eb5f51d76bfd7242cbb131",
+    "report/SCIENTIFIC_VALIDATION_AND_LIMITATIONS.md": "bf036713c9a2fc5bc6e54e2e4e055205380dbb0cf5e903a0032da9e15daf21f3",
+    "results/classical_baseline.json": "6b36e231ac3a7bd6f72a7a461de8827aa339385941a5702641ec5e4055e872f7",
+    "results/noisy_simulation_results.json": "80309fb430037fd4a5f5cdfe8f6e99cb9d502d6d17832576ae45692e7114a25c",
+    "results/transpilation_comparison.json": "0d087e25803671a7ab7ea2600b4fd0d54e5bc4234aa4fed8501663813903a594",
+    "results/vqc_heldout_evaluation.json": "cc6108beacbbf081e377dbe3275b12d93a74ed24e5e88ef04f4840db58454f32",
+    "src/classical_models.py": "86b42d4949c116564768686768ec96aaf6ca4f728bd636bdf1fe8342e5ef99d0",
+    "src/dataset_builder.py": "125695c96ab2e53f012703707ecb56ece00f13cb93031cbf031e9ff4a8284a29",
+    "src/noise_experiments.py": "99612485d3c6506106cad090d7ac3dad4728e2d022efd5c06aa617536ad5343d",
+    "src/transpilation_experiments.py": "51c296e46c2c08d79e90743e27615f3c3ebb7ef5617854902ab2bd9b685a575f",
+    "src/vqc_evaluation.py": "16157f95c0b1532064ff826819b3f373a22a48ad38dadadceb649fc101ea087f",
+    "tests/test_classical_evaluation.py": "c27b8c4ea609d1427fa871e2e60b4fa19922a4074eff6d42d2bbd01a10cb0a05",
+    "tests/test_hardware_experiments.py": "af440090b89ea981c37d91cb601d34b2559363ab52ea2f6ddb398f227e138bd7",
+    "tests/test_processor_ab.py": "1487a44fe9959b397125ca0bf63c22497b5cf26a0660fe7e93a8cc774ba8b825",
+    "tests/test_vqc_evaluation.py": "3e8f1ffcabd24292d27154f521728710553c263418702a73788f2a846f1e4630",
+    "tests/test_vqc_preprocessing.py": "4683456b7a54fa3b472a4f50b34f520906afc1853cd61a1b680e04431c9eeb1b"
+  }
+}
