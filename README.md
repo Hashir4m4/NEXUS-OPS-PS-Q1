@@ -61,6 +61,25 @@ To prevent data contamination and preserve experimental validity, the preprocess
 
 ---
 
+## ECG Data Pipeline and Validation Architecture
+
+![ECG Data Pipeline and Validation Architecture](docs/images/ecg-data-pipeline.png)
+
+The end-to-end data curation, validation, and feature-to-quantum embedding architecture follows a modular pipeline designed for strict reproducibility and data hygiene:
+
+- **MIT-BIH Acquisition and WFDB Record Loading (`src/acquire_and_inspect_mitbih.py` / `src/dataset_builder.py`):**
+  PhysioNet MIT-BIH Arrhythmia Database recordings (`106`, `119`, `200`, `208`) are loaded using native WFDB routines. Signal integrity on Lead II (sampled at 360 Hz) is verified alongside standard expert annotation streams (`.atr`).
+- **Beat Segmentation and Dataset Construction (`src/dataset_builder.py`):**
+  R-peak annotations drive the segmentation of 360-sample (1.0 s) windows centered at sample index 144. Beats are filtered to isolate annotation class `N` (normal sinus rhythm) and class `V` (ventricular ectopic beats), producing a balanced cohort of 300 segments partitioned into development ($N=200$) and held-out test ($N=100$) sets under record-level isolation.
+- **Dataset Validation and Feature Auditing (`tests/test_dataset_validation.py` / `tests/test_feature_audit.py`):**
+  Automated validation suites continuously audit class balances, zero NaNs/infinities, segment boundary integrity, and feature distributions. The baseline integrity audit ensures no cross-record contamination occurs across partitions.
+- **Classical Evaluation and VQC Preprocessing (`src/classical_models.py` / `src/vqc_preprocessing.py`):**
+  Partitioned segments feed into parallel evaluation tracks: classical model candidates (Logistic Regression, Random Forest) for baseline benchmarking, and VQC preprocessing modules that format features into deterministic input vectors for quantum encoding.
+- **ECG Feature Extraction and Quantum Feature Scaling (`src/feature_extraction.py` / `src/feature_scaling.py`):**
+  For each segmented beat, six physiological biomarkers (`pre_rr`, `post_rr`, `qrs_rms`, `qrs_duration`, `p2p_amplitude`, `spectral_ratio`) are computed after two-stage median filtering. The `QuantumFeatureScaler` fits min-max boundaries strictly on development records and scales inputs to $[0, \pi]$ rotation angles with test boundary clamping, directly mapping physiological signals to single-qubit Bloch sphere rotations.
+
+---
+
 ## 3. Quantum Architecture: Approved 6-Qubit VQC
 
 The NEXUS-OPS classifier uses an approved, frozen 6-qubit variational circuit:
