@@ -1,0 +1,201 @@
+{
+  "audit_metadata": {
+    "timestamp": "2026-10-13T15:30:00Z",
+    "auditor": "Independent Technical Auditor & Scientific Software Architect",
+    "project": "IBM Quantum Qiskit Fall Fest 2026 | Project Q | PS-Q1 Biomedical Classifier",
+    "milestone": "Final Phase 6 Evidence and Phase 1 Submission-Readiness Audit",
+    "overall_status": "VERIFIED WITH LIMITATIONS",
+    "audit_report_reference": "report/PHASE1_SUBMISSION_READINESS_AUDIT.md"
+  },
+  "executive_verdict": {
+    "status": "VERIFIED WITH LIMITATIONS",
+    "scientific_soundness": "VERIFIED",
+    "hardware_transpilation_evidence": "VERIFIED",
+    "processor_comparability": "QUALIFIED (NOT A LIKE-FOR-LIKE COMPARISON)",
+    "statistical_integrity": "VERIFIED (0.533 CLAIM RETRACTED)",
+    "git_tracking_and_submission_readiness": "ACTION REQUIRED PRIOR TO SUBMISSION",
+    "summary": "Core QML and hardware simulation implementations are technically sound, fully reproducible, and backed by 116 passing tests. Staging of untracked files, completion of README.md, and population of main.ipynb are required before official repository submission."
+  },
+  "verified_findings": [
+    {
+      "area": "VQC Architecture",
+      "finding": "Approved 6-qubit VQC uses first-order RY feature encoding, RealAmplitudes ansatz with linear entanglement, 12 trainable parameters (18 total), and ensemble Pauli-Z observable.",
+      "evidence_location": "src/vqc_circuit.py lines 42-75",
+      "status": "VERIFIED"
+    },
+    {
+      "area": "Model Freezing & Performance",
+      "finding": "Candidate fold_1_seed_303 achieves 76.0% accuracy on held-out test cohort (100% sensitivity on VEB beats) in ideal simulation and 77.0% under full synthetic noise.",
+      "evidence_location": "results/vqc_model_selection.json & results/vqc_heldout_evaluation.json",
+      "status": "VERIFIED"
+    },
+    {
+      "area": "Processor B Native Transpilation",
+      "finding": "Compiled 6-qubit circuit onto Processor B heavy-hex tree topology produces depth 15, 5 CX gates, 0 SWAP gates, and 65 total operations across all 5 seeds and 3 optimization levels.",
+      "evidence_location": "tests/test_hardware_experiments.py lines 40-49 & results/transpilation_comparison.json lines 222-245",
+      "status": "VERIFIED"
+    },
+    {
+      "area": "Processor A Capacity Enforcement",
+      "finding": "Compiling 6-qubit circuit onto 5-qubit Processor A deterministically triggers CircuitTooWideForTarget error, adhering to Challenge Kit Section 3.1 & Section 12 instructions.",
+      "evidence_location": "processors/processor_a.py lines 114-134 & tests/test_hardware_experiments.py lines 27-38",
+      "status": "VERIFIED"
+    },
+    {
+      "area": "Measurement Mapping & Bitstring Order",
+      "finding": "Classical register mapping and Qiskit little-endian unpacking (creg[k] at bitstring[5 - k]) match Statevector expectations within statistical shot noise across 50k and 500k shots.",
+      "evidence_location": "tests/test_hardware_experiments.py lines 93-185 & scratch/test_mapping.py",
+      "status": "VERIFIED"
+    },
+    {
+      "area": "Exact Quantum State Variance",
+      "finding": "Operator square expansion proves Var_psi(O) = 1/6 + (1/18)*sum <Zj Zk> - <O>^2; measured mean variance across 100 test samples is 0.334035 (mean std dev 0.567699, noiseless SE at 4096 shots is 0.008870).",
+      "evidence_location": "results/phase6_final_verification.json lines 48-62",
+      "status": "VERIFIED"
+    },
+    {
+      "area": "Regression Test Suite",
+      "finding": "Full repository test suite executes 116 tests with 100% pass rate (0 failures, 0 warnings under pytest.ini).",
+      "evidence_location": "tests/ (14 test modules)",
+      "status": "VERIFIED"
+    }
+  ],
+  "findings_with_limitations": [
+    {
+      "area": "Finite-Shot Scaling",
+      "finding": "Finite-shot sweep across S in [256, 4096] aligns approximately with 1/sqrt(S) dispersion. Empirical standard error at 4096 shots (0.011403) exceeds noiseless SE (0.008870) due to synthetic gate/readout noise and small simulation seed sample size (K=3).",
+      "limitation": "Finite 3-seed sampling provides empirical dispersion estimation, not strict asymptotic proof.",
+      "status": "VERIFIED WITH LIMITATIONS"
+    },
+    {
+      "area": "Noise Model Scope",
+      "finding": "Synthetic noise model consists of depolarizing gate errors and readout bit-flips under provisional parameters.",
+      "limitation": "Thermal relaxation (T1, T2), crosstalk, and coherent drift are unmodeled; final noise parameters await confirmation post-shortlisting.",
+      "status": "VERIFIED WITH LIMITATIONS"
+    },
+    {
+      "area": "Processor A/B Comparison",
+      "finding": "Processor A benchmark is based on an auxiliary 5-qubit reference circuit.",
+      "limitation": "The 5-qubit reference circuit is an architectural routing proxy and was not trained or evaluated on clinical ECG data; it is not a like-for-like comparator to the 6-qubit VQC.",
+      "status": "VERIFIED WITH LIMITATIONS"
+    }
+  ],
+  "unsupported_or_unverified_claims": [
+    {
+      "claim": "Depth 24, total ops 47 on Processor B",
+      "finding": "UNSUPPORTED DISCREPANCY",
+      "auditor_analysis": "Earlier narrative reports (e.g., PHASE6_FINAL_EVIDENCE_RECONCILIATION.md line 183) cited depth 24 and total ops 47. Independent reproduction, unit test assertions (test_hardware_experiments.py line 45), and raw benchmark JSON files (transpilation_comparison.json line 223) conclusively establish the verified result as depth 15, 5 CX, 0 SWAP, and 65 total operations.",
+      "corrective_action": "Depth 24 is retracted as a typographical narrative discrepancy; ground truth of depth 15 is enforced."
+    },
+    {
+      "claim": "0.533 measured covariance",
+      "finding": "RETRACTED",
+      "auditor_analysis": "The 0.533 figure was an inverted back-calculation (0.011403 / 0.015625)^2 = 0.5326 from noisy 3-seed simulation dispersion, not a measured covariance.",
+      "corrective_action": "Confirmed retracted; replaced with exact measured quantum state variance 0.334035."
+    },
+    {
+      "claim": "Physical Quantum Hardware Execution",
+      "finding": "NOT PERFORMED",
+      "auditor_analysis": "No physical IBM Quantum QPU jobs were dispatched. All hardware analysis reflects Qiskit transpilation and Aer simulation.",
+      "corrective_action": "Explicitly declared as NOT PERFORMED across all documentation."
+    }
+  ],
+  "processor_ab_comparability_qualification": {
+    "status": "QUALIFIED NON-EQUIVALENCE",
+    "processor_b_vqc": {
+      "qubits": 6,
+      "features": 6,
+      "clinical_training": true,
+      "test_accuracy": 0.76,
+      "test_sensitivity": 1.0,
+      "role": "Full-size clinical biomedical signal classifier"
+    },
+    "processor_a_reference": {
+      "qubits": 5,
+      "features": 5,
+      "clinical_training": false,
+      "test_accuracy": null,
+      "test_sensitivity": null,
+      "role": "Auxiliary compiler routing and capacity boundary benchmark"
+    },
+    "formal_statement": "The Processor A reference circuit is an architectural routing benchmark and is not clinically comparable to the full 6-qubit Processor B VQC. Their performance metrics cannot be compared like-for-like."
+  },
+  "git_tracking_and_submission_readiness": {
+    "git_status_modified_tracked": 0,
+    "git_status_deleted_tracked": 0,
+    "git_status_staged": 0,
+    "portal_submission_status": "NOT PERFORMED",
+    "file_inventory_summary": {
+      "tracked_files_count": 52,
+      "untracked_essential_files": [
+        "processors/processor_a.py",
+        "processors/processor_b.py",
+        "processors/__init__.py",
+        "processors/processor_A.json",
+        "processors/processor_B.json",
+        "src/vqc_circuit.py",
+        "src/vqc_training.py",
+        "src/vqc_evaluation.py",
+        "src/transpilation_experiments.py",
+        "src/processor_simulation.py",
+        "src/noise_experiments.py",
+        "pytest.ini",
+        "tests/test_vqc_circuit.py",
+        "tests/test_vqc_training.py",
+        "tests/test_vqc_evaluation.py",
+        "tests/test_hardware_experiments.py",
+        "tests/test_processor_ab.py",
+        "tests/test_vqc_training_diagnostics.py",
+        "results/vqc_model_selection.json",
+        "results/vqc_heldout_evaluation.json",
+        "results/transpilation_comparison.json",
+        "results/noisy_simulation_results.json",
+        "results/shot_based_results.json"
+      ],
+      "untracked_reports": [
+        "report/PHASE5_PHASE6_COMPLETION_REPORT.md",
+        "report/quantum_hardware_experiment_report.md",
+        "report/ORGANIZER_FAQ_COMPLIANCE_RECONCILIATION.md",
+        "report/PHASE1_SUBMISSION_READINESS_AUDIT.md"
+      ],
+      "files_to_exclude_from_git": [
+        "backup_audit_20261013/",
+        "backup_phase6_final_20261013/",
+        "scratch/",
+        "docs/challenge_materials/"
+      ],
+      "empty_or_stub_files_requiring_action": [
+        {"path": "README.md", "current_size_bytes": 0, "status": "EMPTY (REQUIRES POPULATION)"},
+        {"path": "main.ipynb", "current_size_bytes": 1332, "status": "STUB NOTEBOOK (REQUIRES EXECUTION/ASSEMBLY)"}
+      ]
+    }
+  },
+  "decisions_requiring_user_approval": [
+    {
+      "decision_id": "DEC-01",
+      "topic": "Root README.md Content Approval",
+      "description": "Approve executive summary, architecture description, and benchmark results table for the empty root README.md."
+    },
+    {
+      "decision_id": "DEC-02",
+      "topic": "main.ipynb Notebook Assembly",
+      "description": "Approve whether to assemble an end-to-end executable demonstration notebook in main.ipynb or retain modular script execution."
+    },
+    {
+      "decision_id": "DEC-03",
+      "topic": "Report Selection for Public Repository",
+      "description": "Approve which reports to include in the public repository submission (curated core set vs complete internal audit history)."
+    },
+    {
+      "decision_id": "DEC-04",
+      "topic": "Git Staging & Commit Authorization",
+      "description": "Authorize staging (git add) and initial Phase 1 commit of untracked core source, processor, test, and result files."
+    }
+  ],
+  "test_suite_status": {
+    "total_tests": 116,
+    "passed_tests": 116,
+    "failed_tests": 0,
+    "execution_time_seconds": 12.78
+  }
+}

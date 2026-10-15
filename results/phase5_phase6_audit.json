@@ -1,0 +1,206 @@
+{
+  "audit_metadata": {
+    "timestamp": "2026-10-13T12:45:00Z",
+    "project": "IBM Quantum Qiskit Fall Fest 2026 | Project Q | PS-Q1 Biomedical Classifier",
+    "milestones_audited": [
+      "Phase 5 (Quantum Machine Learning — 6-Qubit VQC)",
+      "Phase 6 (Quantum Hardware Experiments & Processor Topologies)"
+    ],
+    "auditor_role": "Senior Independent Quantum & Software Architecture Auditor",
+    "overall_verdict": "PASSED_WITH_CALIBRATIONS"
+  },
+  "test_suite_verification": {
+    "total_tests": 115,
+    "passed_tests": 115,
+    "failed_tests": 0,
+    "error_tests": 0,
+    "execution_time_seconds": 11.18,
+    "pass_rate_percent": 100.0,
+    "environment": {
+      "os": "Windows",
+      "python_version": "3.13.7",
+      "qiskit_version": "2.5.2",
+      "qiskit_aer_version": "0.17.2",
+      "pytest_version": "9.1.1"
+    }
+  },
+  "phase5_qml_audit": {
+    "architecture_compliance": {
+      "logical_qubits": 6,
+      "feature_map": "First-order RY linear encoding",
+      "ansatz": "RealAmplitudes, linear entanglement, reps=1",
+      "trainable_parameters": 12,
+      "observable": "Average Pauli-Z ensemble O = (1/6) sum_i Z_i",
+      "probability_readout": "p = (E + 1) / 2",
+      "compliance_status": "FULL_PARITY"
+    },
+    "training_verification": {
+      "total_runs": 10,
+      "folds": 2,
+      "seeds": [42, 101, 202, 303, 404],
+      "optimizer": "PRIMA COBYLA",
+      "mean_initial_mse": 0.1878,
+      "mean_final_training_mse": 0.0770,
+      "loss_reduction_percent": 59.0,
+      "mean_validation_roc_auc": 0.9840,
+      "mean_class_polarity_delta_p": 0.2170,
+      "convergence_status": "ALL_CONVERGED"
+    },
+    "single_record_training_scope": {
+      "selected_model_run_id": "fold_1_seed_303",
+      "training_record": "106",
+      "training_sample_count": 100,
+      "validation_record": "119",
+      "validation_sample_count": 100,
+      "pooled_training_used": false,
+      "disclosure_status": "EXPLICITLY_DISCLOSED",
+      "future_recommendation": "Perform pooled refit on Records 106+119 (N=200) for expanded morphological coverage."
+    },
+    "model_selection_verification": {
+      "scoring_formula": "(1 - Val_MSE) * 0.4 + Val_F1 * 0.4 + (1 - |Sens - Spec|) * 0.2",
+      "winning_run_id": "fold_1_seed_303",
+      "winning_composite_score": 0.9592,
+      "validation_mse": 0.1020,
+      "validation_f1": 1.0,
+      "validation_sensitivity": 1.0,
+      "validation_specificity": 1.0,
+      "selection_frozen_prior_to_test": true
+    },
+    "heldout_test_verification": {
+      "cohort": "MIT-BIH Records 200 & 208",
+      "total_samples": 100,
+      "normal_beats": 50,
+      "veb_beats": 50,
+      "metrics": {
+        "accuracy": 0.76,
+        "f1_score": 0.8064516129032258,
+        "sensitivity": 1.0,
+        "specificity": 0.52,
+        "precision": 0.6756756756756757,
+        "roc_auc": 0.9988,
+        "mse_loss": 0.16263370085155981,
+        "expected_calibration_error": 0.17751949167251587
+      },
+      "reproducibility": "BIT_EXACT_MATCH"
+    },
+    "patient_stratification": {
+      "record_200": {
+        "samples": 50,
+        "accuracy": 0.84,
+        "sensitivity": 1.0,
+        "specificity": 0.68,
+        "roc_auc": 1.0
+      },
+      "record_208": {
+        "samples": 50,
+        "accuracy": 0.68,
+        "sensitivity": 1.0,
+        "specificity": 0.36,
+        "roc_auc": 0.9968,
+        "clinical_note": "Record 208 exhibited a higher false-positive rate and lower specificity than Record 200. The difference indicates record-specific distribution shift; its physiological cause has not been established."
+      }
+    },
+    "data_leakage_audit": {
+      "patient_level_isolation": "VERIFIED_ISOLATED",
+      "scaler_fitting": "FIT_ON_TRAIN_ONLY",
+      "test_quarantine_violation": false
+    }
+  },
+  "phase6_hardware_audit": {
+    "processor_a": {
+      "physical_qubits": 5,
+      "topology": "1D Linear / T-Shape",
+      "vqc_compatibility": "INCOMPATIBLE_CAPACITY_LIMIT",
+      "circuit_too_wide_enforced": true
+    },
+    "processor_b": {
+      "physical_qubits": 9,
+      "topology": "Heavy-Hex Sparse Tree",
+      "logical_to_physical_mapping": [0, 1, 2, 4, 5, 6],
+      "transpiled_depth": 15,
+      "single_qubit_gates": 60,
+      "two_qubit_cx_gates": 5,
+      "swap_gates": 0,
+      "routing_overhead_cx": 0,
+      "determinism_across_5_seeds": true
+    },
+    "readout_error_diagnostic": {
+      "bypassed_by_estimator_v2": true,
+      "applied_by_aersimulator_sampler": true,
+      "single_qubit_50pct_error_diagnostic_confirmed": true,
+      "diagnostic_test_name": "test_readout_error_diagnostic_distinguishes_estimator_and_sampler"
+    },
+    "noise_simulation_evaluation": {
+      "path_a_gate_noise_only": {
+        "method": "Qiskit Aer EstimatorV2",
+        "readout_error_applied": false,
+        "gate_noise_applied": true,
+        "accuracy": 0.74,
+        "f1_score": 0.7936507936507937,
+        "sensitivity": 1.0,
+        "specificity": 0.48,
+        "flips_vs_ideal": 2,
+        "flip_rate": 0.02
+      },
+      "path_b_combined_full_noise": {
+        "method": "Qiskit AerSimulator with physical measurements",
+        "readout_error_applied": true,
+        "gate_noise_applied": true,
+        "accuracy": 0.77,
+        "f1_score": 0.8130081300813007,
+        "sensitivity": 1.0,
+        "specificity": 0.54,
+        "precision": 0.684931506849315,
+        "roc_auc": 0.9984,
+        "mse_loss": 0.16437617093324658,
+        "flips_vs_ideal": 1,
+        "flip_rate": 0.01,
+        "multi_seed_mean": {
+          "seeds": [42, 101, 202],
+          "mean_accuracy": 0.7567,
+          "std_accuracy": 0.0125,
+          "mean_f1": 0.8044,
+          "std_f1": 0.0080,
+          "mean_sensitivity": 1.0
+        }
+      }
+    },
+    "shot_noise_scaling": {
+      "shots_evaluated": [256, 512, 1024, 2048, 4096],
+      "scaling_behavior": "Approximate empirical alignment with theoretical 1/sqrt(S) standard error scaling (variance approximately 1/S)",
+      "standard_error_at_4096": 0.0114,
+      "sensitivity_invariance": true,
+      "recommended_shot_budget": 1024
+    },
+    "hardware_execution_status": "STRICTLY_NOT_PERFORMED",
+    "hardware_execution_note": "No physical IBM QPUs were utilized. All evaluations were executed on Qiskit Aer 0.17.2 simulation."
+  },
+  "scientific_claims_audit": {
+    "calibrated_claims": [
+      {
+        "domain": "Barren Plateaus",
+        "original_claim": "Barren plateaus completely eliminated by ansatz design.",
+        "corrected_claim": "Gradient variances remained non-vanishing due to shallow circuit depth (L=1) and localized ensemble observable; asymptotic barren plateau immunity is not claimed.",
+        "status": "CALIBRATED"
+      },
+      {
+        "domain": "Quantum Advantage",
+        "original_claim": "VQC proves quantum advantage over classical models on ECG classification.",
+        "corrected_claim": "Classical models (Logistic Regression: 92%, SVM: 91%) outperform 6-qubit VQC (76%). VQC demonstrates high sensitivity (100%) with 12 parameters but does not prove quantum advantage.",
+        "status": "CALIBRATED"
+      },
+      {
+        "domain": "Clinical Deployment",
+        "original_claim": "Model is clinically ready with guaranteed zero-miss patient safety.",
+        "corrected_claim": "Exploratory retrospective proof-of-concept on N=100 beats. Low specificity on Record 208 (36%) confirms model is not clinically deployable.",
+        "status": "CALIBRATED"
+      },
+      {
+        "domain": "Hardware Viability",
+        "original_claim": "Verified on physical quantum processors.",
+        "corrected_claim": "Verified via simulated transpilation and Qiskit Aer noise models. Physical execution was NOT PERFORMED.",
+        "status": "CALIBRATED"
+      }
+    ]
+  }
+}

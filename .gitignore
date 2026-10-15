@@ -26,3 +26,10 @@ docs/challenge_materials/
 
 # Local execution logs
 *.log
+
+# Agent framework & local runtime artifacts
+.agents/
+skills-lock.json
+
+# Local audit output directory
+audit_output/

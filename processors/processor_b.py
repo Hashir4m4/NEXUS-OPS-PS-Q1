@@ -25,8 +25,6 @@ from qiskit.exceptions import QiskitError
 from qiskit.primitives import StatevectorEstimator
 from qiskit.quantum_info import SparsePauliOp
 from qiskit.transpiler import CouplingMap
-from qiskit_aer.noise import NoiseModel, ReadoutError, depolarizing_error
-from qiskit_aer.primitives import EstimatorV2
 
 CONFIG_DIR = Path(__file__).resolve().parent
 
@@ -65,7 +63,7 @@ def build_processor_b_coupling_map(variant: str = "canonical") -> CouplingMap:
     return CouplingMap(coupling_list)
 
 
-def build_processor_b_noise_model(config: Optional[Dict[str, Any]] = None) -> NoiseModel:
+def build_processor_b_noise_model(config: Optional[Dict[str, Any]] = None) -> Any:
     """Construct the synthetic Qiskit Aer NoiseModel for Processor B.
 
     Args:
@@ -74,6 +72,8 @@ def build_processor_b_noise_model(config: Optional[Dict[str, Any]] = None) -> No
     Returns:
         Configured Qiskit Aer NoiseModel.
     """
+    from qiskit_aer.noise import NoiseModel, ReadoutError, depolarizing_error
+
     if config is None:
         config = get_processor_b_config()
 
@@ -233,6 +233,7 @@ def simulate_processor_b(
         return results
 
     # 2. Noisy Aer simulation
+    from qiskit_aer.primitives import EstimatorV2
     noise_model = build_processor_b_noise_model()
     precision = 1.0 / np.sqrt(shots)
 

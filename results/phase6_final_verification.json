@@ -1,0 +1,210 @@
+{
+  "verification_metadata": {
+    "timestamp": "2026-10-13T14:15:00Z",
+    "project": "IBM Quantum Qiskit Fall Fest 2026 | Project Q | PS-Q1 Biomedical Classifier",
+    "milestone": "Phase 6 (Quantum Hardware Experiments & Processor Architecture Evaluation)",
+    "overall_status": "VERIFIED WITH LIMITATIONS",
+    "reconciliation_report": "report/PHASE6_FINAL_EVIDENCE_RECONCILIATION.md"
+  },
+  "measurement_mapping_verification": {
+    "status": "VERIFIED",
+    "routing_permutation": [0, 1, 2, 3, 4, 5, 6, 7, 8],
+    "is_identity_routing_permutation": true,
+    "initial_layout": [0, 1, 2, 4, 5, 6],
+    "final_index_layout": [0, 1, 2, 4, 5, 6],
+    "swap_gate_count": 0,
+    "classical_register_size": 6,
+    "classical_bit_ordering_convention": "creg[k] at bitstring[5 - k] in Qiskit little-endian format",
+    "eigenvalue_mapping": "1 - 2 * b_k for b_k in {0, 1}",
+    "evidence_test": "tests/test_hardware_experiments.py::test_transpiler_mapping_and_ideal_measurement_equivalence"
+  },
+  "ideal_measurement_vs_statevector_comparison": {
+    "status": "VERIFIED",
+    "evaluation_samples": 5,
+    "statevector_expectations": [0.02082953, -0.09495875, 0.05304045, -0.03965076, -0.1009727],
+    "unit_test_verification": {
+      "test_reference": "tests/test_hardware_experiments.py::test_transpiler_mapping_and_ideal_measurement_equivalence",
+      "shots_per_sample": 50000,
+      "aer_expectations": [0.02242, -0.09398667, 0.05323333, -0.03849333, -0.10018],
+      "absolute_discrepancies": [0.00159047, 0.00097208, 0.00019289, 0.00115743, 0.0007927],
+      "max_absolute_discrepancy": 0.00159047,
+      "test_assertion_tolerance": 0.015,
+      "within_test_tolerance": true
+    },
+    "benchmark_script_verification": {
+      "script_reference": "scratch/test_mapping.py::main",
+      "shots_per_sample": 500000,
+      "aer_expectations": [0.019928, -0.09470867, 0.05235933, -0.04026067, -0.10120533],
+      "absolute_discrepancies": [0.00090153, 0.00025008, 0.00068111, 0.00060991, 0.00023263],
+      "max_absolute_discrepancy": 0.00090153,
+      "benchmark_tolerance": 0.005,
+      "within_benchmark_tolerance": true
+    },
+    "reconciliation_note": "Unit test uses 50,000 shots for fast automated CI execution (diff < 0.0016 < 0.015); benchmark script uses 500,000 shots for asymptotic convergence (diff < 0.0009 < 0.005)."
+  },
+  "finite_shot_mathematics": {
+    "status": "VERIFIED WITH LIMITATIONS",
+    "observable_operator": "O = (1/6) * sum_{j=0}^5 Z_j",
+    "observable_square_expansion": "O^2 = (1/6) * I + (1/18) * sum_{j < k} Z_j Z_k",
+    "exact_quantum_state_variance": {
+      "formula": "Var_psi(O) = 1/6 + (1/18) * sum_{j < k} <Z_j Z_k>_psi - <O>_psi^2",
+      "num_test_samples": 100,
+      "mean_state_variance": 0.334035,
+      "std_state_variance": 0.12682,
+      "min_state_variance": 0.12749,
+      "max_state_variance": 0.62393,
+      "mean_state_std_dev": 0.567699,
+      "noiseless_theoretical_se_4096": 0.008870
+    },
+    "retraction_of_prior_covariance_claim": {
+      "prior_unverified_claim": "0.533 measured covariance / reduced observable variance to ~0.533",
+      "retraction_status": "RETRACTED",
+      "auditor_explanation": "The 0.533 figure was an inverted back-calculation: (empirical_mean_std / theoretical_upper_bound_se)^2 = (0.011403 / 0.015625)^2 = 0.5326 ~= 0.533. It was not a physical or simulated measurement of covariance, but a ratio of noisy simulation dispersion to worst-case variance."
+    },
+    "empirical_simulation_dispersion": {
+      "source_file": "src/processor_simulation.py (lines 161-165)",
+      "shots": 4096,
+      "simulation_seeds": [42, 101, 202],
+      "reported_metric": "empirical_mean_std (mean across 100 samples of seed-to-seed std dev)",
+      "empirical_mean_std_value": 0.011403298,
+      "theoretical_noiseless_se": 0.008870,
+      "worst_case_upper_bound_se": 0.015625,
+      "dispersion_cause": "Empirical standard error (0.011403) exceeds noiseless SE (0.008870) due to synthetic Processor B gate depolarizing (p=0.001, 0.005) and readout bit-flip noise (p=0.010), compounded by small simulation seed sample size (K=3)."
+    }
+  },
+  "processor_specification_provenance": {
+    "status": "VERIFIED",
+    "authoritative_document": "docs/challenge_materials/Updated_Challenge_Kit.pdf",
+    "provenance_table": [
+      {
+        "parameter": "Processor A physical qubits",
+        "value": 5,
+        "source": "Updated_Challenge_Kit.pdf Section 3.1, p. 3",
+        "classification": "OFFICIAL SPECIFICATION",
+        "verbatim_quote": "Processor A represents a 5-qubit architecture with nearest-neighbor linear connectivity:"
+      },
+      {
+        "parameter": "Processor A canonical coupling map",
+        "value": "Linear chain 0-1-2-3-4 (bidirectional CX)",
+        "source": "Updated_Challenge_Kit.pdf Section 3.1, p. 3",
+        "classification": "OFFICIAL SPECIFICATION",
+        "verbatim_quote": "Coupling map: 0 - 1 - 2 - 3 - 4 (bidirectional CX)"
+      },
+      {
+        "parameter": "Processor A capacity guidance",
+        "value": "Do not delete features; reference only",
+        "source": "Updated_Challenge_Kit.pdf Section 3.1, p. 3 & Section 12, p. 15",
+        "classification": "OFFICIAL SPECIFICATION",
+        "verbatim_quote": "For a problem requiring more than 5 logical qubits, do not delete variables merely to force the full problem into A. Treat A as a capacity/routing reference and perform the full-size execution on Processor B where permitted."
+      },
+      {
+        "parameter": "Processor B physical qubits",
+        "value": 9,
+        "source": "Updated_Challenge_Kit.pdf Section 3.2, p. 3",
+        "classification": "OFFICIAL SPECIFICATION",
+        "verbatim_quote": "Processor B represents a 9-qubit heavy-hex-inspired sparse topology:"
+      },
+      {
+        "parameter": "Processor B canonical coupling map",
+        "value": "Heavy-hex sparse tree (8 bidirectional pairs: 0-1, 1-2, 2-3, 2-4, 4-5, 5-6, 4-7, 7-8)",
+        "source": "Updated_Challenge_Kit.pdf Section 3.2, p. 3",
+        "classification": "OFFICIAL SPECIFICATION",
+        "verbatim_quote": "Coupling pairs: 0-1, 1-2, 2-3, 2-4, 4-5, 5-6, 4-7, 7-8 (bidirectional CX)"
+      },
+      {
+        "parameter": "Basis gate set",
+        "value": "['rz', 'sx', 'x', 'cx']",
+        "source": "Updated_Challenge_Kit.pdf Section 3.4, p. 4",
+        "classification": "OFFICIAL SPECIFICATION",
+        "verbatim_quote": "Basis gates: rz, sx, x, cx"
+      },
+      {
+        "parameter": "1Q depolarizing error rate",
+        "value": 0.001,
+        "source": "Updated_Challenge_Kit.pdf Section 3.4, p. 4",
+        "classification": "OFFICIAL SPECIFICATION",
+        "verbatim_quote": "1Q gate error: depolarizing p = 0.001 on single-qubit gates"
+      },
+      {
+        "parameter": "2Q CX depolarizing error rate",
+        "value": 0.005,
+        "source": "Updated_Challenge_Kit.pdf Section 3.4, p. 4",
+        "classification": "OFFICIAL SPECIFICATION",
+        "verbatim_quote": "2Q gate error: depolarizing p = 0.005 on cx gates"
+      },
+      {
+        "parameter": "Readout bit-flip error rate",
+        "value": 0.01,
+        "source": "Updated_Challenge_Kit.pdf Section 3.4, p. 4",
+        "classification": "OFFICIAL SPECIFICATION",
+        "verbatim_quote": "Readout error: symmetric bit-flip p = 0.01 on measurement"
+      },
+      {
+        "parameter": "Reported shot budget",
+        "value": 4096,
+        "source": "Updated_Challenge_Kit.pdf Section 3.4, p. 4",
+        "classification": "OFFICIAL SPECIFICATION",
+        "verbatim_quote": "Shot budget: S = 4096 shots per circuit execution"
+      },
+      {
+        "parameter": "Transpiler settings",
+        "value": "optimization_level=1, routing_method='sabre', seed_transpiler=42",
+        "source": "Updated_Challenge_Kit.pdf Section 3.4, p. 4",
+        "classification": "OFFICIAL SPECIFICATION",
+        "verbatim_quote": "Transpiler settings: optimization_level=1, routing_method='sabre', seed_transpiler=42"
+      },
+      {
+        "parameter": "Participant JSON config files",
+        "value": "processors/processor_A.json, processors/processor_B.json",
+        "source": "Updated_Challenge_Kit.pdf Section 4.1 / Notes, p. 6",
+        "classification": "TEAM-DEFINED IMPLEMENTATION",
+        "verbatim_quote": "Note: processor_A.json and processor_B.json are participant-created files. Completed Processor A/B implementations are not supplied by the organizers."
+      },
+      {
+        "parameter": "Processor A branching coupling map",
+        "value": "Tree: (0,1), (1,2), (1,3), (3,4)",
+        "source": "Pre-release draft processor_ab_benchmark.pdf, p. 4",
+        "classification": "EXPLORATORY ALTERNATIVE",
+        "verbatim_quote": "Exploratory branching alternative for Processor A"
+      },
+      {
+        "parameter": "Processor B cyclic coupling map",
+        "value": "12-edge cyclic mesh",
+        "source": "Pre-release draft processor_ab_benchmark.pdf, p. 5",
+        "classification": "EXPLORATORY ALTERNATIVE",
+        "verbatim_quote": "Exploratory cyclic alternative for Processor B"
+      },
+      {
+        "parameter": "5-Qubit reference circuit",
+        "value": "5Q linear VQC comparator",
+        "source": "Created by NEXUS-OPS team for Processor A routing tests",
+        "classification": "TEAM-SELECTED COMPARATOR",
+        "verbatim_quote": "Auxiliary benchmark to evaluate 5-qubit linear chain routing"
+      }
+    ]
+  },
+  "record_208_wording_correction": {
+    "status": "VERIFIED",
+    "calibrated_statement": "Record 208 exhibited a higher false-positive rate and lower specificity than Record 200. The difference indicates record-specific distribution shift; its physiological cause has not been established.",
+    "causal_claims_removed": true,
+    "lbbb_and_bigeminy_unverified_hypotheses_retracted": true
+  },
+  "physical_quantum_hardware_execution": {
+    "status": "NOT PERFORMED",
+    "note": "No physical IBM Quantum QPU jobs were dispatched. All hardware analysis reflects simulated compilation and Qiskit Aer 0.17.2 noise models."
+  },
+  "regression_test_suite": {
+    "status": "VERIFIED",
+    "total_tests": 116,
+    "passed_tests": 116,
+    "failed_tests": 0,
+    "execution_time_seconds": 12.98,
+    "focused_hardware_tests_passed": 6,
+    "focused_evaluation_tests_passed": 3
+  },
+  "remaining_limitations": [
+    "Physical hardware execution was NOT PERFORMED (simulation only).",
+    "Thermal relaxation (T1, T2) and coherent error mechanisms are unmodeled in the challenge synthetic noise model.",
+    "Selected VQC model fold_1_seed_303 was trained strictly on Record 106 (N=100); pooled training on Records 106+119 is recommended for future work."
+  ]
+}

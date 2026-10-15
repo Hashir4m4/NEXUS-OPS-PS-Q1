@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-void: #04060B;
+    --bg-black: #060913;
+    --bg-navy: #0A0F1F;
+    --cyan-glow: #00F0FF;
+    --blue-glow: #3B82F6;
+    --violet-glow: #8B5CF6;
+  }
+
+  body {
+    background-color: #04060B;
+    color: #E2E8F0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+  }
+
+  /* Custom scientific dark scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #060913;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 240, 255, 0.25);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 240, 255, 0.6);
+  }
+}
+
+@layer utilities {
+  .bg-glass {
+    background: rgba(10, 16, 32, 0.72);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .bg-glass-elevated {
+    background: rgba(15, 23, 44, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .border-hud {
+    border: 1px solid rgba(0, 240, 255, 0.18);
+  }
+
+  .border-hud-glow {
+    border: 1px solid rgba(0, 240, 255, 0.5);
+    box-shadow: 0 0 15px -3px rgba(0, 240, 255, 0.3);
+  }
+
+  .text-glow-cyan {
+    text-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
+  }
+
+  .text-glow-violet {
+    text-shadow: 0 0 12px rgba(139, 92, 246, 0.6);
+  }
+
+  .text-glow-magenta {
+    text-shadow: 0 0 12px rgba(236, 72, 153, 0.6);
+  }
+
+  .text-glow-emerald {
+    text-shadow: 0 0 12px rgba(16, 185, 129, 0.6);
+  }
+
+  .cyber-dots {
+    background-image: radial-gradient(rgba(0, 240, 255, 0.12) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .cyber-grid {
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .hud-bracket {
+    position: relative;
+  }
+
+  .hud-bracket::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    width: 8px;
+    height: 8px;
+    border-top: 2px solid #00F0FF;
+    border-left: 2px solid #00F0FF;
+    pointer-events: none;
+  }
+
+  .hud-bracket::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    right: -1px;
+    width: 8px;
+    height: 8px;
+    border-bottom: 2px solid #00F0FF;
+    border-right: 2px solid #00F0FF;
+    pointer-events: none;
+  }
+}

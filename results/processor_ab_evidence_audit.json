@@ -1,0 +1,137 @@
+{
+  "audit_metadata": {
+    "project": "NEXUS-OPS PS-Q1 Biomedical Classifier",
+    "event": "IBM Quantum Qiskit Fall Fest SRMAP 2026 (Phase 1)",
+    "audit_type": "Independent Processor A/B Benchmark Evidence Audit",
+    "auditor_role": "Quantum Hardware Architecture Research Engineer",
+    "audit_timestamp_utc": "2026-10-13T09:28:00Z",
+    "verdict": "CONDITIONAL PASS",
+    "verdict_summary": "Official Processor A/B topologies, JSON configs, and 6Q transpilation benchmarks (depth 15, 5 CX, 0 SWAP) are fully verified and reproduced. Two reporting and simulation qualifications require correction: (1) Aer EstimatorV2 does not simulate readout error and requires physical observable mapping for transpiled circuits, and (2) the claim of noise resilience from a single sample comparison is statistically invalid."
+  },
+  "specification_audit": {
+    "processor_A": {
+      "status": "VERIFIED_OFFICIAL",
+      "source_document": "Updated_Challenge_Kit.pdf (Section 3.1)",
+      "num_qubits": 5,
+      "coupling_map": [[0, 1], [1, 0], [1, 2], [2, 1], [2, 3], [3, 2], [3, 4], [4, 3]],
+      "topology_type": "1D linear nearest-neighbor chain (0-1-2-3-4)",
+      "basis_gates": ["rz", "sx", "x", "cx"],
+      "noise_parameters": {
+        "single_qubit_depolarizing_p": 0.001,
+        "cx_depolarizing_p": 0.005,
+        "readout_error_p": 0.01
+      },
+      "capacity_handling": "VERIFIED: CircuitTooWideForTarget correctly raised for 6Q approved VQC; adheres to Challenge Kit Section 3.1 & Section 12 policy"
+    },
+    "processor_B": {
+      "status": "VERIFIED_OFFICIAL",
+      "source_document": "Updated_Challenge_Kit.pdf (Section 3.2)",
+      "num_qubits": 9,
+      "coupling_map": [
+        [0, 1], [1, 0], [1, 2], [2, 1],
+        [2, 3], [3, 2], [2, 4], [4, 2],
+        [4, 5], [5, 4], [5, 6], [6, 5],
+        [4, 7], [7, 4], [7, 8], [8, 7]
+      ],
+      "topology_type": "9-qubit heavy-hex-inspired sparse tree",
+      "basis_gates": ["rz", "sx", "x", "cx"],
+      "noise_parameters": {
+        "single_qubit_depolarizing_p": 0.001,
+        "cx_depolarizing_p": 0.005,
+        "readout_error_p": 0.01
+      }
+    },
+    "exploratory_alternatives": {
+      "processor_A_branching": {
+        "status": "VERIFIED_EXPLORATORY_ALTERNATIVE",
+        "source": "Processor_AB_Benchmark_Configuration_FINAL.pdf (Oct 11 draft)",
+        "coupling_edges": [[0, 1], [1, 2], [1, 3], [3, 4]],
+        "is_official_target": false
+      },
+      "processor_B_cyclic": {
+        "status": "VERIFIED_EXPLORATORY_ALTERNATIVE",
+        "source": "Processor_AB_Benchmark_Configuration_FINAL.pdf (Oct 11 draft)",
+        "coupling_edges_count": 12,
+        "is_official_target": false
+      }
+    }
+  },
+  "reproduced_transpilation_benchmarks": {
+    "compiler_configuration": {
+      "basis_gates": ["rz", "sx", "x", "cx"],
+      "optimization_level": 1,
+      "seed_transpiler": 42
+    },
+    "processor_a_6q_vqc": {
+      "success": false,
+      "capacity_exceeded": true,
+      "error_type": "CircuitTooWideForTarget",
+      "reproduced": true
+    },
+    "processor_a_5q_reference_line": {
+      "transpiled_depth": 14,
+      "total_ops": 54,
+      "ops": {"rz": 30, "sx": 20, "cx": 4},
+      "cx_count": 4,
+      "swap_count": 0,
+      "reproduced": true
+    },
+    "processor_a_5q_reference_branching": {
+      "transpiled_depth": 21,
+      "total_ops": 57,
+      "ops": {"rz": 30, "sx": 20, "cx": 7},
+      "cx_count": 7,
+      "swap_count": 1,
+      "routing_overhead_cx": 3,
+      "reproduced": true
+    },
+    "processor_b_6q_approved_vqc": {
+      "logical_qubits": 6,
+      "physical_qubits": 9,
+      "transpiled_depth": 15,
+      "total_ops": 65,
+      "ops": {"rz": 36, "sx": 24, "cx": 5},
+      "cx_count": 5,
+      "swap_count": 0,
+      "routing_overhead_cx": 0,
+      "initial_layout_mapping": {
+        "q0": 0, "q1": 1, "q2": 2, "q3": 4, "q4": 5, "q5": 6,
+        "ancillae": [3, 7, 8]
+      },
+      "reproduced": true
+    }
+  },
+  "simulation_audit_findings": {
+    "ideal_statevector_expectation": 0.2400364575488815,
+    "reported_noisy_expectation_in_json": 0.23470977285521177,
+    "deterministic_reproduced_noisy_logical": 0.24290412361625466,
+    "deterministic_reproduced_noisy_transpiled_9q": 0.24168140789916412,
+    "discrepancies_identified": [
+      {
+        "issue_id": "SIM-01",
+        "description": "Readout error is not applied by Qiskit Aer EstimatorV2 because the circuit lacks explicit measurement instructions and EstimatorV2 evaluates expectation values directly via operator contraction.",
+        "impact": "Low on uncompiled comparison; must be clearly disclosed in the report."
+      },
+      {
+        "issue_id": "SIM-02",
+        "description": "The circuit passed to simulate_processor_b in the initial benchmark JSON was the uncompiled 6-qubit logical circuit rather than the 9-qubit transpiled circuit. Single-qubit depolarizing error was not applied to ry gates because the noise model defines 1Q errors only for native basis gates ['x', 'sx'].",
+        "impact": "Evaluating the fully transpiled 9Q circuit with re-indexed 9Q observable yields an expectation of 0.241681 (shift of +0.001645 vs ideal 0.240036)."
+      },
+      {
+        "issue_id": "SIM-03",
+        "description": "seed_simulator was passed inside backend_options instead of run_options in EstimatorV2, causing the Gaussian shot-noise sampler to use an unseeded RNG across independent calls.",
+        "impact": "Passing seed_simulator in run_options resolves this and guarantees bit-exact simulation repeatability."
+      },
+      {
+        "issue_id": "INTERP-01",
+        "description": "The claim that the model possesses 'high noise tolerance' based solely on a single sample parameter comparison (|delta E| < sigma) is statistically invalid. Shot-noise standard error reflects sample variance, not hardware resilience.",
+        "impact": "Must be corrected in report/processor_ab_topology_research.md; true noise resilience requires full cohort evaluation."
+      }
+    ]
+  },
+  "test_suite_status": {
+    "focused_processor_ab_tests": "10 passed in 3.29s (100%)",
+    "full_repository_suite": "94 passed in 5.15s (100%)",
+    "regressions": 0
+  }
+}

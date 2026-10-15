@@ -1,0 +1,162 @@
+{
+  "verification_metadata": {
+    "timestamp": "2026-10-13T17:15:00Z",
+    "project": "NEXUS-OPS — Project Q",
+    "challenge": "PS-Q1 Biomedical Signal Classifier",
+    "hackathon": "IBM Quantum Qiskit Fall Fest 2026",
+    "auditor": "Senior Technical Auditor & Scientific Software Architect",
+    "overall_staging_status": "BLOCKED"
+  },
+  "blocker_evaluations": {
+    "blocker_1_mitbih_class_descriptions": {
+      "name": "MIT-BIH Class N Description",
+      "status": "FAIL",
+      "evidence_locations": [
+        "src/dataset_builder.py lines 8-9, 64, 97",
+        "data/processed/features_train.csv column annotation_symbol",
+        "data/processed/features_test.csv column annotation_symbol"
+      ],
+      "finding": "In this project, class 0 consists exclusively of Normal beats (annotated symbol 'N'). There are exactly zero bundle branch block annotations ('L', 'R', or 'B') in the extracted 300-segment dataset. Describing class N as 'Normal / bundle branch block beats' is factually incorrect.",
+      "locations_requiring_correction": [
+        "README.md line 20",
+        "report/README_SCIENTIFIC_ACCURACY_AUDIT.md lines 62, 166",
+        "report/FINAL_PUBLIC_REPOSITORY_MANIFEST.md line 269",
+        "results/final_public_repository_manifest.json line 273",
+        "results/phase1_packaging_verification.json line 60"
+      ],
+      "corrected_text": "MIT-BIH annotation class N (Normal beats, class 0)"
+    },
+    "blocker_2_vqc_optimizer": {
+      "name": "VQC Optimizer Verification",
+      "status": "FAIL",
+      "evidence_locations": [
+        "src/vqc_training.py lines 11, 410-420",
+        "results/vqc_training_runs.json line 6",
+        "results/vqc_model_selection.json lines 6-34"
+      ],
+      "finding": "The true optimizer is SciPy COBYLA (opt.minimize(method='COBYLA', options={'maxiter': 50, 'rhobeg': 0.1, 'tol': 1e-4})). Nelder-Mead was never executed in the codebase. All 10 training runs and frozen candidate fold_1_seed_303 used COBYLA.",
+      "locations_requiring_correction": [
+        "README.md line 108",
+        "report/FINAL_PUBLIC_REPOSITORY_MANIFEST.md lines 39, 95",
+        "results/final_public_repository_manifest.json line 112"
+      ],
+      "corrected_text": "SciPy COBYLA (Constrained Optimization BY Linear Approximation)"
+    },
+    "blocker_3_logistic_regression_reconciliation": {
+      "name": "Logistic Regression Held-Out Metrics Reconciliation",
+      "status": "UNRESOLVED_FAIL",
+      "evidence_locations": [
+        "results/classical_baseline.json lines 275-285",
+        "report/classical_baseline.md line 89",
+        "README.md line 114"
+      ],
+      "canonical_result": {
+        "source": "results/classical_baseline.json",
+        "accuracy": 0.92,
+        "sensitivity": 1.0,
+        "specificity": 0.84,
+        "precision": 0.8621,
+        "f1_score": 0.9259,
+        "roc_auc": 0.996,
+        "confusion_matrix": {
+          "tn": 42,
+          "fp": 8,
+          "fn": 0,
+          "tp": 50
+        }
+      },
+      "unsupported_readme_result": {
+        "source": "README.md line 114",
+        "accuracy": 0.71,
+        "sensitivity": 1.0,
+        "specificity": 0.42,
+        "precision": 0.6329,
+        "f1_score": 0.7752,
+        "roc_auc": 0.9976,
+        "status": "NO SAVED ARTIFACT IN REPOSITORY"
+      },
+      "finding": "The 71.00% result in README.md is unbacked by any saved JSON, CSV, or script output in the repository. Clean replication on all N=200 training beats confirms 92.00% accuracy.",
+      "recommendation": "Remove the unsupported 71.00% comparison from README.md, or replace it with the verified 92.00% baseline with honest scientific disclosure that the linear baseline outperforms the 6Q VQC in accuracy (92% vs 76%/77%)."
+    },
+    "blocker_4_public_audit_documents": {
+      "name": "Review of Proposed Public Audit Documents",
+      "status": "FAIL",
+      "file_evaluations": {
+        "report/ORGANIZER_FAQ_COMPLIANCE_RECONCILIATION.md": {
+          "recommendation": "EXCLUDE",
+          "reasons": [
+            "Quotes copyrighted organizer PDFs verbatim (Updated_Challenge_Kit.pdf Section 3.1, etc.)",
+            "Reproduces raw developer git command dumps in Section 7",
+            "Contains outdated hallucinated feature list in line 67"
+          ]
+        },
+        "report/PHASE1_SUBMISSION_READINESS_AUDIT.md": {
+          "recommendation": "EXCLUDE",
+          "reasons": [
+            "Internal readiness audit describing pre-packaging state (stating README is empty / 0 bytes)",
+            "Contains internal pre-submission decisions for project owner",
+            "Quotes Challenge Kit text verbatim"
+          ]
+        },
+        "results/organizer_faq_compliance.json": {
+          "recommendation": "EXCLUDE",
+          "reasons": [
+            "References private organizer Google Drive links and quotes rulings",
+            "Contains old draft feature list in line 23"
+          ]
+        },
+        "results/phase1_submission_readiness.json": {
+          "recommendation": "EXCLUDE",
+          "reasons": [
+            "Internal checklist artifact referencing temporary scratch scripts",
+            "Internal operational audit metadata"
+          ]
+        }
+      }
+    },
+    "blocker_5_gitignore_review": {
+      "name": "Review of Proposed .gitignore",
+      "status": "PASS_WITH_REFINEMENT",
+      "finding": "The proposed rule docs/ is overly broad and would block future legitimate project documentation. Excluding docs/challenge_materials/ is safe and specific. Rules backup_*/, scratch/, and *.log are completely safe.",
+      "minimum_safe_additions": [
+        "# Safety backups (local development and audit snapshots)",
+        "backup_*/",
+        "",
+        "# Temporary development scratch directory",
+        "scratch/",
+        "",
+        "# Organizer competition PDFs (not for public redistribution)",
+        "docs/challenge_materials/",
+        "",
+        "# Local execution logs",
+        "*.log"
+      ]
+    },
+    "blocker_6_security_scan": {
+      "name": "Comprehensive Security and Privacy Scan",
+      "status": "PASS",
+      "finding": "Zero API keys, private tokens, credentials, or personal user paths found across publishable files.",
+      "scanned_extensions": [
+        ".py",
+        ".ipynb",
+        ".md",
+        ".json",
+        ".ini",
+        ".txt",
+        ".gitignore"
+      ],
+      "limitations": "Binary files (.png, .pdf, .dat, .atr, .hea), .git/, and .venv/ excluded."
+    }
+  },
+  "overall_verdict": {
+    "safe_to_stage": false,
+    "verdict_summary": "Repository is NOT safe to stage until class N definition, optimizer name, and baseline metrics in README.md are corrected, and the 4 internal audit documents are excluded from the public manifest.",
+    "required_pre_staging_corrections": [
+      "Correct README.md line 20: 'Normal / bundle branch block beats' -> 'Normal beats'",
+      "Correct README.md line 108: 'Nelder-Mead simplex algorithm' -> 'SciPy COBYLA'",
+      "Remove unsupported 71.00% baseline column from README.md or update to verified 92.00% result",
+      "Exclude the 4 internal audit documents from staging",
+      "Append refined .gitignore block (docs/challenge_materials/ instead of docs/)"
+    ]
+  }
+}

@@ -21,7 +21,6 @@ from typing import Any, Dict, Optional, Tuple
 from qiskit import QuantumCircuit, transpile
 from qiskit.exceptions import QiskitError
 from qiskit.transpiler import CouplingMap
-from qiskit_aer.noise import NoiseModel, ReadoutError, depolarizing_error
 
 CONFIG_DIR = Path(__file__).resolve().parent
 
@@ -60,7 +59,7 @@ def build_processor_a_coupling_map(variant: str = "canonical") -> CouplingMap:
     return CouplingMap(coupling_list)
 
 
-def build_processor_a_noise_model(config: Optional[Dict[str, Any]] = None) -> NoiseModel:
+def build_processor_a_noise_model(config: Optional[Dict[str, Any]] = None) -> Any:
     """Construct the synthetic Qiskit Aer NoiseModel for Processor A.
 
     Args:
@@ -69,6 +68,8 @@ def build_processor_a_noise_model(config: Optional[Dict[str, Any]] = None) -> No
     Returns:
         Configured Qiskit Aer NoiseModel.
     """
+    from qiskit_aer.noise import NoiseModel, ReadoutError, depolarizing_error
+
     if config is None:
         config = get_processor_a_config()
 
