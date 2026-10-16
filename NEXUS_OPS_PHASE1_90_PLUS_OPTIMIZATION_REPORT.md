@@ -61,11 +61,10 @@ To strengthen the judging narrative without perturbing the frozen benchmark resu
 ### 3.1 Quantum Experiment Design & Analysis Matrix
 
 #### Experiment E1: Barren Plateau & Gradient Variance Scaling Analysis
-- **Theoretical Basis & Applicability:** McClean et al. (2018) established that deep, randomly initialized parameterized quantum circuits (forming approximate 2-designs) exhibit barren plateaus where cost function gradients vanish exponentially as $\mathcal{O}(2^{-n})$. However, Cerezo et al. (*Nat. Commun.* 2021) proved that cost function locality fundamentally determines trainability: for **local observables** (consisting of sums of few-body operators) and shallow circuit depth $L \in \mathcal{O}(\log n)$, the gradient variance vanishes at most polynomially with system size ($\text{Var}[\partial_{\theta_k} \langle\hat{O}\rangle] \in \Omega(1/\text{poly}(n))$).
-- **Applicability to NEXUS-OPS VQC:** Our classifier employs an equal-weight ensemble Pauli-$Z$ observable $\hat{O} = \frac{1}{6} \sum_{j=0}^5 Z_j$, which is strictly a 1-local operator (each term acts non-trivially on only 1 qubit). Furthermore, the variational ansatz (`RealAmplitudes` with linear nearest-neighbor entanglement) has depth $L=1$ with only 12 trainable parameters. Because the circuit depth is shallow and the observable is 1-local, the architecture provably mitigates barren plateaus, ensuring robust gradient variance and trainability under local optimizers.
-- **Hypothesis:** The approved 6-qubit VQC avoids exponential gradient vanishing, exhibiting non-vanishing empirical gradient variance across random initializations.
-- **Evaluation Metric:** Empirical gradient variance $\text{Var}_{\theta}[\nabla_{\theta} \mathcal{L}]$ across multi-seed training runs.
-- **Judging Value:** **Exceptional.** Provides rigorous mathematical justification for selecting a 1-repetition linear ansatz over deeper alternating-layered circuits.
+- **Theoretical Motivation:** McClean et al. (2018) established that deep, randomly initialized parameterized quantum circuits (forming approximate 2-designs) exhibit barren plateaus where cost function gradients vanish exponentially as $\mathcal{O}(2^{-n})$. However, Cerezo et al. (*Nat. Commun.* 2021) proved that cost function locality fundamentally influences trainability: under the assumptions of their theorem, for **local observables** (sums of few-body operators) and shallow circuit depth $L \in \mathcal{O}(\log n)$, cost function gradients do not vanish exponentially with system size, but at most polynomially ($\text{Var}[\partial_{\theta_k} \langle\hat{O}\rangle] \in \Omega(1/\text{poly}(n))$).
+- **Applicability & Boundaries for NEXUS-OPS VQC:** Our classifier employs an equal-weight ensemble Pauli-$Z$ observable $\hat{O} = \frac{1}{6} \sum_{j=0}^5 Z_j$, which is strictly a 1-local operator (each term acts non-trivially on only 1 qubit). Furthermore, the variational ansatz (`RealAmplitudes` with linear nearest-neighbor entanglement) has depth $L=1$ with only 12 trainable parameters. These architectural choices provide strong **theoretical motivation** that the circuit mitigates the exponential barren plateau regime described by McClean et al.
+- **Empirical Status Disclosure:** The repository evaluates end-to-end classification convergence and held-out accuracy across multi-seed COBYLA training runs, but **does not contain dedicated direct empirical measurements of gradient variance $\text{Var}_{\theta}[\nabla_{\theta} \mathcal{L}]$ across random initializations**. We explicitly demarcate Cerezo et al.'s findings as an architectural design rationale rather than experimentally proven immunity, and recommend systematic numerical gradient-variance sampling across varying depths as valuable future work.
+- **Judging Value:** **High.** Provides rigorous theoretical grounding while demonstrating scientific honesty by distinguishing mathematical motivation from unperformed experiments.
 
 #### Experiment E2: Shot-Noise Scaling & Exact Variance Operator Expansion
 - **Hypothesis:** The standard error of the ensemble Pauli-$Z$ observable follows $\sigma_S = \sqrt{\text{Var}_\psi(\hat{O}) / S}$, where $\text{Var}_\psi(\hat{O}) = \langle\hat{O}^2\rangle - \langle\hat{O}\rangle^2$.
@@ -102,15 +101,40 @@ To strengthen the judging narrative without perturbing the frozen benchmark resu
 | Clinical / Scientific Area | Implementation Finding | Methodological Classification | Scientific Defense & Recommendation |
 |:---|:---|:---:|:---|
 | **MIT-BIH Data Construction** | 300 balanced beats extracted from Records `106`, `119`, `200`, `208` on Lead II at 360 Hz. | **Verified** | Standard benchmark dataset. Accurately disclaims that MIT-BIH is team-curated open-access data, not pre-packaged by organizers. |
-| **Record-Level Cohort Isolation** | Train: Records 106 & 119 ($N=200$); Test: Records 200 & 208 ($N=100$). | **Verified** | Eliminates inter-patient beat shuffling, enforcing true external cohort generalization. |
+| **Record-Level Cohort Isolation (Two-Fold LORO)** | Two-fold Leave-One-Record-Out cross-validation across 2 development records: Fold 1 (Train 106, Val 119); Fold 2 (Train 119, Val 106). Quarantined test set: Records 200 & 208. | **Verified (Strictly Scoped)** | Eliminates intra-record beat shuffling between dev and test sets. However, it involves **only two development records** ($N=200$) and two test records ($N=100$), and does **not** constitute broad multi-patient population-scale external clinical validation. |
 | **Bundle Branch Block Isolation** | Filter explicitly enforces `symbol in ['N', 'V']`. | **Verified** | Exactly zero bundle branch block (`L`, `R`, `B`) beats exist in the dataset; class 0 is purely normal sinus rhythm. |
 | **Feature Extraction Accuracy** | 6 physiologically grounded biomarkers: `pre_rr`, `post_rr`, `qrs_rms`, `qrs_duration`, `p2p_amplitude`, `spectral_ratio`. | **Verified** | Derived after two-stage median filtering (200ms / 600ms) and 0.5–40 Hz Butterworth bandpass filtering. |
-| **Post-RR Lookahead Latency** | `post_rr` interval requires the subsequent R-peak ($t_{R_{i+1}} - t_{R_i}$). | **Partially Verified (Disclosed)** | Transparently disclosed across all documentation: classifier is designed for **retrospective Holter screening / batch surveillance**, not real-time defibrillator triggering. |
+| **Post-RR Lookahead Latency** | `post_rr` interval requires the subsequent R-peak ($t_{R_{i+1}} - t_{R_i}$). | **Partially Verified (Disclosed)** | Transparently disclosed across all documentation: classifier is designed for **retrospective Holter screening / batch surveillance**, not real-time causal defibrillator triggering. |
 | **Development Window Overlap** | 9 consecutive beat pairs in development set have R-R $< 1.0\text{ s}$, creating temporal sample overlap. | **Verified (Disclosed)** | Partition boundary between dev and test is absolute (0 cross-record overlap); intra-record overlap is disclosed in `results/dataset_validation.json`. |
 | **Feature Scaler Clamping** | `QuantumFeatureScaler` fitted on dev set; test features clamped to $[0, \pi]$. | **Verified** | 14/600 values (2.33%) across 13/100 beats (13.0%) clamped; prevents unconstrained Bloch rotations while preserving distribution isolation. |
 | **Classical vs. Quantum Accuracy Gap** | Logistic Regression: 92.00%; VQC Ideal: 76.00%; VQC Noisy: 77.00%. | **Verified (Justified)** | Transparently explained: LR was trained on pooled 200 beats; VQC was trained under strict LORO on Record 106 ($N=100$) and evaluated across high-heterogeneity Record 208. |
 | **Sensitivity Superiority** | Both classical and quantum models achieve 100.00% Sensitivity (50/50 VEBs detected). | **Verified** | Crucial clinical finding: zero missed ventricular ectopic events in the held-out sample, satisfying arrhythmia screening triage priorities. |
 | **Stratified Record Performance** | Record 200: VQC Accuracy 84.0% (Spec 68%); Record 208: VQC Accuracy 68.0% (Spec 36%). | **Verified** | Accurately identifies patient-specific baseline morphological shift in Record 208 as the primary source of false positives. |
+
+---
+
+### 4.2 What We Demonstrated vs. What We Have Not Demonstrated
+
+To ensure complete scientific integrity during judging evaluation, the project's technical boundaries are explicitly delineated:
+
+#### What We Demonstrated (Verified Claims)
+1. **End-to-End Quantum Machine Learning Pipeline:** Fully functional and reproducible software pipeline from continuous raw ECG signal filtering and feature extraction to single-qubit rotation encoding and Pauli-$Z$ observable measurement.
+2. **Deterministic VQC Execution & Optimization:** Successful convergence of a 6-qubit, 12-parameter variational circuit using COBYLA on classical statevector simulation.
+3. **Rigorous Leakage Controls on Sample Cohort:** Strict record-level separation between the two development records (`106`, `119`) and the two test records (`200`, `208`), with scaler parameters fitted exclusively on development data and test features clamped to $[0, \pi]$.
+4. **Empirical High Sensitivity on Test Sample:** 100.00% sensitivity (50/50 VEB beats correctly detected) on the quarantined 100-beat test cohort under ideal statevector simulation, gate depolarizing noise, and combined gate/readout noise.
+5. **Hardware-Aware Transpilation Analysis:**
+   - Formal capacity enforcement on 5-qubit Processor A (`CircuitTooWideForTarget`).
+   - Exact subgraph isomorphism proof and execution on 9-qubit Processor B yielding depth 15, 5 CX gates, and **zero SWAP gates**.
+6. **Disaggregated Noise Channel Analysis:** Empirical demonstration that Qiskit Aer's `EstimatorV2` ignores readout errors in expectation evaluation, contrasted with `AerSimulator` measurement sampling which applies physical readout bit-flip channels.
+7. **Complete Reproducibility:** 131 unit/integration tests passing (100%), fresh-kernel execution of all 10 notebook code cells without errors, and 35/35 passing frontend integrity tests.
+
+#### What We Have Not Demonstrated (Explicit Disclosures & Limitations)
+1. **No Physical Cryogenic QPU Execution:** All hardware evaluations reflect local transpilation and classical simulation (`qiskit-aer`); no physical quantum processor jobs were submitted.
+2. **No Demonstrated Quantum Advantage:** Classical $L_2$ Logistic Regression achieves superior overall accuracy (92.00% vs. 76.00% ideal / 77.00% noisy) and higher specificity (84.00% vs. 52.00% ideal / 54.00% noisy). The VQC demonstrates feasibility and high sensitivity under severe NISQ constraints, not quantum supremacy.
+3. **No Clinical Certification or Diagnostic Autonomy:** The classifier is an exploratory engineering benchmark evaluated on retrospective data, not a medical device.
+4. **No Real-Time Causal Detection:** The `post_rr` feature depends on the subsequent R-peak ($t_{R_{i+1}} - t_{R_i}$), creating a 1-beat retrospective latency. The system is designed for offline Holter triage, not zero-lookahead defibrillator monitoring.
+5. **No Large-Scale Multi-Patient Generalization:** The dataset comprises exactly 300 beats across 4 MIT-BIH recordings. The two-fold LORO protocol operates across only 2 development records. Generalization to diverse patient demographics, unobserved lead placements, or noise artifacts remains unverified.
+6. **No Experimentally Measured Barren Plateau Immunity:** Barren plateau mitigation is supported by theoretical results from Cerezo et al. (2021) based on observable locality and circuit depth, but direct empirical gradient-variance scaling experiments across varying qubit registers were not performed in this repository.
 
 ---
 
