@@ -5,7 +5,7 @@
 **Competition:** IBM Quantum Qiskit Fall Fest 2026 (SRM University-AP)  
 **Evaluation Standard:** 70% Automated Evaluation + 30% Human Judging  
 **Repository:** [https://github.com/Hashir4m4/NEXUS-OPS-PS-Q1](https://github.com/Hashir4m4/NEXUS-OPS-PS-Q1)  
-**Evaluator Roles:** Senior IBM Quantum Engineer, QML Research Scientist, Biomedical Signal Processing Researcher, Quantum Hardware Architecture Specialist, Scientific Reproducibility Auditor, and Independent Hackathon Judging Panel.  
+**Auditor Roles:** Senior Quantum Computing Research Engineer, QML Research Scientist, Biomedical Signal Processing Researcher, Quantum Hardware Architecture Specialist, and Scientific Reproducibility Auditor (Internal Engineering Audit Team).<br>
 **Date of Audit & Report:** October 16, 2026  
 
 ---
@@ -27,9 +27,10 @@ The project addresses Problem Statement PS-Q1: developing a 6-qubit Variational 
 3. **Hardware-Aware Compilation (Processor A vs. B):**
    - **Processor A (5 physical qubits, linear chain):** Deterministically raises `CircuitTooWideForTarget` (`capacity_exceeded: True`) on the 6-qubit VQC, refusing to silently drop clinical features or logical qubits.
    - **Processor B (9 physical qubits, sparse heavy-hex tree):** Natively embeds the 6-qubit VQC with **depth 15**, **5 CX gates**, **0 SWAP gates**, and 65 total operations (`rz: 36`, `sx: 24`, `cx: 5`) across all 5 transpiler seeds and 3 optimization levels.
-4. **Independent Judging Assessment:**
-   - **Current Evaluated Score:** **92.0 / 100** (Automated Component: 65.5 / 70; Human Component: 26.5 / 30).
-   - **Realistic Post-Optimization Ceiling:** **96.5 / 100** when judges review the complete documentation, verified fresh-kernel execution outputs, and rigorous theoretical proofs.
+4. **Hypothetical Internal Readiness Assessment (Unofficial Estimate):**
+   - **Estimated Internal Readiness Target:** **92.0 / 100** (Hypothetical Automated Component: 65.5 / 70; Hypothetical Human Component: 26.5 / 30).
+   - **Hypothetical Internal Ceiling:** **96.5 / 100** under optimal rubric alignment.
+   - *Official Evaluation Disclaimer:* These numbers represent purely unofficial internal self-assessments based on the organizer's 70/30 weighting division. No official judging has occurred, no official score has been issued, and the actual evaluation outcome is completely unknown.
 
 ---
 
@@ -42,7 +43,7 @@ An exhaustive forensic comparison was conducted between current implementation c
 | Item ID | Target File & Location | Prior Stated Value / Claim | Ground Truth Verified Value | Severity | Recommended Correction / Status |
 |:---|:---|:---|:---|:---:|:---|
 | **AUD-01** | `README.md` lines 6, 269 | "116 Passed" badge / "116 unit and integration tests" | **131 tests passed** (15 test modules, 1 warning) | **Medium** | Update test count badge and quickstart text in `README.md` to reflect the expanded 131-test suite. |
-| **AUD-02** | `README.md` line 8 | Commit badge points to `Hashir4m4/NEXUS-OPS-PS-Q1` without explicit hash | Current synchronized `origin/main` commit is `026bea4` | **Low** | Synchronize commit hash references across submission documentation. |
+| **AUD-02** | `README.md` line 8 | Commit badge points to `Hashir4m4/NEXUS-OPS-PS-Q1` without explicit hash | Avoid embedding fragile dynamic commit hashes; repository history tracked on GitHub main | **Low** | Preserve stable GitHub link in `README.md`; track commit history on GitHub. |
 | **AUD-03** | `results/judging_evidence_manifest.json` line 8 | `"commit_hash": "c1e05004274949eb3bea2409967435960bcca4af"` | Current commit: `026bea4be448418114661ea5ce0bee2380ed636a` | **Medium** | Stale commit hash in manifest metadata from prior Phase 5 milestone. Update to current commit. |
 | **AUD-04** | `results/judging_evidence_manifest.json` line 57 | `"error_raised": "ValueError"` | `"error_raised": "CircuitTooWideForTarget"` (subclass of ValueError) | **Low** | Clarify that `CircuitTooWideForTarget` is raised by `check_processor_capacity` and caught in `processors/processor_a.py`. |
 | **AUD-05** | `results/judging_evidence_manifest.json` line 138 | `"total_tests": 116`, `"test_file_count": 14` | **131 tests** across **15 test files** (`test_api.py` added) | **Medium** | Update manifest software QA claim CLM-08 to reflect 131 tests across 15 test files. |
@@ -246,10 +247,9 @@ To ensure complete harmony between all files prior to any future commit, the fol
 1. **`README.md` Badge & Test Count Update:**
    - Update line 6 badge: `[![Tests](https://img.shields.io/badge/Tests-131%20Passed-brightgreen.svg)](tests/)`.
    - Update quickstart section (line 269): `pytest -v -s  # 131 tests across 15 test files`.
-2. **`results/judging_evidence_manifest.json` Synchronization:**
-   - Update commit hash (line 8) to `026bea4be448418114661ea5ce0bee2380ed636a`.
-   - Update CLM-08 claim (lines 134–144) to specify 131 tests across 15 test files.
-   - Clarify CLM-03 error type as `CircuitTooWideForTarget`.
+2. **Manifest and Result Snapshot Provenance:**
+   - Retain frozen snapshot status for `results/judging_evidence_manifest.json` and `results/judging_readiness_audit.json`, preserving commit `c1e0500` as the historical Phase 5 audit milestone baseline.
+   - Clarify CLM-03 error type as `CircuitTooWideForTarget` and active test count (131 tests across 15 files) in human review documentation (`report.md` and readiness reports).
 3. **`results/phase1_submission_readiness.json` State Update:**
    - Update line 169 to reflect that `main.ipynb` is fully populated and executed.
 
@@ -257,21 +257,22 @@ To ensure complete harmony between all files prior to any future commit, the fol
 
 ---
 
-## 9. Phase 8 — Independent Hackathon Judging Assessment (70/30)
+## 9. Phase 8 — Hypothetical Internal Readiness Assessment (Unofficial Engineering Self-Audit)
 
-> **Important Evaluation Disclaimer:**  
-> The 92.0 / 100 evaluation score presented below is an **independent internal engineering estimate** formulated by applying the organizer-confirmed weighting (70% automated execution + 30% human judging). It does **not** represent an official score issued by the IBM Quantum Qiskit Fall Fest judging committee, nor does it imply private access to the organizer's automated scoring engine. Its purpose is to guide repository audit rigor and verify that every claim is defensible.
+> [!IMPORTANT]
+> **Official Scoring & Evaluation Disclaimer:**
+> The 92.0 / 100 evaluation metric presented below is a **purely hypothetical internal engineering self-assessment** formulated solely by the team to evaluate readiness against the organizer-confirmed weighting (70% automated execution + 30% human judging). It does **NOT** represent an official score, evaluation outcome, or rubric determination issued by the IBM Quantum Qiskit Fall Fest judging committee, nor does it imply private access to the organizer's automated scoring engine. The official evaluation outcome is entirely unknown. Its purpose is to guide internal repository audit rigor, verify that every scientific claim is defensible, and separate internal self-assessment from official judging results.
 
-### Reconstructed Evaluation Scorecard
+### Hypothetical Internal Self-Assessment Scorecard
 
 ```
 ====================================================================================
-PART A: AUTOMATED EVALUATION (70% WEIGHT — 70.0 POINTS MAXIMUM)
+PART A: HYPOTHETICAL AUTOMATED COMPONENT ESTIMATE (70% WEIGHT — 70.0 POINTS MAXIMUM)
 ====================================================================================
 Criterion                                     Max Pts   Awarded   Status
 ------------------------------------------------------------------------------------
 A1. Implementation Correctness & Code Health    15.0      14.5    EXCELLENT
-    - 131/131 passing pytest tests in 34.8s.
+    - 131/131 passing pytest tests in 52.2s.
     - Zero syntax errors, clean OOP architecture, strict typing.
     - Minor: 1 harmless deprecation warning from Starlette TestClient.
 
@@ -294,13 +295,13 @@ A4. Scientific Validity & Data Hygiene          15.0      13.5    VERY GOOD
 A5. Fresh-Kernel Reproducibility & Artifacts    10.0       8.0    STRONG
     - main.ipynb fresh-kernel executed (10/10 cells, 0 errors, 31.4s).
     - demo.py runs in ~2.1s with zero retraining.
-    - Loss of 2.0 pts: Minor stale commit hashes in secondary JSON manifests.
+    - Loss of 2.0 pts: Minor stale commit hashes in secondary historical manifests.
 ------------------------------------------------------------------------------------
-SUBTOTAL: AUTOMATED EVALUATION                           65.5 / 70.0 (93.6%)
+SUBTOTAL: HYPOTHETICAL AUTOMATED ESTIMATE                 65.5 / 70.0 (93.6%)
 ====================================================================================
 
 ====================================================================================
-PART B: HUMAN JUDGING EVALUATION (30% WEIGHT — 30.0 POINTS MAXIMUM)
+PART B: HYPOTHETICAL HUMAN COMPONENT ESTIMATE (30% WEIGHT — 30.0 POINTS MAXIMUM)
 ====================================================================================
 Criterion                                     Max Pts   Awarded   Status
 ------------------------------------------------------------------------------------
@@ -330,11 +331,12 @@ B5. Report Quality & Processor D Ideology        6.0       4.0    GOOD
     - Loss of 2.0 pts: Dense, multi-report documentation history
       can overwhelm evaluators seeking quick executive summaries.
 ------------------------------------------------------------------------------------
-SUBTOTAL: HUMAN EVALUATION                               26.5 / 30.0 (88.3%)
+SUBTOTAL: HYPOTHETICAL HUMAN ESTIMATE                     26.5 / 30.0 (88.3%)
 ====================================================================================
 
 ====================================================================================
-FINAL COMPOSITE EVALUATION SCORE: 92.0 / 100.0  [TIER 1 SHORTLIST COMPETITIVE]
+HYPOTHETICAL COMPOSITE READINESS ESTIMATE: 92.0 / 100.0  [INTERNAL TARGET TIER]
+OFFICIAL JUDGING OUTCOME: UNKNOWN
 ====================================================================================
 ```
 
@@ -460,6 +462,6 @@ Across our 100 test samples, the measured mean variance is **0.334035**, yieldin
 - **Frontend Production Build:** `dist/` generated with zero errors.
 
 ### Recommended Next Actions
-1. **User Decision on Minor Documentation Cleanup:** Approve updating the test count badge (`116` $\to$ `131`) and commit hash references in `README.md` and `results/judging_evidence_manifest.json` before final submission freeze.
+1. **Documentation Integrity Reconciliation:** Reconciled test count badge (116 $\to$ 131) and test suite details in `README.md` and `report.md` while preserving frozen historical audit snapshots.
 2. **Phase 1 Presentation Readiness:** Rehearse the 3-minute pitch and review the 15 judge Q&As during team presentation prep.
-3. **Repository State:** Current branch `main` is clean, synchronized with GitHub origin at commit `026bea4`, and positioned at a **92.0+ / 100** competitive judging tier.
+3. **Repository State:** Current branch `main` is clean, synchronized with GitHub origin (audit baselines: `c1e0500`, `c0065dd`; current commits tracked on `main`), satisfying all internal scientific integrity standards.

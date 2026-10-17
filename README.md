@@ -3,7 +3,7 @@
 
 [![Qiskit](https://img.shields.io/badge/Qiskit-2.5.2-613394.svg)](https://qiskit.org/)
 [![Qiskit Aer](https://img.shields.io/badge/Qiskit_Aer-0.17.2-002D9C.svg)](https://qiskit.org/)
-[![Tests](https://img.shields.io/badge/Tests-116%20Passed-brightgreen.svg)](tests/)
+[![Tests](https://img.shields.io/badge/Tests-131%20Passed-brightgreen.svg)](tests/)
 [![Python](https://img.shields.io/badge/Python-3.13-blue.svg)](https://www.python.org/)
 [![Repository](https://img.shields.io/badge/GitHub-Hashir4m4%2FNEXUS--OPS--PS--Q1-blue.svg)](https://github.com/Hashir4m4/NEXUS-OPS-PS-Q1)
 
@@ -211,7 +211,7 @@ This runner executes:
 5. Verifying capacity boundary enforcement on 5-qubit Processor A.
 
 ### 6.3 Run the Test Suite
-Verify repository integrity across all 116 automated tests:
+Verify repository integrity across all 131 automated tests (15 test modules):
 ```bash
 pytest -v
 ```
@@ -240,7 +240,7 @@ NEXUS-OPS-PS-Q1/
 │   ├── noise_experiments.py         # Readout error audit & noisy simulations
 │   ├── processor_simulation.py      # Finite-shot scaling sweeps (S=256..4096)
 │   └── feature_extraction.py        # ECG morphological feature extraction
-├── tests/                           # 14 test modules (116 passing tests)
+├── tests/                           # 15 test modules (131 passing tests)
 │   ├── test_hardware_experiments.py # Transpilation & layout equivalence tests
 │   ├── test_processor_ab.py         # Processor configuration integrity tests
 │   ├── test_vqc_circuit.py          # Circuit contracts & observable tests
